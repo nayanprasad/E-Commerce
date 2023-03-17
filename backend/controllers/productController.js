@@ -10,8 +10,8 @@ exports.createProduct = async (req, res, next) => {
     success: true,
     product
   })
-
 };
+
 
 // Get all products
 exports.getAllProducts = async (req, res, next) => {
@@ -21,11 +21,11 @@ exports.getAllProducts = async (req, res, next) => {
   res.status(200).json({
     success: true,
     products
-  });
-}
+  })
+};
+
 
 // Get single product details
-
 exports.getSingleProduct = async (req, res, next) => {
 
   const product = await Product.findById(req.params.id);
@@ -41,9 +41,10 @@ exports.getSingleProduct = async (req, res, next) => {
     success: true,
     product
   })
-}
+};
 
 
+// Update the product  --Admin
 exports.updateProduct = async (req, res, next) => {
   
   const product = Product.findById(req.params.id);
@@ -69,7 +70,6 @@ exports.updateProduct = async (req, res, next) => {
 };
 
 
-
 // Delete product  --Admin
 exports.deleteProduct = async (req, res, next) => {
 
@@ -88,4 +88,4 @@ exports.deleteProduct = async (req, res, next) => {
     success: true,
     message: "Product is deleted",
   })
-}
+};
