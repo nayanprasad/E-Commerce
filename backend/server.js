@@ -10,7 +10,6 @@ process.on("uncaughtException", err => {
   process.exit(1);
 })
 
-console.log(hi)
 
 dotenv.config({ path: 'backend/config/config.env' })
 
