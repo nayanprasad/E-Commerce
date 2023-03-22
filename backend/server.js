@@ -21,7 +21,7 @@ const server = app.listen(process.env.PORT, () => {
 })
 
 
-// unhandled promie rejection  eg: changing the uri for connecting to db
+// unhandled promie rejection  eg: changing the uri for connecting to db (in dotenv file)
 process.on("unhandledRejection", err => {
   console.log("Error: " + err.message);
   console.log("Shutting down the server due to unhandled promise rejection");
