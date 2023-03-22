@@ -1,9 +1,10 @@
 const Product = require("../models/productModel");
-const ErrorHandler = require("../utils/errorhandler")
+const ErrorHandler = require("../utils/errorhandler");
+const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 
 // Create new product   --Admin
-exports.createProduct = async (req, res, next) => {
+exports.createProduct = CatchAsyncErrors( async (req, res, next) => {
 
   const product = await Product.create(req.body);
 
@@ -11,11 +12,11 @@ exports.createProduct = async (req, res, next) => {
     success: true,
     product
   })
-};
+});
 
 
 // Get all products
-exports.getAllProducts = async (req, res, next) => {
+exports.getAllProducts = CatchAsyncErrors( async (req, res, next) => {
 
   const products = await Product.find()
 
@@ -23,11 +24,11 @@ exports.getAllProducts = async (req, res, next) => {
     success: true,
     products
   })
-};
+});
 
 
 // Get single product details
-exports.getSingleProduct = async (req, res, next) => {
+exports.getSingleProduct = CatchAsyncErrors( async (req, res, next) => {
 
   const product = await Product.findById(req.params.id);
 
@@ -39,11 +40,11 @@ exports.getSingleProduct = async (req, res, next) => {
     success: true,
     product
   })
-};
+});
 
 
 // Update the product  --Admin
-exports.updateProduct = async (req, res, next) => {
+exports.updateProduct = CatchAsyncErrors( async (req, res, next) => {
   
   const product = Product.findById(req.params.id);
 
@@ -62,11 +63,11 @@ exports.updateProduct = async (req, res, next) => {
     updatedProduct
 
   })
-};
+});
 
 
 // Delete product  --Admin
-exports.deleteProduct = async (req, res, next) => {
+exports.deleteProduct = CatchAsyncErrors(async (req, res, next) => {
 
   const product = await Product.findById(req.params.id);
 
@@ -80,4 +81,4 @@ exports.deleteProduct = async (req, res, next) => {
     success: true,
     message: "Product is deleted",
   })
-};
+});
