@@ -16,6 +16,7 @@ class ApiFeatures {
     // console.log(keyword);  // { name: { '$regex': keyword, '$options': 'i' } }
 
     this.query = this.query.find({...keyword});
+    
     return this;
   }
 
@@ -31,6 +32,17 @@ class ApiFeatures {
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
+
+    return this;
+  }
+
+  pagination(resultPerPage) {
+    const currPage = Number(this.querystr.page) || 1;
+
+    const skip = resultPerPage * (currPage - 1);    
+
+    this.query = this.query.limit(resultPerPage).skip(skip);
+
     return this;
   }
 }
