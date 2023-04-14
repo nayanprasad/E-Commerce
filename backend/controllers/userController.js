@@ -17,13 +17,14 @@ exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
     }
   });
 
-  const token = user.getJWTToken();   // this method is defined in the useModel
+  // const token = user.getJWTToken();   // this method is defined in the useModel
 
-  res.status(201).json({
-    success: true,
-    token
-  });
-  // sendToken(user,201, res);
+  // res.status(201).json({
+  //   success: true,
+  //   token
+  // });
+
+  sendToken(user,201, res);
 
 });
 
@@ -51,4 +52,20 @@ exports.loginUser = CatchAsyncErrors( async(req, res, next) => {
   sendToken(user,200, res)
 
 });
+
+
+//Log out
+
+exports.logout = (req, res, next) => {
+
+  res.cookie("token", null, {
+    expire: new Date(Date.now()),
+    httponly: true
+  })
+
+  res.status(200).json({
+    success: true,
+    message: "logged out"
+  })
+}
 
