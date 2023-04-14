@@ -8,15 +8,27 @@ exports.isAuthenticatedUser = CatchAsyncErrors(async (req, res, next) => {
 
     const {token} = req.cookies;
 
-    console.log(token)
+    // console.log(token)
 
     if(!token || token === "j:null")
         return next(new ErrorHandler("please login to access this resource", 401));
 
     const decodedData = await jwt.verify(token, process.env.JWT_SECRETE);
 
-    req.user = await User.findById(decodedData._id);
-    next();
+    req.user = await User.findById(decodedData.id);
 
+    next();
 });
+
+
+
+exports.isAuthorizedRoles = (...roles) => {
+    return (req, res, next) => {
+        console.log(req.user)
+        if(!roles.includes((req.user.role))) {
+            return next(new ErrorHandler(`role: ${req.user.role} is not allowed access this resource`, 403));
+        }
+        next();
+    }
+};
 
