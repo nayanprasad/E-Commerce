@@ -17,13 +17,13 @@ exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
     }
   });
 
-  // const token = user.getJWTToken();   // this method is defined in the useModel
-  //
-  // res.status(201).json({
-  //   success: true,
-  //   token
-  // });
-  sendToken(user,201, res);
+  const token = user.getJWTToken();   // this method is defined in the useModel
+
+  res.status(201).json({
+    success: true,
+    token
+  });
+  // sendToken(user,201, res);
 
 });
 

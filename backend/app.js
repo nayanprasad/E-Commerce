@@ -5,7 +5,7 @@ const cookieParse = require("cookie-parser")
 const errorMiddleware = require("./middleware/error")
 
 app.use(express.json()); // This is a middleware that allows us to accept json data in the body
-app.use(cookieParse);
+app.use(cookieParse());
 
 const productRouter = require("./routes/productRouter");
 const userRouter = require("./routes/userRouter")
