@@ -217,3 +217,21 @@ exports.getSingleUser = CatchAsyncErrors(async (req, res, next) => {
 });
 
 
+//delete a user --admin
+exports.deleteAUser = CatchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if(!user)
+        return next(new ErrorHandler("user not found", 400));
+
+    await User.findByIdAndDelete(req.params.id)
+
+    res.status(200).json({
+        success: true,
+        message: "deleted the user"
+    })
+
+
+});
+
+
