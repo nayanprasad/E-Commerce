@@ -178,7 +178,8 @@ exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.params.id);
 
     if(!user)
-        return next(new ErrorHandler("user not found", 400)
+        return next(new ErrorHandler("user not found", 400))
+
     const newData = {
         email: req.body.email,
         name: req.body.name
