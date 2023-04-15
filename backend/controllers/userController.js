@@ -114,7 +114,7 @@ exports.forgotPassword = CatchAsyncErrors(async (req, res, next) => {
 //reset password
 exports.resetPassword = CatchAsyncErrors(async (req, res, next) => {
 
-    const token = crypto.createHash("sha256").update(req.params.token).digest("hex");
+    const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
 
     const user = await User.findOne({
         resetPasswordToken,
@@ -134,5 +134,20 @@ exports.resetPassword = CatchAsyncErrors(async (req, res, next) => {
     await user.save();
 
     sendToken(user, 200, res);
+});
+
+
+//get user details
+exports.getUser = CatchAsyncErrors(async (req, res, next) => {
+
+    // console.log(req.user._id)  // ObjectId("64387f3cfcbfd0d807ad569d")
+    // console.log(req.user.id)  // 64387f3cfcbfd0d807ad569d
+    const user = await User.findById(req.user.id);  // in auth middleware we store user after login as req.user
+
+    res.status(200).json({
+        success: true,
+        user
+    })
 })
+
 
