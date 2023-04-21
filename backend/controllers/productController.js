@@ -2,7 +2,6 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
-const {json} = require("express");
 
 
 // Create new product   --Admin
