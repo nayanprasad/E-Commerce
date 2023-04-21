@@ -122,18 +122,28 @@ exports.addProductReview = CatchAsyncErrors(async (req, res, next) => {
     product.reviews.push(review);
     product.numOfReviews = product.reviews.length;
   }
-  //
+
   let avg = 0;
   product.reviews.forEach((rev) => avg += rev.rating);
-  console.log(avg)
   product.ratings = avg / product.reviews.length;
-
-  console.log(product.ratings)
 
   await product.save({validateBeforeSave: false});
 
   res.status(200).json({
     success: true
   });
+});
 
+
+//get all  reviews
+exports.getProductReview = CatchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.query.id)
+
+  if(!product)
+    return next(new ErrorHandler("product  not found", 404));
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews
+  })
 });
