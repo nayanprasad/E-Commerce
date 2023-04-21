@@ -2,6 +2,7 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
+const {json} = require("express");
 
 
 // Create new product   --Admin
@@ -90,4 +91,49 @@ exports.deleteProduct = CatchAsyncErrors(async (req, res, next) => {
     success: true,
     message: "Product is deleted",
   })
+});
+
+
+// add/update review
+exports.addProductReview = CatchAsyncErrors(async (req, res, next) => {
+
+  const {rating, comment, productId} = req.body;
+
+  const review = {
+    user: req.user.id,
+    name: req.user.name,
+    rating: Number(rating),
+    comment
+  }
+
+  const product = await Product.findById(productId);
+
+  const isReviewed = product.reviews.find(rev => rev.user.toString() === req.user.id.toString());
+
+  if(isReviewed) {
+    product.reviews.forEach( rev => {
+      if(rev.user.toString() === req.user.id.toString()) {
+        rev.comment = comment;
+        rev.rating = rating;
+      }
+    });
+  }
+  else{
+    product.reviews.push(review);
+    product.numOfReviews = product.reviews.length;
+  }
+  //
+  let avg = 0;
+  product.reviews.forEach((rev) => avg += rev.rating);
+  console.log(avg)
+  product.ratings = avg / product.reviews.length;
+
+  console.log(product.ratings)
+
+  await product.save({validateBeforeSave: false});
+
+  res.status(200).json({
+    success: true
+  });
+
 });
