@@ -74,14 +74,47 @@ exports.getMyOrder = CatchAsyncErrors(async (req, res, next) => {
 // get all  orders --admin
 exports.getAllOrders = CatchAsyncErrors(async (req, res, next) => {
 
-    const myOrders = await Order.find();
+    const orders = await Order.find();
 
-    if(!myOrders) {
+    if(!orders) {
         return next(new Errorhandler("No order found", 404));
     }
 
+    let totalPrice = 0;
+    orders.forEach((order) => {
+        totalPrice += order.totalPrice
+    })
+
     res.status(200).json({
         success: true,
-        myOrders
+        orders,
+        totalPrice
+    });
+});
+
+// update order status  --admin
+exports.updateOrderStatus = CatchAsyncErrors(async (req, res, next) => {
+
+    const orders = await Order.findById(req.params.id);
+
+    if(!orders) {
+        return next(new Errorhandler("No order found", 404));
+    }
+
+    if(orders.orderStatus === "Delivered") {
+        return next(new Errorhandler("order delivered", 400));
+    }
+
+    orders.orderStatus = req.body.status;
+
+    if(orders.orderStatus === "Delivered") {
+        orders.deliveredAt = Date.now();
+    }
+
+    await orders.save({validateBeforeSave: false});
+
+    res.status(200).json({
+        success: true,
+        orders,
     });
 });
