@@ -4,36 +4,36 @@ const mongoose  = require('mongoose');
 const orderSchema = new mongoose.Schema({
     shippingAddress: {
         address: {
-            type: string,
-            require: true
+            type: String,
+            required: true
         },
         city: {
-            type: string,
-            require: true
+            type: String,
+            required: true
         },
         country: {
-            type: string,
-            require: true
+            type: String,
+            required: true
         },
-        pinCond : {
+        pinCode : {
             type: Number,
             required: true
         },
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        require: true,
+        required: true,
         ref: "User"
     },
     orderItems: [
         {
             name: {
-                type: string,
-                require: true,
+                type: String,
+                required: true,
             },
             image: {
-                type: string,
-                require: true,
+                type: String,
+                required: true,
             },
             price: {
                 type: Number,
@@ -45,7 +45,7 @@ const orderSchema = new mongoose.Schema({
             },
             product: {
                 type: mongoose.Schema.Types.ObjectId,
-                require: true,
+                required: true,
                 ref: "Product"
             }
         }
@@ -62,7 +62,7 @@ const orderSchema = new mongoose.Schema({
             type: String,
         },
     },
-    itemPrice: {
+    itemsPrice: {
         type: Number,
         required: true,
     },
@@ -85,8 +85,8 @@ const orderSchema = new mongoose.Schema({
         type: Date,
     },
     orderStatus: {
-        type: string,
-        require: true,
+        type: String,
+        required: true,
         default: "Processing",
     },
     deliveredAt: Date,
@@ -97,4 +97,5 @@ const orderSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.models("Order", orderSchema);
+module.exports = mongoose.model("Order", orderSchema);
+
