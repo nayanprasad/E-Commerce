@@ -1,6 +1,7 @@
 const Order = require("../models/orderModel");
 const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Errorhandler = require("../utils/errorhandler");
+const Product = require("../models/productModel");
 
 
 exports.sayHello = (req, res, next) => {
@@ -116,5 +117,21 @@ exports.updateOrderStatus = CatchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         orders,
+    });
+});
+
+// delete  order --admin
+exports.deleteOrder = CatchAsyncErrors(async (req, res, next) => {
+
+    const order = await Order.findById(req.params.id);
+
+    if(!order) {
+        return next(new Errorhandler("No order found", 404));
+    }
+
+    await Order.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+        success: true,
     });
 });
