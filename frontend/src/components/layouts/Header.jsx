@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ReactNavbar} from "overlay-navbar";
 import logo from "../../assets/images/logo.jpg";
+import webfont from "webfontloader"
 
 const Header = () => {
+
+
+
+
     return (
         <ReactNavbar
             burgerColorHover="#eb4034"
@@ -27,15 +32,15 @@ const Header = () => {
             nav4justifyContent="flex-start"
             link1ColorHover="#eb4034"
             link1Margin="1vmax"
-            profileIconColor="rgba(35, 35, 35,0.8"
-            searchIconColor=" rgba(35, 35, 35, 0.8)"
-            cartIconColor = "rgba(35, 35, 35,0.8)"
-            profileIconColorHover = "#eb4034"
-            searchIconColorHover = "#eb4034"
-            cartIconColorHover = "#eb4034"
-            cartIconMargin = "1vmax"
+            profileIconColor="rgba(35, 35, 35,0.8)"
+            searchIconColor=" rgba(35, 35, 35, 0.8) "
+            cartIconColor="rgba(35, 35, 35,0.8)"
+            profileIconColorHover="#eb4034"
+            searchIconColorHover="#eb4034"
+            cartIconColorHover="#eb4034"
+            cartIconMargin="1vmax"
         />
-);
+    );
 };
 
 export default Header;
