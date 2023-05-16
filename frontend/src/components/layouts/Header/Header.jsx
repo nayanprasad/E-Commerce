@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {ReactNavbar} from "overlay-navbar";
-import logo from "../../assets/images/logo.jpg";
+import logo from "../../../assets/images/logo.jpg";
 import webfont from "webfontloader"
 
 const Header = () => {

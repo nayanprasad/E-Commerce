@@ -6,19 +6,16 @@ import {
     // Link,
     // Routes
 } from "react-router-dom";
-import Header from "./components/layouts/Header";
+import Header from "./components/layouts/Header/Header";
+import Footer from "./components/layouts/Footer/Footer";
 
 
 export default function App() {
     return (
         <Router>
-            <div>
-                <Header/>
-                {/*<Routes>*/}
-                {/*    <Route path="/" element={<Join getName={getName} showAlert={showAlert}/>}/>*/}
-                {/*    <Route path="/chat" element={<Chat name={name}/>}/>*/}
-                {/*</Routes>*/}
-            </div>
+            <Header/>
+            <Footer/>
+
         </Router>
     );
 }
