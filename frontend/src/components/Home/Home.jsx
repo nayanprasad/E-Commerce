@@ -20,7 +20,7 @@ const Home = () => {
             <div className="banner">
                 <p>Welcome to Ecommerce</p>
                 <h1>FIND AMAZING PRODUCTS BELOW</h1>
-                <a href="#container">
+                <a href="#container" >
                     <button>
                         Scroll <CgMouse/>
                     </button>
@@ -29,7 +29,7 @@ const Home = () => {
 
             <h2 className="homeHeading">Featured Products</h2>
 
-            <div className="container" id="container">
+            <div  id="container" className="container">
                 <Product product={product}/>
                 <Product product={product}/>
                 <Product product={product}/>
