@@ -4,7 +4,7 @@ import "./Home.css";
 import Product from "./Product";
 import MetaDate from "../MetaDate";
 import { useDispatch, useSelector} from "react-redux";
-import {PRODUCT_LIST_REQUEST} from "../../redux/slice/productSlice";
+import {listProduct} from "../../redux/actions/productAction";
 
 import testImg from "../../assets/images/micromaxInB.jpg"
 
@@ -21,19 +21,13 @@ const Home = () => {
 
     const dispatch = useDispatch();
 
-    const products = useSelector(state => state.products);
-    const loading = useSelector(state => state.loading);
-    const error = useSelector(state => state.error);
-
+    const productList = useSelector(state => state.productList);
+    const {loading, error, products} = productList;
 
     useEffect(() => {
-        dispatch(PRODUCT_LIST_REQUEST());
+        dispatch(listProduct);
 
-        console.log(products);
-
-    }
-    , [dispatch]);
-
+    }, [dispatch]);
 
 
     return (
