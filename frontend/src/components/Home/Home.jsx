@@ -1,8 +1,10 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {CgMouse} from "react-icons/cg";
 import "./Home.css";
 import Product from "./Product";
 import MetaDate from "../MetaDate";
+import { useDispatch, useSelector} from "react-redux";
+import {PRODUCT_LIST_REQUEST} from "../../redux/slice/productSlice";
 
 import testImg from "../../assets/images/micromaxInB.jpg"
 
@@ -16,6 +18,24 @@ const product = {
 }
 
 const Home = () => {
+
+    const dispatch = useDispatch();
+
+    const products = useSelector(state => state.products);
+    const loading = useSelector(state => state.loading);
+    const error = useSelector(state => state.error);
+
+
+    useEffect(() => {
+        dispatch(PRODUCT_LIST_REQUEST());
+
+        console.log(products);
+
+    }
+    , [dispatch]);
+
+
+
     return (
         <Fragment>
             
