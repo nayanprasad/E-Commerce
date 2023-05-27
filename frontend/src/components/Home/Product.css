@@ -11,6 +11,7 @@
 
 .ProductCard > img {
     width: 18vmax;
+    height: 18vmax;
 }
 
 .ProductCard > p {
