@@ -8,15 +8,6 @@ import {listProduct} from "../../redux/actions/productAction";
 
 import testImg from "../../assets/images/micromaxInB.jpg"
 
-const product = {
-    id: 1,
-    name: "Iphone 12",
-    price: 1000,
-    numReviews: 10,
-    image: testImg,
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-}
-
 const Home = () => {
 
     const dispatch = useDispatch();
@@ -28,6 +19,9 @@ const Home = () => {
         dispatch(listProduct);
 
     }, [dispatch]);
+
+    if(loading) return <h2>Loading...</h2>
+    if(error) return <h2>{error}</h2>
 
 
     return (
@@ -48,15 +42,9 @@ const Home = () => {
             <h2 className="homeHeading">Featured Products</h2>
 
             <div  id="container" className="container">
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
-                <Product product={product}/>
+                {products.map((product) => (
+                    <Product key={product._id} product={product}/>
+                ))}
             </div>
 
         </Fragment>
