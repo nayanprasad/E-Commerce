@@ -8,6 +8,18 @@ import {listProduct} from "../../redux/actions/productAction";
 
 import testImg from "../../assets/images/micromaxInB.jpg"
 
+// const product = {
+//     id: 1,
+//     name: "Iphone 12",
+//     price: 1000,
+//     numReviews: 10,
+//     image: testImg,
+//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+//     ratings: 4.5,
+//     numOfReviews: 10
+// }
+
+
 const Home = () => {
 
     const dispatch = useDispatch();
@@ -42,7 +54,7 @@ const Home = () => {
             <h2 className="homeHeading">Featured Products</h2>
 
             <div  id="container" className="container">
-                {products.map((product) => (
+                {products && products.map((product) => (
                     <Product key={product._id} product={product}/>
                 ))}
             </div>
