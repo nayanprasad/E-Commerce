@@ -12,7 +12,6 @@ const Product = ({product}) => {
         activeColor: "tomato",
         color: "rgba(0,0,0,0.2)",
         isHalf: true
-
     };
 
     return (
