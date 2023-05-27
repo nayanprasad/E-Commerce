@@ -7,6 +7,7 @@ import { useDispatch, useSelector} from "react-redux";
 import {listProduct} from "../../redux/actions/productAction";
 
 import testImg from "../../assets/images/micromaxInB.jpg"
+import Loader from "../Loader/Loader";
 
 // const product = {
 //     id: 1,
@@ -32,9 +33,9 @@ const Home = () => {
 
     }, [dispatch]);
 
-    if(loading) return <h2>Loading...</h2>
-    if(error) return <h2>{error}</h2>
 
+    if(loading) return <Loader/>
+    if(error) return <h2>{error}</h2>
 
     return (
         <Fragment>
