@@ -1,8 +1,13 @@
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
-    PRODUCT_LIST_FAILS
+    PRODUCT_LIST_FAILS,
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCCESS,
+    PRODUCT_DETAILS_FAILS,
+    CLEAR_ERRORS
 } from "../../constants/productConstant";
+import {actionsReducer} from "@reduxjs/toolkit/src/query/tests/helpers";
 
 
 export const productListReducer = (state = {loading: true, products: []}, action) => {
@@ -22,6 +27,40 @@ export const productListReducer = (state = {loading: true, products: []}, action
             return {
                 loading: false,
                 error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state;
+    }
+};
+
+
+
+export const productDetailsReducer = (state = {loading: true, product : {}}) => {
+    switch (action.type) {
+        case PRODUCT_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case PRODUCT_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                product: action.payload
+            }
+        case PRODUCT_DETAILS_FAILS:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
             }
         default:
             return state;
