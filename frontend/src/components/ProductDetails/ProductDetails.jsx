@@ -13,13 +13,17 @@ const ProductDetails = () => {
 
     useEffect(() => {
         dispatch(getProductDetails(id));
-    }, []);
+    }, [dispatch, id]);
+
+    console.log(product);
 
     return (
         <div className="productDetails">
-            <Carousel>
+            {/*<Carousel>*/}
 
-            </Carousel>
+            {/*</Carousel>*/}
+            {product.name}s
+
         </div>
     );
 };
