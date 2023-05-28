@@ -19,10 +19,11 @@ const ProductDetails = () => {
 
     return (
         <div className="productDetails">
-            {/*<Carousel>*/}
-
-            {/*</Carousel>*/}
-            {product.name}s
+            <Carousel>
+                {product.images && product.images.map((image) => (
+                    <img className="carouselImage" src={image.url} alt={image.url} key={image.public_id}/>
+                ))}
+            </Carousel>
 
         </div>
     );
