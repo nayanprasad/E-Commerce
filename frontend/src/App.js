@@ -12,6 +12,7 @@ import Home from "./components/Home/Home";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import "./App.css";
 
 
 
