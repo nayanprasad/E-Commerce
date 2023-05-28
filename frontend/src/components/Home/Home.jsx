@@ -5,11 +5,10 @@ import Product from "./Product";
 import MetaDate from "../MetaDate";
 import { useDispatch, useSelector} from "react-redux";
 import {listProduct} from "../../redux/actions/productAction";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-
-import testImg from "../../assets/images/micromaxInB.jpg"
+import {toast } from 'react-toastify';
 import Loader from "../Loader/Loader";
+import testImg from "../../assets/images/micromaxInB.jpg"
+
 
 // const product = {
 //     id: 1,
@@ -33,37 +32,17 @@ const Home = () => {
     useEffect(() => {
 
         dispatch(listProduct);
-
-        // if(error)
-            toast("Wow so easy!")
-
-
-
-
     }, [dispatch]);
 
+    if(error)
+        toast.error(error)
 
     if(loading) return <Loader/>
-    // if(error) return <ToastContainer />
 
     return (
         <Fragment>
             
             <MetaDate title={"Ecommerce"} />
-
-            <ToastContainer
-                position="bottom-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
-
             <div className="banner">
                 <p>Welcome to Ecommerce</p>
                 <h1>FIND AMAZING PRODUCTS BELOW</h1>
