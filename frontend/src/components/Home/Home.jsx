@@ -4,7 +4,7 @@ import "./Home.css";
 import Product from "./Product";
 import MetaDate from "../MetaDate";
 import { useDispatch, useSelector} from "react-redux";
-import {listProduct} from "../../redux/actions/productAction";
+import {listProducts} from "../../redux/actions/productAction";
 import {toast } from 'react-toastify';
 import Loader from "../Loader/Loader";
 import testImg from "../../assets/images/micromaxInB.jpg"
@@ -31,7 +31,7 @@ const Home = () => {
 
     useEffect(() => {
 
-        dispatch(listProduct);
+        dispatch(listProducts);
     }, [dispatch]);
 
     if(error)
