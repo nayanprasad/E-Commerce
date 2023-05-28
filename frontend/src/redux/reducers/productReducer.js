@@ -7,7 +7,6 @@ import {
     PRODUCT_DETAILS_FAILS,
     CLEAR_ERRORS
 } from "../../constants/productConstant";
-import {actionsReducer} from "@reduxjs/toolkit/src/query/tests/helpers";
 
 
 export const productListReducer = (state = {loading: true, products: []}, action) => {
