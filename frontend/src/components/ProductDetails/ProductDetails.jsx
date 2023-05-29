@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import Carousel from 'react-material-ui-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import {useSelector, useDispatch} from "react-redux";
 import {getProductDetails} from "../../redux/actions/productAction";
 import ReactStars from "react-rating-stars-component";
@@ -34,7 +35,9 @@ const ProductDetails = () => {
             <div className="carousel">
                 <Carousel>
                     {product.images && product.images.map((image) => (
-                        <img className="carouselImage" src={image.url} alt={image.url} key={image.public_id}/>
+                        <div className="carouselImage">
+                            <img src={image.url} alt={product.name}/>
+                        </div>
                     ))}
                 </Carousel>
             </div>
