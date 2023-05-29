@@ -25,6 +25,7 @@
     object-fit: cover;
     border-radius: 10px 10px 0 0;
     padding: 1vmax;
+    align-self: flex-start;
 }
 
 .reviewCard > div > p {
