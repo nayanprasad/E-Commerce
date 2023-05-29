@@ -142,6 +142,38 @@
     transform: translateY(-2px);
 }
 
+
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /*border: 1px solid rgba(0, 0, 0, 0.2);*/
+    padding: 1vmax 0;
+    margin: 1vmax 0;
+}
+.reviewHeading {
+    color: rgba(0, 0, 0, .7);
+    font: 400 1.2vmax 'Roboto';
+    padding: 1vmax 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.review {
+    margin: 3vmax 0;
+}
+
+.noReview {
+    font-size: 1vmax;
+    margin: 1vmax 0;
+}
+
+
 @media screen and (max-width: 600px) {
 
     .productDetails {
