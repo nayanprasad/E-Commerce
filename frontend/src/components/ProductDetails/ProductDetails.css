@@ -256,6 +256,19 @@
         margin: 3vmax 0;
         width: 20vmax;
     }
+
+    .reviewHeading {
+        font-size: 2vmax;
+        padding: 2.5vmax 0;
+    }
+
+    .review {
+        margin: 3vmax;
+    }
+
+    .noReview {
+        font-size: 2vmax;
+    }
 }
 
 
