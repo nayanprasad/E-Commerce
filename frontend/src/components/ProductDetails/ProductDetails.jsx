@@ -8,6 +8,7 @@ import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import Loader from "../Loader/Loader";
+import {toast} from "react-toastify";
 
 const ProductDetails = () => {
 
@@ -20,6 +21,8 @@ const ProductDetails = () => {
         dispatch(getProductDetails(id));
     }, [dispatch, id]);
 
+
+
     console.log(product);
 
     const option = {
@@ -30,6 +33,9 @@ const ProductDetails = () => {
         color: "rgba(0,0,0,0.2)",
         isHalf: true
     };
+
+    if(error)
+        toast.error(error)
 
     if (loading) return <Loader/>
 
