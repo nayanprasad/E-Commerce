@@ -163,12 +163,12 @@
 }
 
 .review {
-    margin: 3vmax 0;
+    margin: 3vmax 1vmax;
 }
 
 .noReview {
     font-size: 1vmax;
-    margin: 1vmax 0;
+    margin: 1vmax 1vmax;
 }
 
 
