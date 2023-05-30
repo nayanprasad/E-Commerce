@@ -16,7 +16,6 @@ export const listProducts = async (dispatch) => {
             method: "GET",
             url: "http://localhost:3000/api/v1/products"
         });
-
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: response.data
@@ -38,6 +37,8 @@ export const getProductDetails = (id) => async (dispatch) => {
             method: "GET",
             url: `http://localhost:3000/api/v1/product/${id}`
         });
+
+
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

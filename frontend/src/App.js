@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import "./App.css";
+import Products from "./components/Products/Products";
 
 
 
@@ -37,6 +38,7 @@ export default function App() {
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/product/:id" element={<ProductDetails/>}/>
+                <Route exact path="/products" element={<Products/>}/>
             </Routes>
 
             <Footer/>

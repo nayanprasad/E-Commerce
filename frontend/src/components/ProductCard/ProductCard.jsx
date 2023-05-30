@@ -1,9 +1,9 @@
 import React from 'react';
-import "./Product.css";
+import "./ProductCard.css";
 import {Link} from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-const Product = ({product}) => {
+const ProductCard = ({product}) => {
 
     const option = {
         size: window.innerHeight < 600 ? 20 : 25,
@@ -27,4 +27,4 @@ const Product = ({product}) => {
     );
 };
 
-export default Product;
+export default ProductCard;
