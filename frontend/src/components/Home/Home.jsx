@@ -31,16 +31,16 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(listProducts);
+
     }, [dispatch]);
 
     if(error)
-        toast.error(error)
+        toast.error(error);
 
     if(loading) return <Loader/>
 
     return (
         <Fragment>
-            
             <MetaDate title={"Ecommerce"} />
             <div className="banner">
                 <p>Welcome to Ecommerce</p>

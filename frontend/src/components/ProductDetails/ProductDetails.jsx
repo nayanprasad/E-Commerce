@@ -19,6 +19,10 @@ const ProductDetails = () => {
 
     useEffect(() => {
         dispatch(getProductDetails(id));
+
+        if (error)
+            toast.error(error);
+
     }, [dispatch, id]);
 
 
@@ -32,8 +36,6 @@ const ProductDetails = () => {
     };
 
 
-    if (error)
-        toast.error(error);
 
     if (loading)
         return <Loader/>
