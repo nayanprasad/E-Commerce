@@ -23,7 +23,7 @@ const ProductDetails = () => {
         if (error)
             toast.error(error);
 
-    }, [dispatch, id]);
+    }, [dispatch, id, error]);
 
 
     const option = {
