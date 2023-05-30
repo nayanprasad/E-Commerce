@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import {useSelector, useDispatch} from "react-redux";
-import {getProductDetails} from "../../redux/actions/productAction";
+import {getProductDetails, clearErrors} from "../../redux/actions/productAction";
 import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "../ReviewCard/ReviewCard";
@@ -18,12 +18,17 @@ const ProductDetails = () => {
     const {product, loading, error} = useSelector(state => state.productDetails);
 
     useEffect(() => {
+
+        if(error) {
+            toast.error(error);
+            dispatch(clearErrors());
+        }
         dispatch(getProductDetails(id));
+
+
+
     }, [dispatch, id]);
 
-
-
-    console.log(product);
 
     const option = {
         size: window.innerHeight < 600 ? 20 : 25,
@@ -34,8 +39,7 @@ const ProductDetails = () => {
         isHalf: true
     };
 
-    if(error)
-        toast.error(error)
+
 
     if (loading) return <Loader/>
 
