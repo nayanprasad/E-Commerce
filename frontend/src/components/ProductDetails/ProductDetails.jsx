@@ -7,6 +7,7 @@ import {getProductDetails} from "../../redux/actions/productAction";
 import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "../ReviewCard/ReviewCard";
+import Loader from "../Loader/Loader";
 
 const ProductDetails = () => {
 
@@ -29,6 +30,8 @@ const ProductDetails = () => {
         color: "rgba(0,0,0,0.2)",
         isHalf: true
     };
+
+    if (loading) return <Loader/>
 
 
     return (
