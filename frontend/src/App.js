@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import "./App.css";
 import Products from "./components/Products/Products";
+import Search from "./components/Search/Search";
 
 
 
@@ -39,6 +40,7 @@ export default function App() {
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/product/:id" element={<ProductDetails/>}/>
                 <Route exact path="/products" element={<Products/>}/>
+                <Route exact path="/search" element={<Search/>}/>
             </Routes>
 
             <Footer/>
