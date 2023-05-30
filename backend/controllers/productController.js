@@ -43,7 +43,7 @@ exports.getAllProducts = CatchAsyncErrors( async (req, res, next) => {
 // Get single product details
 exports.getSingleProduct = CatchAsyncErrors( async (req, res, next) => {
 
-  return next(new ErrorHandler("test error", 500))
+  // return next(new ErrorHandler("test error", 500))
 
   const product = await Product.findById(req.params.id);
 
