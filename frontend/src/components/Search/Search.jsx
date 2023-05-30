@@ -1,7 +1,11 @@
 import React, {Fragment, useState} from 'react';
+import { useNavigate } from "react-router-dom"
 import "./Search.css";
+import {Route} from "react-router-dom";
 
 const Search = () => {
+
+    const navigate = useNavigate();
 
     const [keyword, setKeyword] = useState("");
 
@@ -10,7 +14,11 @@ const Search = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(keyword);
+        if(keyword.trim()){
+            navigate(`/search/${keyword}`);
+        }else{
+            navigate(`/`);
+        }
     }
 
     return (
