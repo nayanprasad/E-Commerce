@@ -24,6 +24,7 @@ export const productListReducer = (state = {loading: true, products: []}, action
             }
         case PRODUCT_LIST_FAILS:
             return {
+                ...state,
                 loading: false,
                 error: action.payload
             }
@@ -54,6 +55,7 @@ export const productDetailsReducer = (state = {loading: true, product : {}}, act
         case PRODUCT_DETAILS_FAILS:
             return {
                 ...state,
+                loading: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:
