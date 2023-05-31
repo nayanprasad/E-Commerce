@@ -3,7 +3,7 @@
     font-weight: 700;
     margin: 2.8vmax auto 2vmax;
     text-align: center;
-    /*width: 100%;*/
+    width: 20vmax;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }

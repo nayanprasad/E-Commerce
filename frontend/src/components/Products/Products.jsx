@@ -55,10 +55,10 @@ const Products = () => {
 
             <div className="pagination">
                 <Pagination
-                    count={Math.ceil(productCount / resultPerPage)}
+                    count={resultPerPage < productCount ? Math.ceil(productCount / resultPerPage) : 1}
                     variant="outlined"
                     shape="rounded"
-                    color="primary"
+                    color="standard"
                     size="medium"
                     defaultPage={currentPage}
                     onChange={handlePageChange}
