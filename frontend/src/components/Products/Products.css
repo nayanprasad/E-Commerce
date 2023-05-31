@@ -16,3 +16,10 @@
     max-width: 100vmax;
     padding:2vmax;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vmax auto;
+}

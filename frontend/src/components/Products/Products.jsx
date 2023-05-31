@@ -15,7 +15,7 @@ const Products = () => {
 
     const dispatch = useDispatch();
 
-    const {loading, error, products, productCount} = useSelector(state => state.productList);
+    const {loading, error, products, productCount, resultPerPage} = useSelector(state => state.productList);
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -49,7 +49,7 @@ const Products = () => {
 
             <div className="pagination">
                 <Pagination
-                    count={productCount}
+                    count={ Math.ceil(productCount / resultPerPage)}
                     variant="outlined"
                     shape="rounded"
                     color="primary"
