@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import Loader from "../Loader/Loader";
 import ProductCard from "../ProductCard/ProductCard";
 import "./Products.css";
-import {Pagination,Slider} from '@mui/material';
+import {Pagination, Slider} from '@mui/material';
 
 const Products = () => {
 
@@ -48,7 +48,7 @@ const Products = () => {
 
             <div className="productContainer">
                 <div className="filter">
-                    <h1 >Filters</h1>
+                    <h1>Filters</h1>
 
                     <div className="priceFilter">
                         <p> Price </p>
@@ -62,7 +62,6 @@ const Products = () => {
                             disableSwap
                         />
                     </div>
-
 
 
                 </div>
@@ -81,20 +80,17 @@ const Products = () => {
             </div>
 
 
-
-
-
-
             <div className="pagination">
-                <Pagination
-                    count={resultPerPage < productCount ? Math.ceil(productCount / resultPerPage) : 1}
-                    variant="outlined"
-                    shape="rounded"
-                    color="standard"
-                    size="medium"
-                    defaultPage={currentPage}
-                    onChange={handlePageChange}
-                />
+                {products.length > 0 &&
+                    <Pagination
+                        count={resultPerPage < productCount ? Math.ceil(productCount / resultPerPage) : 1}
+                        variant="outlined"
+                        shape="rounded"
+                        color="standard"
+                        size="medium"
+                        defaultPage={currentPage}
+                        onChange={handlePageChange}
+                    />}
             </div>
 
         </Fragment>
