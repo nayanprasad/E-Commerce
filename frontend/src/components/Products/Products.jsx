@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from "react-redux";
 import {listProducts, clearErrors} from "../../redux/actions/productAction";
 import {toast} from "react-toastify";
@@ -8,19 +9,21 @@ import "./Products.css";
 
 const Products = () => {
 
+    const {keyword} = useParams();
+
     const dispatch = useDispatch();
 
     const {loading, error, products, productCount} = useSelector(state => state.productList);
 
     useEffect(() => {
-        dispatch(listProducts);
+        dispatch(listProducts(keyword));
 
         if(error){
             toast.error(error);
             dispatch(clearErrors());
         }
 
-    }, [dispatch]);
+    }, [dispatch, keyword]);
 
 
     if(loading)

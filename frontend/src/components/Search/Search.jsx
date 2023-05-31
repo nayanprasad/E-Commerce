@@ -11,13 +11,14 @@ const Search = () => {
 
     const handleChange = (e) => {
         setKeyword(e.target.value);
+
     }
     const handleSubmit = (e) => {
         e.preventDefault();
         if(keyword.trim()){
             navigate(`/search/${keyword}`);
         }else{
-            navigate(`/`);
+            navigate(`/products`);
         }
     }
 
