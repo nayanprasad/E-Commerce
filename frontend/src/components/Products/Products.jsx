@@ -6,8 +6,8 @@ import {toast} from "react-toastify";
 import Loader from "../Loader/Loader";
 import ProductCard from "../ProductCard/ProductCard";
 import "./Products.css";
-import { PaginationItem } from '@mui/material';
-import { Pagination } from '@mui/material';
+import {PaginationItem} from '@mui/material';
+import {Pagination} from '@mui/material';
 
 const Products = () => {
 
@@ -26,7 +26,7 @@ const Products = () => {
     useEffect(() => {
         dispatch(listProducts(keyword, currentPage));
 
-        if(error){
+        if (error) {
             toast.error(error);
             dispatch(clearErrors());
         }
@@ -34,22 +34,28 @@ const Products = () => {
     }, [dispatch, keyword, currentPage]);
 
 
-    if(loading)
-        return <Loader />
+    if (loading)
+        return <Loader/>
 
     return (
         <Fragment>
             <h2 className="productHeading">Products</h2>
 
-            <div  className="productContainer">
-                {products && products.map((product) => (
-                    <ProductCard key={product._id} product={product}/>
-                ))}
-            </div>
+            {products ?
+                (<div className="productContainer">
+                    {products && products.map((product) => (
+                        <ProductCard key={product._id} product={product}/>
+                    ))}
+                </div>)
+                : (
+                    <div className="noProduct">
+                        <h2>No Products Found</h2>
+                    </div>
+                )}
 
             <div className="pagination">
                 <Pagination
-                    count={ Math.ceil(productCount / resultPerPage)}
+                    count={Math.ceil(productCount / resultPerPage)}
                     variant="outlined"
                     shape="rounded"
                     color="primary"
@@ -57,10 +63,7 @@ const Products = () => {
                     defaultPage={currentPage}
                     onChange={handlePageChange}
                 />
-
-
             </div>
-
 
         </Fragment>
     );
