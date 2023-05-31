@@ -8,6 +8,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import "./Products.css";
 import {PaginationItem} from '@mui/material';
 import {Pagination} from '@mui/material';
+import { Slider } from '@mui/material';
 
 const Products = () => {
 
@@ -18,20 +19,25 @@ const Products = () => {
     const {loading, error, products, productCount, resultPerPage} = useSelector(state => state.productList);
 
     const [currentPage, setCurrentPage] = useState(1);
+    const [price, setPrice] = useState([0, 1000]);
 
     const handlePageChange = (e, val) => {
         setCurrentPage(val);
     }
 
+    const filterByPrice = (e, val) => {
+        setPrice(val);
+    }
+
     useEffect(() => {
-        dispatch(listProducts(keyword, currentPage));
+        dispatch(listProducts(keyword, currentPage, price));
 
         if (error) {
             toast.error(error);
             dispatch(clearErrors());
         }
 
-    }, [dispatch, keyword, currentPage]);
+    }, [dispatch, keyword, currentPage, price]);
 
 
     if (loading)
@@ -52,6 +58,16 @@ const Products = () => {
                         <h2>No Products Found</h2>
                     </div>
                 )}
+
+            <Slider
+                value={price}
+                onChange={filterByPrice}
+                valueLabelDisplay="auto"
+                min={0}
+                max={25000}
+                aria-labelledby="range-slider"
+                disableSwap
+            />
 
             <div className="pagination">
                 <Pagination
