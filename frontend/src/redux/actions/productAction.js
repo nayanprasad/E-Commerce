@@ -12,14 +12,11 @@ export const listProducts = (keyword = "", page = 1, price = [0, 25000]) => asyn
     try{
         dispatch({type: PRODUCT_LIST_REQUEST});
 
-        const url = `http://localhost:3000/api/v1/products?keyword=${keyword}&page=${page}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
-        console.log(url)
-
         const response = await axios({
             method: "GET",
             url: `http://localhost:3000/api/v1/products?keyword=${keyword}&page=${page}&price[lte]=${price[1]}&price[gte]=${price[0]}`
         });
-        console.log(response.data)
+
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: response.data

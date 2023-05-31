@@ -10,11 +10,27 @@
 
 .productContainer {
     display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.filter {
+    /*display: flex;*/
+    width: 15%;
+    padding: 1vmax 0 0 2vmax;
+}
+
+.filter > h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.products {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    max-width: 100vmax;
-    padding:2vmax;
+    width: 85%;
 }
 
 .pagination {

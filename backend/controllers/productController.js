@@ -23,7 +23,7 @@ exports.getAllProducts = CatchAsyncErrors( async (req, res, next) => {
 
   // return next(new ErrorHandler("test error", 500))
 
-  const resultPerPage = 8;
+  const resultPerPage = 6;
 
   const apiFeature = new ApiFeatures(Product.find(), req.query)
   .search()
