@@ -56,7 +56,7 @@ const Products = () => {
 
 
     useEffect(() => {
-        dispatch(listProducts(keyword, currentPage, price, category));
+        dispatch(listProducts(keyword, currentPage, price, category, ratings));
 
         if (error) {
             toast.error(error);
