@@ -38,8 +38,8 @@ const Products = () => {
     const [price, setPrice] = useState([0, 10000]);
     const [category, setCategory] = useState("");
 
-    const [isPriceAccordionExpanded, setIsPriceAccordionExpanded] = useState(true);
-    const [isCategoryAccordionExpanded, setIsCategoryAccordionExpanded] = useState(true);
+    const [isPriceAccordionExpanded, setIsPriceAccordionExpanded] = useState(false);
+    const [isCategoryAccordionExpanded, setIsCategoryAccordionExpanded] = useState(false);
 
     const handlePriceAccordionChange = (_, expanded) => {
         setIsPriceAccordionExpanded(expanded);
