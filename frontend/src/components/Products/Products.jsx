@@ -37,10 +37,11 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 10000]);
     const [category, setCategory] = useState("");
-    const [rating, setRating] = useState();
+    const [ratings, setRatings] = useState();
 
     const [isPriceAccordionExpanded, setIsPriceAccordionExpanded] = useState(false);
     const [isCategoryAccordionExpanded, setIsCategoryAccordionExpanded] = useState(false);
+    const  [isRatingAccordionExpanded, setIsRatingAccordionExpanded] = useState(false);
 
     const handlePriceAccordionChange = (_, expanded) => {
         setIsPriceAccordionExpanded(expanded);
@@ -48,6 +49,10 @@ const Products = () => {
     const handleCategoryAccordionChange = (_, expanded) => {
         setIsCategoryAccordionExpanded(expanded);
     };
+
+    const handleRatingAccordionChange = (_, expanded) => {
+        setIsRatingAccordionExpanded(expanded);
+    }
 
 
     useEffect(() => {
@@ -58,7 +63,7 @@ const Products = () => {
             dispatch(clearErrors());
         }
 
-    }, [dispatch, keyword, currentPage, price, category]);
+    }, [dispatch, keyword, currentPage, price, category, ratings]);
 
 
     if (loading)
@@ -114,7 +119,7 @@ const Products = () => {
                         </AccordionDetails>
                     </Accordion>
 
-                    <Accordion>
+                    <Accordion expanded={isRatingAccordionExpanded} onChange={handleRatingAccordionChange}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel3a-content"
@@ -125,11 +130,12 @@ const Products = () => {
                         <AccordionDetails>
                             <Slider
                                 size="small"
-                                defaultValue={0}
+                                value={ratings}
                                 aria-label="Small"
                                 valueLabelDisplay="auto"
                                 min={0}
                                 max={5}
+                                onChange={(e, val) => setRatings(val)}
                             />
                         </AccordionDetails>
                     </Accordion>
