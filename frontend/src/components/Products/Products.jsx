@@ -37,6 +37,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 10000]);
     const [category, setCategory] = useState("");
+    const [rating, setRating] = useState();
 
     const [isPriceAccordionExpanded, setIsPriceAccordionExpanded] = useState(false);
     const [isCategoryAccordionExpanded, setIsCategoryAccordionExpanded] = useState(false);
@@ -48,13 +49,6 @@ const Products = () => {
         setIsCategoryAccordionExpanded(expanded);
     };
 
-    const handlePageChange = (e, val) => {
-        setCurrentPage(val);
-    }
-
-    const filterByPrice = (e, val) => {
-        setPrice(val);
-    }
 
     useEffect(() => {
         dispatch(listProducts(keyword, currentPage, price, category));
@@ -90,8 +84,9 @@ const Products = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Slider
+                                size="small"
                                 value={price}
-                                onChange={filterByPrice}
+                                onChange={(e, val) => setPrice(val)}
                                 valueLabelDisplay="auto"
                                 min={0}
                                 max={25000}
@@ -118,6 +113,27 @@ const Products = () => {
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
+
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel3a-content"
+                            id="panel3a-header"
+                        >
+                            <Typography>Ratings</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Slider
+                                size="small"
+                                defaultValue={0}
+                                aria-label="Small"
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={5}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+
                 </div>
 
                 {products ?
@@ -143,7 +159,7 @@ const Products = () => {
                         color="standard"
                         size="medium"
                         defaultPage={currentPage}
-                        onChange={handlePageChange}
+                        onChange={(e, val) => setCurrentPage(val)}
                     />}
             </div>
 
