@@ -49,3 +49,24 @@
     align-items: center;
     margin: 2vmax auto;
 }
+
+@media screen and (max-width: 600px) {
+    .productHeading {
+        font-size: 2rem;
+        width: 100%;
+    }
+
+    .productContainer {
+        flex-direction: column-reverse;
+        position: relative;
+    }
+
+    .filter {
+        width: 90%;
+        padding: 1vamx;
+    }
+
+    .products {
+        width: 100%;
+    }
+}
