@@ -28,13 +28,17 @@ exports.getAllProducts = CatchAsyncErrors( async (req, res, next) => {
   const apiFeature = new ApiFeatures(Product.find(), req.query)
   .search()
   .filter()
-  .pagination(resultPerPage);
+
+  const filteredProductsCount = await Product.countDocuments(apiFeature.query); // this will count the total number of documents in the collection
+
+  apiFeature.pagination(resultPerPage);
 
   const products = await apiFeature.query;  // apiFeature is the same class and search() will return the new obj , 
   const productsCount = await Product.countDocuments(); // this will count the total number of documents in the collection
   res.status(200).json({
     success: true,
     productsCount,
+    filteredProductsCount,
     products,
     resultPerPage
   })
