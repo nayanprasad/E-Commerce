@@ -23,15 +23,7 @@ const categories = [
     "headphone",
     "accessories",
     "speaker",
-    "tv",
-    "watch",
-    "shoes",
-    "clothes",
-    "books",
-    "furniture",
-    "beauty",
-    "sports",
-    "toys",
+    "electronics",
 ];
 
 const Products = () => {
@@ -65,7 +57,7 @@ const Products = () => {
     }
 
     useEffect(() => {
-        dispatch(listProducts(keyword, currentPage, price));
+        dispatch(listProducts(keyword, currentPage, price, category));
 
         if (error) {
             toast.error(error);
