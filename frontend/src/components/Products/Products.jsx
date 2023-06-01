@@ -7,6 +7,32 @@ import Loader from "../Loader/Loader";
 import ProductCard from "../ProductCard/ProductCard";
 import "./Products.css";
 import {Pagination, Slider} from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+
+
+const categories = [
+    "mobile",
+    "laptop",
+    "camera",
+    "headphone",
+    "accessories",
+    "speaker",
+    "tv",
+    "watch",
+    "shoes",
+    "clothes",
+    "books",
+    "furniture",
+    "beauty",
+    "sports",
+    "toys",
+];
 
 const Products = () => {
 
@@ -18,6 +44,7 @@ const Products = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 10000]);
+    const [category, setCategory] = useState("");
 
     const handlePageChange = (e, val) => {
         setCurrentPage(val);
@@ -35,7 +62,7 @@ const Products = () => {
             dispatch(clearErrors());
         }
 
-    }, [dispatch, keyword, currentPage, price]);
+    }, [dispatch, keyword, currentPage, price, category]);
 
 
     if (loading)
@@ -50,20 +77,45 @@ const Products = () => {
                 <div className="filter">
                     <h1>Filters</h1>
 
-                    <div className="priceFilter">
-                        <p> Price </p>
-                        <Slider
-                            value={price}
-                            onChange={filterByPrice}
-                            valueLabelDisplay="auto"
-                            min={0}
-                            max={25000}
-                            aria-labelledby="range-slider"
-                            disableSwap
-                        />
-                    </div>
 
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography>Price</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Slider
+                                value={price}
+                                onChange={filterByPrice}
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={25000}
+                                aria-labelledby="range-slider"
+                                disableSwap
+                            />
+                        </AccordionDetails>
+                    </Accordion>
 
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2a-content"
+                            id="panel2a-header"
+                        >
+                            <Typography>Category</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                    {categories.map((category) => (
+                                            <li className="categoryItem" onClick={() => setCategory(category)}>{category}</li>
+                                        )
+                                    )}
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
                 </div>
 
                 {products ?
