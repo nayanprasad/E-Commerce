@@ -46,6 +46,12 @@ const Products = () => {
     const [price, setPrice] = useState([0, 10000]);
     const [category, setCategory] = useState("");
 
+    const [isAccordionExpanded, setIsAccordionExpanded] = useState(true);
+
+    const handleAccordionChange = (_, expanded) => {
+        setIsAccordionExpanded(expanded); // Keep Accordion expanded if category is not empty
+    };
+
     const handlePageChange = (e, val) => {
         setCurrentPage(val);
     }
@@ -78,7 +84,7 @@ const Products = () => {
                     <h1>Filters</h1>
 
 
-                    <Accordion>
+                    <Accordion expanded={isAccordionExpanded} onChange={handleAccordionChange}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -99,7 +105,7 @@ const Products = () => {
                         </AccordionDetails>
                     </Accordion>
 
-                    <Accordion>
+                    <Accordion expanded={isAccordionExpanded} onChange={handleAccordionChange}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
