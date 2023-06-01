@@ -32,7 +32,7 @@ const Products = () => {
 
     const dispatch = useDispatch();
 
-    const {loading, error, products, productCount, resultPerPage} = useSelector(state => state.productList);
+    const {loading, error, products, productCount, resultPerPage, filteredProductsCount} = useSelector(state => state.productList);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 10000]);
@@ -142,14 +142,14 @@ const Products = () => {
 
                 </div>
 
-                {products ?
+                {filteredProductsCount ?
                     (<div className="products">
-                        {products && products.map((product) => (
+                        { products.map((product) => (
                             <ProductCard key={product._id} product={product}/>
                         ))}
                     </div>)
                     : (
-                        <div className="noProduct">
+                        <div className="noProducts">
                             <h2>No Products Found</h2>
                         </div>
                     )}
@@ -157,9 +157,9 @@ const Products = () => {
 
 
             <div className="pagination">
-                {products.length > 0 &&
+                {filteredProductsCount > 0 &&
                     <Pagination
-                        count={resultPerPage < productCount ? Math.ceil(productCount / resultPerPage) : 1}
+                        count={resultPerPage < filteredProductsCount ? Math.ceil(filteredProductsCount / resultPerPage) : 1}
                         variant="outlined"
                         shape="rounded"
                         color="standard"
