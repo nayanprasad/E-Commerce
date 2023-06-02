@@ -12,6 +12,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MetaDate from "../MetaDate";
 
 
 
@@ -71,6 +72,8 @@ const Products = () => {
 
     return (
         <Fragment>
+
+            <MetaDate title={"Products --Ecommerce"} />
 
             <h2 className="productHeading">Products</h2>
 

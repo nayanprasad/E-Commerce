@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react';
 import { useNavigate } from "react-router-dom"
 import "./Search.css";
 import {Route} from "react-router-dom";
+import MetaDate from "../MetaDate";
 
 const Search = () => {
 
@@ -24,7 +25,7 @@ const Search = () => {
 
     return (
         <Fragment>
-
+            <MetaDate title={"Search --Ecommerce"} />
             <form className="searchBox" onSubmit={handleSubmit}>
                 <input onChange={handleChange} type="text" value={keyword} placeholder="Search Products" />
                 <input type="submit" value="Search"/>

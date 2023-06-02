@@ -9,6 +9,7 @@ import "./ProductDetails.css";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import Loader from "../Loader/Loader";
 import {toast} from "react-toastify";
+import MetaDate from "../MetaDate";
 
 const ProductDetails = () => {
 
@@ -43,6 +44,9 @@ const ProductDetails = () => {
 
     return (
         <Fragment>
+
+            <MetaDate title={product.name + " --Ecommerce"} />
+
             <div className="productDetails">
                 <div className="carousel">
                     <Carousel>
