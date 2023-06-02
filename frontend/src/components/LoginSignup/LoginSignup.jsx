@@ -39,6 +39,9 @@ const LoginSignup = () => {
 
     return (
         <Fragment>
+            <div className="wrapperContainer">
+
+
             <div className="wrapper">
                 <div className="title-text">
                     <div className="title login">Login Form</div>
@@ -84,6 +87,7 @@ const LoginSignup = () => {
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         </Fragment>
     );
