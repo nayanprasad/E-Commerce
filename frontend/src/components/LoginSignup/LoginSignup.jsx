@@ -1,5 +1,9 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import './LoginSignup.css';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BadgeIcon from '@mui/icons-material/Badge';
+import LockIcon from '@mui/icons-material/Lock';
+import EmailIcon from '@mui/icons-material/Email';
 
 const LoginSignup = () => {
 
@@ -14,7 +18,6 @@ const LoginSignup = () => {
         email: "",
         password: ""
     });
-
 
 
     useEffect(() => {
@@ -69,52 +72,81 @@ const LoginSignup = () => {
             <div className="wrapperContainer">
 
 
-            <div className="wrapper">
-                <div className="title-text">
-                    <div className="title login">Login Form</div>
-                    <div className="title signup">Signup Form</div>
-                </div>
-                <div className="form-container">
-                    <div className="slide-controls">
-                        <input type="radio" name="slide" id="login" defaultChecked />
-                        <input type="radio" name="slide" id="signup" />
-                        <label htmlFor="login" className="slide login">Login</label>
-                        <label htmlFor="signup" className="slide signup">Signup</label>
-                        <div className="slider-tab"></div>
+                <div className="wrapper">
+                    <div className="title-text">
+                        <div className="title login">Login Form</div>
+                        <div className="title signup">Signup Form</div>
                     </div>
-                    <div className="form-inner">
-                        <form className="login" onSubmit={handleLoginSubmit}>
-                            <div className="field">
-                                <input type="text" placeholder="Email Address" name="email" value={loginData.email} onChange={(e) => setloginData({...loginData, [e.target.name] : e.target.value})} required />
-                            </div>
-                            <div className="field">
-                                <input type="password" placeholder="Password" name="password" value={loginData.password} onChange={(e) => setloginData({...loginData, [e.target.name] : e.target.value})} required />
-                            </div>
-                            <div className="pass-link"><a href="#">Forgot password?</a></div>
-                            <div className="field btn">
-                                <div className="btn-layer"></div>
-                                <input type="submit" value="Login" />
-                            </div>
-                            <div className="signup-link">Not a member? <a href="">Signup now</a></div>
-                        </form>
-                        <form  className="signup" onSubmit={handleSignupSubmit}>
-                            <div className="field">
-                                <input type="text" placeholder="Name" required name="name" value={signupData.name} onChange={(e) => setsignupData({...signupData, [e.target.name] : e.target.value})} />
-                            </div>
-                            <div className="field">
-                                <input type="text" placeholder="Email Address" required name="email" value={signupData.email} onChange={(e) => setsignupData({...signupData, [e.target.name] : e.target.value})} />
-                            </div>
-                            <div className="field">
-                                <input type="password" placeholder="Password" required name="password" value={signupData.password} onChange={(e) => setsignupData({...signupData, [e.target.name] : e.target.value})}/>
-                            </div>
-                            <div className="field btn">
-                                <div className="btn-layer"></div>
-                                <input type="submit" value="Signup" />
-                            </div>
-                        </form>
+                    <div className="form-container">
+                        <div className="slide-controls">
+                            <input type="radio" name="slide" id="login" defaultChecked/>
+                            <input type="radio" name="slide" id="signup"/>
+                            <label htmlFor="login" className="slide login">Login</label>
+                            <label htmlFor="signup" className="slide signup">Signup</label>
+                            <div className="slider-tab"></div>
+                        </div>
+                        <div className="form-inner">
+                            <form className="login" onSubmit={handleLoginSubmit}>
+                                <div className="field flex">
+                                    <BadgeIcon/>
+                                    <input type="text" placeholder="Email Address" name="email" value={loginData.email}
+                                           onChange={(e) => setloginData({
+                                               ...loginData,
+                                               [e.target.name]: e.target.value
+                                           })} required/>
+                                </div>
+                                <div className="field flex">
+                                    <LockIcon/>
+                                    <input type="password" placeholder="Password" name="password"
+                                           value={loginData.password} onChange={(e) => setloginData({
+                                        ...loginData,
+                                        [e.target.name]: e.target.value
+                                    })} required/>
+                                </div>
+                                <div className="pass-link"><a href="#">Forgot password?</a></div>
+                                <div className="field btn">
+                                    <div className="btn-layer"></div>
+                                    <input type="submit" value="Login"/>
+                                </div>
+                                <div className="signup-link">Not a member? <a href="">Signup now</a></div>
+                            </form>
+                            <form className="signup" onSubmit={handleSignupSubmit}>
+                                <div className="field flex">
+                                    <BadgeIcon />
+                                    <input type="text" placeholder="Name" required name="name" value={signupData.name}
+                                           onChange={(e) => setsignupData({
+                                               ...signupData,
+                                               [e.target.name]: e.target.value
+                                           })}/>
+                                </div>
+                                <div className="field flex">
+                                    <EmailIcon />
+                                    <input type="text" placeholder="Email Address" required name="email"
+                                           value={signupData.email} onChange={(e) => setsignupData({
+                                        ...signupData,
+                                        [e.target.name]: e.target.value
+                                    })}/>
+                                </div>
+                                <div className="field flex">
+                                    <LockIcon />
+                                    <input type="password" placeholder="Password" required name="password"
+                                           value={signupData.password} onChange={(e) => setsignupData({
+                                        ...signupData,
+                                        [e.target.name]: e.target.value
+                                    })}/>
+                                </div>
+                                <div className="field flex FileSelector">
+                                    <AccountCircleIcon fontSize="large"/>
+                                    <input type="file" accept="image/*"/>
+                                </div>
+                                <div className="field btn">
+                                    <div className="btn-layer"></div>
+                                    <input type="submit" value="Signup"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </Fragment>
     );

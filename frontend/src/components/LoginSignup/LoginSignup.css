@@ -122,7 +122,6 @@ input[type="radio"] {
     height: 100%;
     width: 100%;
     outline: none;
-    padding-left: 15px;
     border: none;
     border-bottom: 1px solid lightgrey;
     border-bottom-width: 2px;
@@ -130,9 +129,14 @@ input[type="radio"] {
     transition: all 0.3s ease;
 }
 
+.form-inner form .field input[type="text"],[type="email"],[type="password"] {
+    padding-left: 15px;
+}
+
+
 .form-inner form .field input:focus {
     /*border-color: rgba(255, 67, 67, 0.9);*/
-    box-shadow: inset 0 -3px 3px -3px tomato, inset 0 3px 3px -3px tomato;
+    box-shadow: inset 0 -3px 3px -3px tomato;
 
 }
 
@@ -200,6 +204,28 @@ form .btn input[type="submit"] {
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.FileSelector > input::file-selector-button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #000;
+    font-size: 1em;
+    width: 100%;
+    height: 5vmax;
+    cursor: pointer;
+    transition: all 3s ease-in-out;
+}
+
+.FileSelector > input::file-selector-button:hover {
+        background: -webkit-linear-gradient(right, #fbf9f9, #ffffff, #ffffff, #ffffff);
 }
 
 
