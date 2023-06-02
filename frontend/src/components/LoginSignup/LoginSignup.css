@@ -221,11 +221,11 @@ form .btn input[type="submit"] {
     width: 100%;
     height: 5vmax;
     cursor: pointer;
-    transition: all 3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 .FileSelector > input::file-selector-button:hover {
-        background: -webkit-linear-gradient(right, #fbf9f9, #ffffff, #ffffff, #ffffff);
+        background-color: rgb(235, 235, 235);
 }
 
 
