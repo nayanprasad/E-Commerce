@@ -1,7 +1,21 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import './LoginSignup.css';
 
 const LoginSignup = () => {
+
+
+    const [loginData, setloginData] = useState({
+        email: "",
+        password: ""
+    });
+
+    const [signupData, setsignupData] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+
+
 
     useEffect(() => {
         const loginText = document.querySelector(".title-text .login");
@@ -37,6 +51,19 @@ const LoginSignup = () => {
         };
     }, []);
 
+
+    const handleLoginSubmit = (event) => {
+        event.preventDefault();
+
+
+        console.log(loginData)
+    }
+
+    const handleSignupSubmit = (event) => {
+        event.preventDefault();
+        console.log(signupData);
+    }
+
     return (
         <Fragment>
             <div className="wrapperContainer">
@@ -56,12 +83,12 @@ const LoginSignup = () => {
                         <div className="slider-tab"></div>
                     </div>
                     <div className="form-inner">
-                        <form action="#" className="login">
+                        <form className="login" onSubmit={handleLoginSubmit}>
                             <div className="field">
-                                <input type="text" placeholder="Email Address" required />
+                                <input type="text" placeholder="Email Address" name="email" value={loginData.email} onChange={(e) => setloginData({...loginData, [e.target.name] : e.target.value})} required />
                             </div>
                             <div className="field">
-                                <input type="password" placeholder="Password" required />
+                                <input type="password" placeholder="Password" name="password" value={loginData.password} onChange={(e) => setloginData({...loginData, [e.target.name] : e.target.value})} required />
                             </div>
                             <div className="pass-link"><a href="#">Forgot password?</a></div>
                             <div className="field btn">
@@ -70,15 +97,15 @@ const LoginSignup = () => {
                             </div>
                             <div className="signup-link">Not a member? <a href="">Signup now</a></div>
                         </form>
-                        <form action="#" className="signup">
+                        <form  className="signup" onSubmit={handleSignupSubmit}>
                             <div className="field">
-                                <input type="text" placeholder="Email Address" required />
+                                <input type="text" placeholder="Name" required name="name" value={signupData.name} onChange={(e) => setsignupData({...signupData, [e.target.name] : e.target.value})} />
                             </div>
                             <div className="field">
-                                <input type="password" placeholder="Password" required />
+                                <input type="text" placeholder="Email Address" required name="email" value={signupData.email} onChange={(e) => setsignupData({...signupData, [e.target.name] : e.target.value})} />
                             </div>
                             <div className="field">
-                                <input type="password" placeholder="Confirm password" required />
+                                <input type="password" placeholder="Password" required name="password" value={signupData.password} onChange={(e) => setsignupData({...signupData, [e.target.name] : e.target.value})}/>
                             </div>
                             <div className="field btn">
                                 <div className="btn-layer"></div>
