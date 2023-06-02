@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {ReactNavbar} from "overlay-navbar";
 import logo from "../../../assets/images/logo.jpg";
 import webfont from "webfontloader"
+import "./Header.css"
 
 const Header = () => {
 
@@ -47,6 +48,7 @@ const Header = () => {
             cartIconColorHover="#eb4034"
             cartIconMargin="1vmax"
         />
+
     );
 };
 

@@ -15,6 +15,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import "./App.css";
 import Products from "./components/Products/Products";
 import Search from "./components/Search/Search";
+import LoginSignup from "./components/LoginSignup/LoginSignup";
 
 
 
@@ -42,6 +43,8 @@ export default function App() {
                 <Route exact path="/products" element={<Products/>}/>
                 <Route exact path="/search" element={<Search/>}/>
                 <Route  path="/search/:keyword" element={<Products/>}/>
+                <Route exact path="/login" element={<LoginSignup/>}/>
+
             </Routes>
 
             <Footer/>

@@ -88,7 +88,7 @@ const Products = () => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography>Price</Typography>
+                            <Typography>PRICE</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Slider
@@ -110,7 +110,7 @@ const Products = () => {
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <Typography>Category</Typography>
+                            <Typography>CATEGORY</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
@@ -128,7 +128,7 @@ const Products = () => {
                             aria-controls="panel3a-content"
                             id="panel3a-header"
                         >
-                            <Typography>Ratings</Typography>
+                            <Typography>RATINGS</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Slider
