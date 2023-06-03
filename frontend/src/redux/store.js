@@ -8,7 +8,7 @@ import {userReducer} from "./reducers/userReducer"
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
-    user: userReducerReducer
+    user: userReducer
 });
 
 const initialState = {}

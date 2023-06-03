@@ -2,6 +2,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_REQUEST,
     LOGIN_FAILS,
+    CLEAR_ERRORS
 } from "../constants/userConstant";
 
 
@@ -26,6 +27,11 @@ export const userReducer = (state = {user: {}}, action) => {
                 user: null,
                 error: action.payload
             }
+            case CLEAR_ERRORS:
+                return {
+                    ...state,
+                    error: null
+                }
         default:
             return state
     }
