@@ -15,7 +15,7 @@ const LoginSignup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
+    const {loading, error, user, isAuthenticated}  = useSelector(state => state.userLogin)
 
     const [loginData, setloginData] = useState({
         email: "",
@@ -32,13 +32,12 @@ const LoginSignup = () => {
     useEffect(() => {
 
         if(error) {
-
             toast.error(error);
         }
 
         if(isAuthenticated) {
             toast.success("Login Successful");
-            navigate("/")
+            // navigate("/")
         }
 
 
