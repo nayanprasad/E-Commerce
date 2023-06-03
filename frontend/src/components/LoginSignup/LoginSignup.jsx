@@ -18,15 +18,16 @@ const LoginSignup = () => {
 
     const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
 
-    const [loginData, setloginData] = useState({
+    const [loginData, setLoginData] = useState({
         email: "",
         password: ""
     });
 
-    const [signupData, setsignupData] = useState({
+    const [signupData, setSignupData] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        avatar: ""
     });
 
 
@@ -85,17 +86,23 @@ const LoginSignup = () => {
 
     const handleSignupSubmit = (event) => {
         event.preventDefault();
+        // console.log(signupData)
+        // const formData = new FormData();
+        // formData.append("name", signupData.name);
+        // formData.append("email", signupData.email);
+        // formData.append("password", signupData.password);
+        // formData.append("avatar", signupData.avatar);
         dispatch(signup(signupData))
     }
 
     const handleRegisterEmailChange = async (event) => {
-        setsignupData({
+        setSignupData({
             ...signupData,
             [event.target.name]: event.target.value
         });
 
-        const {data} = await axios.post("http://localhost:3000/api/v1/user/checkEmail", {email: event.target.value})
-        console.log(data)
+        // const {data} = await axios.post("http://localhost:3000/api/v1/user/checkEmail", {email: event.target.value})
+        // console.log(data)
     }
 
 
@@ -121,7 +128,7 @@ const LoginSignup = () => {
                                 <div className="field flex">
                                     <BadgeIcon/>
                                     <input type="text" placeholder="Email Address" name="email" value={loginData.email}
-                                           onChange={(e) => setloginData({
+                                           onChange={(e) => setLoginData({
                                                ...loginData,
                                                [e.target.name]: e.target.value
                                            })} required/>
@@ -129,7 +136,7 @@ const LoginSignup = () => {
                                 <div className="field flex">
                                     <LockIcon/>
                                     <input type="password" placeholder="Password" name="password"
-                                           value={loginData.password} onChange={(e) => setloginData({
+                                           value={loginData.password} onChange={(e) => setLoginData({
                                         ...loginData,
                                         [e.target.name]: e.target.value
                                     })} required/>
@@ -145,7 +152,7 @@ const LoginSignup = () => {
                                 <div className="field flex">
                                     <BadgeIcon />
                                     <input type="text" placeholder="Name" required name="name" value={signupData.name}
-                                           onChange={(e) => setsignupData({
+                                           onChange={(e) => setSignupData({
                                                ...signupData,
                                                [e.target.name]: e.target.value
                                            })}/>
@@ -158,14 +165,17 @@ const LoginSignup = () => {
                                 <div className="field flex">
                                     <LockIcon />
                                     <input type="password" placeholder="Password" required name="password"
-                                           value={signupData.password} onChange={(e) => setsignupData({
+                                           value={signupData.password} onChange={(e) => setSignupData({
                                         ...signupData,
                                         [e.target.name]: e.target.value
                                     })}/>
                                 </div>
                                 <div className="field flex FileSelector">
                                     <AccountCircleIcon fontSize="large"/>
-                                    <input type="file" accept="image/*"/>
+                                    <input type="file" accept="image/*" name="avatar"  onChange={(e) => setSignupData({
+                                        ...signupData,
+                                        [e.target.name]: e.target.value
+                                    })}/>
                                 </div>
                                 <div className="field btn">
                                     <div className="btn-layer"></div>
