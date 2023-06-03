@@ -4,9 +4,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BadgeIcon from '@mui/icons-material/Badge';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
+import {useSelector, useDispatch } from "react-redux";
+import {login} from "../../redux/actions/userAction";
+import {toast} from "react-toastify"
 
 const LoginSignup = () => {
 
+    const dispatch = useDispatch();
+
+    const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
 
     const [loginData, setloginData] = useState({
         email: "",
@@ -21,6 +27,10 @@ const LoginSignup = () => {
 
 
     useEffect(() => {
+
+        if(error)
+            toast.error(error);
+
         const loginText = document.querySelector(".title-text .login");
         const loginForm = document.querySelector("form.login");
         const loginBtn = document.querySelector("label.login");
@@ -46,20 +56,20 @@ const LoginSignup = () => {
         loginBtn.addEventListener("click", handleLoginBtnClick);
         signupLink.addEventListener("click", handleSignupLinkClick);
 
-        // Clean up event listeners on component unmount
+
         return () => {
             signupBtn.removeEventListener("click", handleSignupBtnClick);
             loginBtn.removeEventListener("click", handleLoginBtnClick);
             signupLink.removeEventListener("click", handleSignupLinkClick);
         };
-    }, []);
+    }, [error]);
 
 
     const handleLoginSubmit = (event) => {
         event.preventDefault();
 
+        dispatch(login(loginData.email, loginData.password))
 
-        console.log(loginData)
     }
 
     const handleSignupSubmit = (event) => {
@@ -70,8 +80,6 @@ const LoginSignup = () => {
     return (
         <Fragment>
             <div className="wrapperContainer">
-
-
                 <div className="wrapper">
                     <div className="title-text">
                         <div className="title login">Login Form</div>
