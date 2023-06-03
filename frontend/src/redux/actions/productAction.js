@@ -6,7 +6,7 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILS, CLEAR_ERRORS,
-} from "../../constants/productConstant";
+} from "../constants/productConstant";
 
 export const listProducts = (keyword = "", page = 1, price = [0, 25000], category, ratings = 0) => async (dispatch) => {
     try{

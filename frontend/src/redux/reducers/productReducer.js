@@ -6,7 +6,7 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILS,
     CLEAR_ERRORS
-} from "../../constants/productConstant";
+} from "../constants/productConstant";
 
 
 export const productListReducer = (state = {loading: true, products: []}, action) => {
