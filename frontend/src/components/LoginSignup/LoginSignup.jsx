@@ -31,8 +31,10 @@ const LoginSignup = () => {
 
     useEffect(() => {
 
-        if(error)
+        if(error) {
+
             toast.error(error);
+        }
 
         if(isAuthenticated) {
             toast.success("Login Successful");
