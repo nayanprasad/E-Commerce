@@ -52,7 +52,7 @@ export const signup = (userData) => async (dispatch) => {
             url: "http://localhost:3000/api/v1/register",
             data: userData,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "multipart/form-data"
             }
         });
 

@@ -4,6 +4,7 @@ const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require('cloudinary').v2;
 
 
 // Register new user   
@@ -11,13 +12,23 @@ exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
 
     const {name, email, password} = req.body;
 
+    console.log(req.body)
+
+    const myCloud = await cloudinary.uploader.upload(req.body.file, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale"
+    });
+
+    console.log(myCloud)
+
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: "sample id",
-            url: "sample url"
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
         }
     });
 
@@ -263,6 +274,28 @@ exports.deleteAUser = CatchAsyncErrors(async (req, res, next) => {
         success: true,
         message: "deleted the user"
     });
+});
+
+
+
+exports.isEmailUnique = CatchAsyncErrors(async (req, res, next) => {
+    const {email} = req.body;
+
+    const user = await User.findOne({email});
+
+    if(user) {
+        res.status(200).json({
+            success: true,
+            email,
+            message: "email is not unique"
+        })
+    }
+
+    res.status(200).json({
+        success: true,
+        email,
+        message: "email is unique"
+    })
 });
 
 

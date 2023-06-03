@@ -9,6 +9,7 @@ import {useSelector, useDispatch } from "react-redux";
 import {login, signup} from "../../redux/actions/userAction";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
+import axios  from "axios";
 
 const LoginSignup = () => {
 
@@ -36,7 +37,7 @@ const LoginSignup = () => {
         }
 
         if(isAuthenticated) {
-            toast.success("Login Successful");
+            toast.success("Authenticated Successful");
             // navigate("/")
         }
 
@@ -85,6 +86,16 @@ const LoginSignup = () => {
     const handleSignupSubmit = (event) => {
         event.preventDefault();
         dispatch(signup(signupData))
+    }
+
+    const handleRegisterEmailChange = async (event) => {
+        setsignupData({
+            ...signupData,
+            [event.target.name]: event.target.value
+        });
+
+        const {data} = await axios.post("http://localhost:3000/api/v1/user/checkEmail", {email: event.target.value})
+        console.log(data)
     }
 
 
@@ -142,10 +153,7 @@ const LoginSignup = () => {
                                 <div className="field flex">
                                     <EmailIcon />
                                     <input type="text" placeholder="Email Address" required name="email"
-                                           value={signupData.email} onChange={(e) => setsignupData({
-                                        ...signupData,
-                                        [e.target.name]: e.target.value
-                                    })}/>
+                                           value={signupData.email} onChange={handleRegisterEmailChange}/>
                                 </div>
                                 <div className="field flex">
                                     <LockIcon />
