@@ -7,6 +7,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import {useSelector, useDispatch } from "react-redux";
 import {login} from "../../redux/actions/userAction";
 import {toast} from "react-toastify"
+import Loader from "../Loader/Loader";
 
 const LoginSignup = () => {
 
@@ -30,6 +31,9 @@ const LoginSignup = () => {
 
         if(error)
             toast.error(error);
+
+        if(isAuthenticated)
+            toast.success("Login Successful");
 
         const loginText = document.querySelector(".title-text .login");
         const loginForm = document.querySelector("form.login");
@@ -62,7 +66,7 @@ const LoginSignup = () => {
             loginBtn.removeEventListener("click", handleLoginBtnClick);
             signupLink.removeEventListener("click", handleSignupLinkClick);
         };
-    }, [error]);
+    }, [ error, loading, isAuthenticated]);
 
 
     const handleLoginSubmit = (event) => {
@@ -77,8 +81,11 @@ const LoginSignup = () => {
         console.log(signupData);
     }
 
+
+
     return (
         <Fragment>
+            {loading && <Loader/>}
             <div className="wrapperContainer">
                 <div className="wrapper">
                     <div className="title-text">
