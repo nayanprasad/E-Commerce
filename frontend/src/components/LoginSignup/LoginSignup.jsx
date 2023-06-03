@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import './LoginSignup.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BadgeIcon from '@mui/icons-material/Badge';
@@ -11,6 +12,7 @@ import Loader from "../Loader/Loader";
 
 const LoginSignup = () => {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
@@ -32,8 +34,11 @@ const LoginSignup = () => {
         if(error)
             toast.error(error);
 
-        if(isAuthenticated)
+        if(isAuthenticated) {
             toast.success("Login Successful");
+            navigate("/")
+        }
+
 
         const loginText = document.querySelector(".title-text .login");
         const loginForm = document.querySelector("form.login");
