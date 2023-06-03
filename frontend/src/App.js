@@ -35,7 +35,7 @@ export default function App() {
                 draggable
                 pauseOnHover
                 theme="dark"
-                limit={2}
+                limit={1}
             />
 
             <Routes>

@@ -6,7 +6,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import {useSelector, useDispatch } from "react-redux";
-import {login} from "../../redux/actions/userAction";
+import {login, signup} from "../../redux/actions/userAction";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
 
@@ -15,7 +15,7 @@ const LoginSignup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {loading, error, user, isAuthenticated}  = useSelector(state => state.userLogin)
+    const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
 
     const [loginData, setloginData] = useState({
         email: "",
@@ -84,9 +84,8 @@ const LoginSignup = () => {
 
     const handleSignupSubmit = (event) => {
         event.preventDefault();
-        console.log(signupData);
+        dispatch(signup(signupData))
     }
-
 
 
     return (

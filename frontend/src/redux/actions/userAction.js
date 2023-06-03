@@ -41,33 +41,34 @@ export const login = (email, password) => async (dispatch) => {
         })
     }
 }
-
 export const signup = (userData) => async (dispatch) => {
+
     try {
 
-        dispatch({type: SIGNUP_REQUEST})
+        dispatch({type: LOGIN_REQUEST});
 
         const {data} = await axios({
             method: "POST",
-            data : userData,
+            url: "http://localhost:3000/api/v1/register",
+            data: userData,
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
         dispatch({
-            type: SIGNUP_SUCCESS,
+            type: LOGIN_SUCCESS,
             payload: data.user
         })
 
+
     }catch (e) {
         dispatch({
-            type: SIGNUP_FAILS,
+            type: LOGIN_FAILS,
             payload: e.response.data.message
         })
     }
 }
-
 
 
 export const clearErrors = () => async (dispatch) => {
