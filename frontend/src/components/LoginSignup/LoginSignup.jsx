@@ -189,7 +189,7 @@ const LoginSignup = () => {
                                     ) : (
                                         <AccountCircleIcon fontSize="large" />
                                     )}
-                                    <input type="file" accept="image/*" name="avatar"  onChange={handleImageChange}/>
+                                    <input type="file" accept="image/*" name="avatar"  onChange={handleImageChange} required/>
                                 </div>
                                 <div className="field btn">
                                     <div className="btn-layer"></div>
