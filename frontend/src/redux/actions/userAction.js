@@ -29,6 +29,8 @@ export const login = (email, password) => async (dispatch) => {
             }
         });
 
+        localStorage.setItem("token", data.token);
+
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -56,6 +58,8 @@ export const signup = (userData) => async (dispatch) => {
                 "Content-Type": "multipart/form-data"
             }
         });
+
+        localStorage.setItem("token", data.token);
 
         dispatch({
             type: REGISTER_SUCCESS,
