@@ -122,7 +122,7 @@ const LoginSignup = () => {
     return (
         <Fragment>
             {loading && <Loader/>}
-            <div className="wrapperContainer">
+            <div className="wrapperContainer" style={{display: loading ? "none" : ""}}>
                 <div className="wrapper">
                     <div className="title-text">
                         <div className="title login">Login Form</div>
