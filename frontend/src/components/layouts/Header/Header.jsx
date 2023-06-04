@@ -6,48 +6,61 @@ import "./Header.css"
 
 const Header = () => {
 
+
     useEffect(() => {
-        webfont.load({
-            google: {
-                families: ['Roboto:300,400,500,700', 'sans-serif']
-            }
+        const Toggle = document.querySelector('#toggle');
+        const overlay = document.querySelector('#overlay');
+        const closeIcon = document.querySelector('#close');
+
+        Toggle.addEventListener('click', () => {
+            Toggle.classList.add('active');
+            overlay.classList.add('open');
         });
+
+
+        overlay.addEventListener('click', () => {
+            Toggle.classList.remove('active');
+            overlay.classList.remove('open');
+        });
+
+
+        return () => {
+            Toggle.removeEventListener('click', () => {
+                Toggle.classList.toggle('active');
+                overlay.classList.toggle('open');
+            });
+            overlay.removeEventListener('click', () => {
+                Toggle.classList.remove('active');
+                overlay.classList.remove('open');
+            });
+
+
+        };
     }, []);
 
 
     return (
-        <ReactNavbar
-            burgerColorHover="#eb4034"
-            logo={logo}
-            background="white"
-            logowidth="20vmax"
-            navColor1="rgba(0,0,0,0.4)"
-            logoHoverSize="10px"
-            logoHoverColor="#eb4034"
-            link1Text="Home"
-            link2Text="Products"
-            link3Text="Contact"
-            link4Text="About"
-            link1Url="/"
-            link2Url="/products"
-            link3Url="/contact"
-            link4Url="/about"
-            link1Size="1.3vmax"
-            link1Color="rgba(35, 35, 35,0.8)"
-            nav1justifyContent="flex-end"
-            nav2justifyContent="flex-end"
-            nav3justifyContent="flex-start"
-            nav4justifyContent="flex-start"
-            link1ColorHover="#eb4034"
-            link1Margin="1vmax"
-            profileIconColor="rgba(35, 35, 35,0.8)"
-            searchIconColor=" rgba(35, 35, 35, 0.8) "
-            cartIconColor="rgba(35, 35, 35,0.8)"
-            profileIconColorHover="#eb4034"
-            searchIconColorHover="#eb4034"
-            cartIconColorHover="#eb4034"
-            cartIconMargin="1vmax"
-        />
+        <>
+            <div className="button_container" id="toggle">
+                <span className="top"></span>
+                <span className="middle"></span>
+                <span className="bottom"></span>
+            </div>
+
+            <div className="overlay" id="overlay" >
+                <div id="close" >
+                    <span className="top"></span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a >Home</a></li>
+                        <li><a >Products</a></li>
+                        <li><a >About</a></li>
+                        <li><a >Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </>
 
     );
 };
