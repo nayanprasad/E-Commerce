@@ -5,6 +5,7 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require('cloudinary').v2;
+const jwt = require('jsonwebtoken');
 
 // Register new user   
 exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
@@ -291,6 +292,19 @@ exports.isEmailUnique = CatchAsyncErrors(async (req, res, next) => {
         email,
         message: "email is unique"
     })
+});
+
+exports.getUserDetailsFromToken = CatchAsyncErrors(async (req, res, next) => {
+
+        const token = req.headers.authorization.split(" ")[1];
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRETE);
+
+        const user = await User.findById(decoded.id);
+        res.status(200).json({
+            success: true,
+            user
+        })
 });
 
 
