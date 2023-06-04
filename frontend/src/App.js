@@ -16,9 +16,18 @@ import "./App.css";
 import Products from "./components/Products/Products";
 import Search from "./components/Search/Search";
 import LoginSignup from "./components/LoginSignup/LoginSignup";
-
+import {useDispatch} from "react-redux";
+import {loadUser} from "./redux/actions/userAction";
 
 export default function App() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUser())
+
+    }, [dispatch] );
+
 
     return (
         <Router>

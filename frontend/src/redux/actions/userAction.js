@@ -6,6 +6,9 @@ import {
     REGISTER_SUCCESS,
     REGISTER_REQUEST,
     REGISTER_FAILS,
+    LOAD_USER_SUCCESS,
+    LOAD_USER_REQUEST,
+    LOAD_USER_FAILS,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
 import {BASE_URL} from "../constants";
@@ -74,6 +77,31 @@ export const signup = (userData) => async (dispatch) => {
         })
     }
 }
+
+
+export const loadUser = () => async (dispatch) => {
+
+        try {
+            dispatch({type: LOAD_USER_REQUEST});
+            const {data} = await axios({
+                method: "GET",
+                url: `${BASE_URL}/api/v1/me`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            dispatch({
+                type: LOAD_USER_SUCCESS,
+                payload: data.user
+            })
+        }catch (e) {
+            dispatch({
+                type: LOAD_USER_FAILS,
+                payload: e.response.data.message
+            })
+        }
+};
 
 
 export const clearErrors = () => async (dispatch) => {
