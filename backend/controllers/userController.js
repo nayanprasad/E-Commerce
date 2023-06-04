@@ -6,22 +6,16 @@ const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require('cloudinary').v2;
 
-
 // Register new user   
 exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
 
-    console.log(req.body)
-
     const {name, email, password, avatar} = req.body;
 
-
-    const myCloud = await cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", {
+    const myCloud = await cloudinary.uploader.upload(avatar, {
         folder: "avatars",
         width: 150,
         crop: "scale"
-    })
-
-    // console.log(myCloud)
+    });
 
     const user = await User.create({
         name,

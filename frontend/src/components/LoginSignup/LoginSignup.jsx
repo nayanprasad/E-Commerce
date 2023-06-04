@@ -27,7 +27,7 @@ const LoginSignup = () => {
         name: "",
         email: "",
         password: "",
-        avatar: ""
+        avatar: undefined
     });
 
 
@@ -84,15 +84,27 @@ const LoginSignup = () => {
 
     }
 
+    const handleImageChange = (event) => {
+        const image = event.target.files?.[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onloadend = () => {
+            setSignupData({
+                ...signupData,
+                avatar: reader.result
+            })
+        }
+    };
+
     const handleSignupSubmit = (event) => {
         event.preventDefault();
         // console.log(signupData)
-        // const formData = new FormData();
-        // formData.append("name", signupData.name);
-        // formData.append("email", signupData.email);
-        // formData.append("password", signupData.password);
-        // formData.append("avatar", signupData.avatar);
-        dispatch(signup(signupData))
+        const formData = new FormData();
+        formData.append("name", signupData.name);
+        formData.append("email", signupData.email);
+        formData.append("password", signupData.password);
+        formData.append("avatar", signupData.avatar);
+        dispatch(signup(formData))
     }
 
     const handleRegisterEmailChange = async (event) => {
@@ -172,10 +184,7 @@ const LoginSignup = () => {
                                 </div>
                                 <div className="field flex FileSelector">
                                     <AccountCircleIcon fontSize="large"/>
-                                    <input type="file" accept="image/*" name="avatar"  onChange={(e) => setSignupData({
-                                        ...signupData,
-                                        [e.target.name]: e.target.value
-                                    })}/>
+                                    <input type="file" accept="image/*" name="avatar"  onChange={handleImageChange}/>
                                 </div>
                                 <div className="field btn">
                                     <div className="btn-layer"></div>
