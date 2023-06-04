@@ -183,7 +183,11 @@ const LoginSignup = () => {
                                     })}/>
                                 </div>
                                 <div className="field flex FileSelector">
-                                    <AccountCircleIcon fontSize="large"/>
+                                    {signupData.avatar ? (
+                                        <img className="avatar" src={signupData.avatar} alt="Uploaded Avatar" />
+                                    ) : (
+                                        <AccountCircleIcon fontSize="large" />
+                                    )}
                                     <input type="file" accept="image/*" name="avatar"  onChange={handleImageChange}/>
                                 </div>
                                 <div className="field btn">
