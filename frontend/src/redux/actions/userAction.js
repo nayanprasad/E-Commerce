@@ -58,7 +58,7 @@ export const signup = (userData) => async (dispatch) => {
         });
 
         dispatch({
-            type: REGISTER_REQUEST,
+            type: REGISTER_SUCCESS,
             payload: data.user
         })
 
