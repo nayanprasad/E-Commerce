@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import "./Header.css"
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Header = () => {
 
@@ -47,19 +48,20 @@ const Header = () => {
                 <span className="bottom"></span>
             </div>
 
-            <div className="overlay" id="overlay" >
-                <div id="close" >
+            <div className="overlay" id="overlay">
+                <div id="close">
                     <span className="top"></span>
                 </div>
                 <nav>
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/products" >Products</Link></li>
+                        <li><Link to="/products">Products</Link></li>
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/cotact">Contact</Link></li>
                         <div className="headerIcons">
-                                <Link className="headerIcon" to="/cart"><ShoppingCartIcon fontSize="large" /></Link>
-                                <Link className="headerIcon"  to="/login"><LoginIcon fontSize="large" /></Link>
+                            <Link className="headerIcon" to="/search"><SearchIcon fontSize="large"/></Link>
+                            <Link className="headerIcon" to="/cart"><ShoppingCartIcon fontSize="large"/></Link>
+                            <Link className="headerIcon" to="/login"><LoginIcon fontSize="large"/></Link>
                         </div>
                     </ul>
                 </nav>
