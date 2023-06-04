@@ -7,19 +7,19 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILS, CLEAR_ERRORS,
 } from "../constants/productConstant";
+import {BASE_URL} from"../constants"
 
 export const listProducts = (keyword = "", page = 1, price = [0, 25000], category, ratings = 0) => async (dispatch) => {
     try{
         dispatch({type: PRODUCT_LIST_REQUEST});
 
-        let link = `http://localhost:3000/api/v1/products?keyword=${keyword}&page=${page}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${ratings}`
+        let link = `${BASE_URL}/api/v1/products?keyword=${keyword}&page=${page}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${ratings}`
 
         if(category) {
             console.log(category)
             link += `&category=${category}`
         }
 
-        console.log(link)
         const response = await axios({
             method: "GET",
             url: link
@@ -44,7 +44,7 @@ export const getProductDetails = (id) => async (dispatch) => {
 
         const response = await axios({
             method: "GET",
-            url: `http://localhost:3000/api/v1/product/${id}`
+            url: `${BASE_URL}/api/v1/product/${id}`
         });
 
 

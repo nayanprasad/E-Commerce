@@ -8,6 +8,7 @@ import {
     REGISTER_FAILS,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
+import {BASE_URL} from "../constants";
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -18,7 +19,7 @@ export const login = (email, password) => async (dispatch) => {
 
         const {data} = await axios({
             method: "POST",
-            url: "http://localhost:3000/api/v1/login",
+            url: `${BASE_URL}/api/v1/login`,
             data: {
                 email,
                 password
@@ -49,7 +50,7 @@ export const signup = (userData) => async (dispatch) => {
 
         const {data} = await axios({
             method: "POST",
-            url: "http://localhost:3000/api/v1/register",
+            url: `${BASE_URL}/api/v1/register`,
             data: userData,
             headers: {
                 "Content-Type": "multipart/form-data"
