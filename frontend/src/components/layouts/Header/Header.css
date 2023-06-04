@@ -100,7 +100,7 @@
   height: 70%;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2vmax;
+  font-size: 4vmax;
   font-family: "Varela Round", serif;
   font-weight: 400;
   text-align: center;
@@ -170,4 +170,3 @@
 .headerIcon:hover {
   color: tomato;
 }
-
