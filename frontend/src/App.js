@@ -33,7 +33,7 @@ export default function App() {
                 rtl={false}
                 pauseOnFocusLoss={false}
                 draggable
-                pauseOnHover
+                pauseOnHover={true}
                 theme="dark"
                 limit={1}
             />

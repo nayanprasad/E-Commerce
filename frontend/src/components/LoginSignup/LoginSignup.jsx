@@ -6,7 +6,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import {useSelector, useDispatch } from "react-redux";
-import {login, signup} from "../../redux/actions/userAction";
+import {login, signup, clearErrors} from "../../redux/actions/userAction";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
 import axios  from "axios";
@@ -35,11 +35,12 @@ const LoginSignup = () => {
 
         if(error) {
             toast.error(error);
+            dispatch(clearErrors())
         }
 
         if(isAuthenticated) {
             toast.success("Authenticated Successful");
-            // navigate("/")
+            navigate("/")
         }
 
 

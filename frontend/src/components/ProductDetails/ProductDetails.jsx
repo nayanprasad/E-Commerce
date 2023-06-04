@@ -10,6 +10,7 @@ import ReviewCard from "../ReviewCard/ReviewCard";
 import Loader from "../Loader/Loader";
 import {toast} from "react-toastify";
 import MetaDate from "../MetaDate";
+import {clearErrors} from "../../redux/actions/userAction";
 
 const ProductDetails = () => {
 
@@ -21,8 +22,11 @@ const ProductDetails = () => {
     useEffect(() => {
         dispatch(getProductDetails(id));
 
-        if (error)
+        if (error) {
             toast.error(error);
+            // dispatch(clearErrors())
+        }
+
 
     }, [dispatch, id, error]);
 
