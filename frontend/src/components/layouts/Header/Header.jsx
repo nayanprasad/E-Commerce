@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react';
-import {ReactNavbar} from "overlay-navbar";
-import logo from "../../../assets/images/logo.jpg";
-import webfont from "webfontloader"
+import {Link} from "react-router-dom";
 import "./Header.css"
 
 const Header = () => {
@@ -53,10 +51,10 @@ const Header = () => {
                 </div>
                 <nav>
                     <ul>
-                        <li><a >Home</a></li>
-                        <li><a >Products</a></li>
-                        <li><a >About</a></li>
-                        <li><a >Contact</a></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/products" >Products</Link></li>
+                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/cotact">Contact</Link></li>
                     </ul>
                 </nav>
             </div>

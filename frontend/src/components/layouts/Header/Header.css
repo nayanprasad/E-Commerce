@@ -16,6 +16,11 @@
   width: 35px;
   cursor: pointer;
   transition: opacity 0.25s ease;
+  z-index: 10;
+}
+
+.button_container span {
+  background: #141313 !important;
 }
 
 .button_container:hover {
