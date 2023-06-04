@@ -3,9 +3,9 @@ import {
     LOGIN_SUCCESS,
     LOGIN_REQUEST,
     LOGIN_FAILS,
-    SIGNUP_SUCCESS,
-    SIGNUP_REQUEST,
-    SIGNUP_FAILS,
+    REGISTER_SUCCESS,
+    REGISTER_REQUEST,
+    REGISTER_FAILS,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
 
@@ -45,7 +45,7 @@ export const signup = (userData) => async (dispatch) => {
 
     try {
 
-        dispatch({type: LOGIN_REQUEST});
+        dispatch({type: REGISTER_REQUEST});
 
         const {data} = await axios({
             method: "POST",
@@ -57,14 +57,14 @@ export const signup = (userData) => async (dispatch) => {
         });
 
         dispatch({
-            type: LOGIN_SUCCESS,
+            type: REGISTER_REQUEST,
             payload: data.user
         })
 
 
     }catch (e) {
         dispatch({
-            type: LOGIN_FAILS,
+            type: REGISTER_FAILS,
             payload: e.response.data.message
         })
     }
