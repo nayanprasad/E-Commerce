@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import "./Header.css"
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LoginIcon from '@mui/icons-material/Login';
 
 const Header = () => {
 
@@ -55,6 +57,10 @@ const Header = () => {
                         <li><Link to="/products" >Products</Link></li>
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/cotact">Contact</Link></li>
+                        <div className="headerIcons">
+                                <Link className="headerIcon" to="/cart"><ShoppingCartIcon fontSize="large" /></Link>
+                                <Link className="headerIcon"  to="/login"><LoginIcon fontSize="large" /></Link>
+                        </div>
                     </ul>
                 </nav>
             </div>
