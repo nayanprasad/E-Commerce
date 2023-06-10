@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { styled } from '@mui/material/styles';
+import React, {Fragment} from 'react';
+import {styled} from '@mui/material/styles';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
@@ -8,9 +8,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import {useNavigate} from "react-router-dom";
 import "./UserIcon.css"
 
-const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
+const StyledSpeedDial = styled(SpeedDial)(({theme}) => ({
     position: 'fixed',
     top: '3%',
     right: theme.spacing(2),
@@ -20,21 +21,36 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
 
 export default function PlaygroundSpeedDial({user}) {
 
+    const navigate = useNavigate();
+
     const actions = [
-        { icon: <PersonIcon />, name: 'Profile', func: Profile },
-        { icon: <ListAltIcon />, name: 'Orders' },
-        { icon: <LogoutIcon />, name: 'Logout' },
+        {icon: <PersonIcon/>, name: 'Profile'},
+        {icon: <ListAltIcon/>, name: 'Orders',},
+        {icon: <LogoutIcon/>, name: 'Logout',},
     ];
 
-    if(user?.role === 'admin'){
-        actions.unshift({ icon: <DashboardIcon />, name: 'Dashboard' });
+    if (user?.role === 'admin') {
+        actions.unshift({icon: <DashboardIcon/>, name: 'Dashboard'});
     }
 
-    function Profile() {
-        console.log('Profile');
+    //handler function
+    function handleClick(e, name) {
+        e.preventDefault();
+        switch (name) {
+            case 'Profile':
+                navigate('/profile');
+                break;
+            case 'Orders':
+                navigate('/orders');
+                break;
+            case 'Logout':
+                window.location.href = '/logout';
+                break;
+            case 'Dashboard':
+                navigate('/admin/dashboard');
+                break;
+        }
     }
-
-
 
 
     return (
@@ -44,8 +60,8 @@ export default function PlaygroundSpeedDial({user}) {
                 hidden={false}
                 icon={user ?
                     // <img src={user.avatar.url} alt={user.name} className="speedDialIcon" />
-                    <AccountBoxIcon />
-                    :  <AccountBoxIcon />}
+                    <AccountBoxIcon/>
+                    : <AccountBoxIcon/>}
                 direction="down"
             >
                 {actions.map((action) => (
@@ -53,6 +69,9 @@ export default function PlaygroundSpeedDial({user}) {
                         key={action.name}
                         icon={action.icon}
                         tooltipTitle={action.name}
+                        onClick={(e) => {
+                            handleClick(e, action.name)
+                        }}
                     />
                 ))}
             </StyledSpeedDial>
