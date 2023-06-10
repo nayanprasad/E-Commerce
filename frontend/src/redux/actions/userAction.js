@@ -104,6 +104,27 @@ export const loadUser = () => async (dispatch) => {
 };
 
 
+export const logout = () => async (dispatch) => {
+    try {
+
+        await axios.get(`${BASE_URL}/api/v1/logout`);
+
+        localStorage.removeItem("token");
+
+        dispatch({
+            type: LOAD_USER_FAILS,
+        });
+
+    }catch (e) {
+        dispatch({
+            type: LOAD_USER_FAILS,
+            payload: e.response.data.message
+        })
+    }
+}
+
+
+
 export const clearErrors = () => async (dispatch) => {
     dispatch({
         type: CLEAR_ERRORS

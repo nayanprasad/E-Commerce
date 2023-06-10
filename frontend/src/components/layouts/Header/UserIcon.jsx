@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {styled} from '@mui/material/styles';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -10,6 +10,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import {useNavigate} from "react-router-dom";
 import "./UserIcon.css"
+import {useSelector, useDispatch} from "react-redux";
+import {logout} from "../../../redux/actions/userAction";
+import {toast} from "react-toastify"
 
 const StyledSpeedDial = styled(SpeedDial)(({theme}) => ({
     position: 'fixed',
@@ -22,6 +25,8 @@ const StyledSpeedDial = styled(SpeedDial)(({theme}) => ({
 export default function PlaygroundSpeedDial({user}) {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const actions = [
         {icon: <PersonIcon/>, name: 'Profile'},
@@ -44,14 +49,15 @@ export default function PlaygroundSpeedDial({user}) {
                 navigate('/orders');
                 break;
             case 'Logout':
-                window.location.href = '/logout';
+                dispatch(logout())
+                toast.success("logout successfully")
                 break;
             case 'Dashboard':
                 navigate('/admin/dashboard');
+
                 break;
         }
     }
-
 
     return (
         <Fragment>

@@ -23,18 +23,18 @@ import UserIcon from "./components/layouts/Header/UserIcon"
 export default function App() {
 
     const dispatch = useDispatch();
-    const {user} = useSelector(state => state.user);
+    const {user, isAuthenticated} = useSelector(state => state.user);
 
     useEffect(() => {
         dispatch(loadUser())
 
-    }, [dispatch] );
+    }, [dispatch, toast] );
 
 
     return (
         <Router>
             <Header/>
-            <UserIcon user={user}/>
+            {isAuthenticated && <UserIcon user={user}/>}
             <ToastContainer
                 position="bottom-center"
                 autoClose={3000}

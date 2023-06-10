@@ -9,5 +9,8 @@ export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
 export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
 export const LOAD_USER_FAILS = "LOAD_USER_FAILS";
 
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILS = "LOGOUT_FAILS";
+
 
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
