@@ -16,13 +16,14 @@ import "./App.css";
 import Products from "./components/Products/Products";
 import Search from "./components/Search/Search";
 import LoginSignup from "./components/LoginSignup/LoginSignup";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loadUser} from "./redux/actions/userAction";
 import UserIcon from "./components/layouts/Header/UserIcon"
 
 export default function App() {
 
     const dispatch = useDispatch();
+    const {user} = useSelector(state => state.user);
 
     useEffect(() => {
         dispatch(loadUser())
@@ -33,7 +34,7 @@ export default function App() {
     return (
         <Router>
             <Header/>
-            <UserIcon/>
+            <UserIcon user={user}/>
             <ToastContainer
                 position="bottom-center"
                 autoClose={3000}
