@@ -97,7 +97,7 @@
     cursor: pointer;
     color: white;
     transition: all 0.5s;
-    background-color: #443f3f;
+    background-color: #0f0f0f;
     padding: 0.625vmax 2.5vmax;
     border-radius: 0.8vmax;
     margin: 1vmax;
@@ -105,7 +105,7 @@
 }
 
 .profileDetailsRight button:hover {
-    background-color: #6683a8;
+    background-color: #3d3d3d;
 }
 
 

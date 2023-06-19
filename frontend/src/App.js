@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import {
     BrowserRouter as Router,
     // Switch,
@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUser} from "./redux/actions/userAction";
 import UserIcon from "./components/layouts/Header/UserIcon";
 import Profile from "./components/Profile/Profile";
+import ProtectedRoute from "./components/Route/ProtectedRoute";
 
 export default function App() {
 
@@ -57,11 +58,15 @@ export default function App() {
                 <Route exact path="/search" element={<Search/>}/>
                 <Route path="/search/:keyword" element={<Products/>}/>
                 <Route exact path="/login" element={<LoginSignup/>}/>
-                <Route exact path="/profile" element={<Profile/>}/>
+
+                <Route element={<ProtectedRoute/>}>
+                    <Route exact path="/profile" element={<Profile/>}/>
+                </Route>
 
             </Routes>
 
             <Footer/>
+
         </Router>
     );
 }

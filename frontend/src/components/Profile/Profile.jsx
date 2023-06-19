@@ -7,7 +7,6 @@ const Profile = () => {
 
     const {user, loading, isAuthenticated} = useSelector(state => state.user)
 
-
     return (
         <Fragment>
             <MetaDate title={`${user?.name}'s Profile`} />
