@@ -19,8 +19,9 @@ import LoginSignup from "./components/LoginSignup/LoginSignup";
 import {useDispatch, useSelector} from "react-redux";
 import {loadUser} from "./redux/actions/userAction";
 import UserIcon from "./components/layouts/Header/UserIcon";
-import Profile from "./components/Profile/Profile";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
+import Profile from "./components/Profile/Profile";
+import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 
 export default function App() {
 
@@ -61,6 +62,7 @@ export default function App() {
 
                 <Route element={<ProtectedRoute/>}>
                     <Route exact path="/profile" element={<Profile/>}/>
+                    <Route exact path="/profile/update" element={<UpdateProfile/>}/>
                 </Route>
 
             </Routes>
