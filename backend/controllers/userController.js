@@ -182,7 +182,7 @@ exports.updatePassword = CatchAsyncErrors(async (req, res, next) => {
 //update user details
 exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
 
-    let user = await User.findById(req.params.id);
+    let user = await User.findById(req.user._id);
 
     if(!user)
         return next(new ErrorHandler("user not found", 400))
@@ -293,6 +293,7 @@ exports.isEmailUnique = CatchAsyncErrors(async (req, res, next) => {
         message: "email is unique"
     })
 });
+
 
 exports.getUserDetailsFromToken = CatchAsyncErrors(async (req, res, next) => {
 
