@@ -108,4 +108,26 @@
     background-color: #3d3d3d;
 }
 
+@media screen and (max-width: 600px) {
+
+    .profileContainer {
+        margin-top: 10vmax;
+        height: 100%;
+    }
+
+    .profileDetails {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .profileDetailsLeft {
+        margin-bottom: 0;
+    }
+
+    .profileDetailsRight {
+        margin-bottom: 0;
+        align-self: center;
+    }
+}
+
 
