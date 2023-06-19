@@ -1,0 +1,111 @@
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3.125vmax;
+    width: 100vw;
+    height: 100vh;
+    left: 0%;
+    right: 0%;
+}
+
+.profileContainer h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.profileDetails {
+    display: flex;
+    gap: 6.25vmax;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6.25vmax;
+}
+
+.profileDetailsLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+}
+
+.profileDetailsLeft img {
+    background: #c05a48;
+    transition: all .3s ease-in-out;
+    width: 20vmax;
+    height: 20vmax;
+    border-radius: 50%;
+    margin-bottom: 2.5vmax;
+    margin-top: 2.5vmax;
+}
+
+.profileDetailsLeft img:hover {
+    transform: scale(1.05);
+}
+
+.profileDetailsLeft button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+    background-color: tomato;
+    padding: 0.625vmax 2.5vmax;
+    border-radius: 20px;
+    margin: 1vmax;
+    outline: none;
+}
+
+.profileDetailsLeft button:hover {
+    background-color: #c05a48;
+    transform: translateY(-2px);
+}
+
+.profileDetailsRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 6vmax;
+    align-self: flex-start;
+}
+
+.profileDetailsRight div {
+    margin-bottom: 1.5vmax;
+}
+
+.profileDetailsRight div h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.25vmax;
+}
+
+.profileDetailsRight div p {
+    font-size: 1.25rem;
+    margin-bottom: 1.25vmax;
+}
+
+.profileDetailsRight div:last-child {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.profileDetailsRight button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+    background-color: #443f3f;
+    padding: 0.625vmax 2.5vmax;
+    border-radius: 0.8vmax;
+    margin: 1vmax;
+    outline: none;
+}
+
+.profileDetailsRight button:hover {
+    background-color: #6683a8;
+}
+
+

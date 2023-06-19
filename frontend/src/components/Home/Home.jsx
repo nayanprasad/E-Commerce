@@ -9,19 +9,6 @@ import {toast } from 'react-toastify';
 import Loader from "../Loader/Loader";
 import testImg from "../../assets/images/micromaxInB.jpg"
 
-
-// const product = {
-//     id: 1,
-//     name: "Iphone 12",
-//     price: 1000,
-//     numReviews: 10,
-//     image: testImg,
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-//     ratings: 4.5,
-//     numOfReviews: 10
-// }
-
-
 const Home = () => {
 
     const dispatch = useDispatch();
@@ -61,7 +48,6 @@ const Home = () => {
             </div>
 
         </Fragment>
-
     );
 };
 
