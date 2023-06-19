@@ -1,11 +1,14 @@
 import React, {Fragment, useRef} from 'react';
 import {useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
 import MetaDate from "../MetaDate";
 import "./Profile.css";
 
 const Profile = () => {
 
-    const {user, loading, isAuthenticated} = useSelector(state => state.user)
+    const navigate = useNavigate();
+
+    const {user, loading, isAuthenticated} = useSelector(state => state.user);
 
     return (
         <Fragment>
@@ -16,7 +19,7 @@ const Profile = () => {
                         <div className="profileDetails">
                             <div className="profileDetailsLeft">
                                 <img src={user?.avatar.url} alt={user?.name}/>
-                                <button>Edit Profile</button>
+                                <Link to="/profile/update"><button>Edit Profile</button></Link>
                             </div>
                             <div className="profileDetailsRight">
                                 <div>
@@ -33,8 +36,8 @@ const Profile = () => {
 
                                 </div>
                                 <div>
-                                    <button>My Orders</button>
-                                    <button>Change Password</button>
+                                   <button onClick={() => navigate("/profile/myorders")}> My Orders</button>
+                                    <button onClick={() => navigate("/profile/changePassword")}>Change Password</button>
                                 </div>
                             </div>
                         </div>
