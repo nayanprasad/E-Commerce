@@ -15,7 +15,7 @@ const Profile = () => {
                         <h2>My Profile</h2>
                         <div className="profileDetails">
                             <div className="profileDetailsLeft">
-                                <img src={user?.avatar} alt={user?.name}/>
+                                <img src={user?.avatar.url} alt={user?.name}/>
                                 <button>Edit Profile</button>
                             </div>
                             <div className="profileDetailsRight">

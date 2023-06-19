@@ -79,9 +79,14 @@ export default function PlaygroundSpeedDial({ user }) {
                 onOpen={() => setOpen(true)}
                 onClose={() => setOpen(false)}
                 icon={
-                    user ? (
-                        // <img src={user.avatar.url} alt={user.name} className="speedDialIcon" />
-                        <AccountBoxIcon />
+                    user.avatar.url ? (
+                        <img src={user.avatar.url} alt={user.name} className="speedDialIcon"
+                             style={{
+                                 borderRadius: "50%",
+                                 widht: "50px",
+                                    height: "50px",
+                        }}
+                        />
                     ) : (
                         <AccountBoxIcon />
                     )
