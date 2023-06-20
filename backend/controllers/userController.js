@@ -182,7 +182,10 @@ exports.updatePassword = CatchAsyncErrors(async (req, res, next) => {
 //update user details
 exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
 
+
+
     let user = await User.findById(req.user._id);
+    console.log(user)
 
     if(!user)
         return next(new ErrorHandler("user not found", 400))
@@ -293,19 +296,4 @@ exports.isEmailUnique = CatchAsyncErrors(async (req, res, next) => {
         message: "email is unique"
     })
 });
-
-
-exports.getUserDetailsFromToken = CatchAsyncErrors(async (req, res, next) => {
-
-        const token = req.headers.authorization.split(" ")[1];
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRETE);
-
-        const user = await User.findById(decoded.id);
-        res.status(200).json({
-            success: true,
-            user
-        })
-});
-
 

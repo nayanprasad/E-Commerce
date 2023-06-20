@@ -52,8 +52,8 @@ app.use((req, res, next) => {
     }
 
     console.log(`\n${arrow}[${timestamp}] Incoming request: ${methodColor}${method}${RESET} ${GRAYISH}${url}${RESET} from ${ip}`);
-    console.log(`${GRAYISH}Headers:${RESET}`, req.headers);
-    console.log(`${GRAYISH}Body:${RESET}`, req.body);
+    // console.log(`${GRAYISH}Headers:${RESET}`, req.headers);
+    // console.log(`${GRAYISH}Body:${RESET}`, req.body);
 
     res.on('finish', () => {
         const statusCode = res.statusCode;
