@@ -83,8 +83,9 @@ export default function PlaygroundSpeedDial({ user }) {
                         <img src={user.avatar.url} alt={user.name} className="speedDialIcon"
                              style={{
                                  borderRadius: "50%",
-                                 widht: "50px",
-                                    height: "50px",
+                                 width: "50px",
+                                 height: "50px",
+                                    objectFit: "cover"
                         }}
                         />
                     ) : (
