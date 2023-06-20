@@ -1,4 +1,4 @@
-import React, {Fragment, useRef} from 'react';
+import React, {Fragment, useEffect, useRef} from 'react';
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import MetaDate from "../MetaDate";
@@ -9,6 +9,7 @@ const Profile = () => {
     const navigate = useNavigate();
 
     const {user, loading, isAuthenticated} = useSelector(state => state.user);
+
 
     return (
         <Fragment>

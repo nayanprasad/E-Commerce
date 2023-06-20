@@ -42,7 +42,10 @@ const LoginSignup = () => {
 
         if(isUpdated) {
             toast.success("Profile Updated Successfully");
-            navigate("/profile");
+            user.name = userData.name;   // This is done so that the updated the state
+            user.email = userData.email;
+            user.avatar.url = userData.avatar;
+            navigate("/profile")
             dispatch({type: UPDATE_PROFILE_RESET})
         }
 
