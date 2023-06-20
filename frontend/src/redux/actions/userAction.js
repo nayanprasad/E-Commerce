@@ -12,7 +12,9 @@ import {
     UPDATE_PROFILE_REQUEST,
     UPDATE_PROFILE_SUCCESS,
     UPDATE_PROFILE_FAILS,
-    UPDATE_PROFILE_RESET,
+    UPDATE_PASSWORD_REQUEST,
+    UPDATE_PASSWORD_SUCCESS,
+    UPDATE_PASSWORD_FAILS,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
 import {BASE_URL} from "../constants";
@@ -149,9 +151,43 @@ export const updateProfile = (userData) => async (dispatch) => {
                 payload: data.success
             })
 
+
+
         }catch (e) {
             dispatch({
                 type: UPDATE_PROFILE_FAILS,
+                payload: e.response.data.message
+            })
+        }
+}
+
+
+export const updatePassword = (passwords) => async (dispatch) => {
+
+        try {
+
+            dispatch({type: UPDATE_PASSWORD_REQUEST});
+
+            const {data} = await axios({
+                method: "PUT",
+                url: `${BASE_URL}/api/v1/password/update`,
+                data: passwords,
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            dispatch({
+                type: UPDATE_PASSWORD_SUCCESS,
+                payload: data.success
+            })
+
+            localStorage.setItem("token", data.token);
+
+        }catch (e) {
+            dispatch({
+                type: UPDATE_PASSWORD_FAILS,
                 payload: e.response.data.message
             })
         }

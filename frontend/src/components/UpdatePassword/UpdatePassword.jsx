@@ -5,6 +5,8 @@ import LockIcon from '@mui/icons-material/Lock';
 import {useSelector, useDispatch} from "react-redux";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
+import {UPDATE_PROFILE_RESET} from "../../redux/constants/userConstant";
+import {updatePassword} from "../../redux/actions/userAction";
 
 const LoginSignup = () => {
 
@@ -22,16 +24,22 @@ const LoginSignup = () => {
 
     useEffect(() => {
 
+        if (error) {
+            toast.error(error);
+        }
 
-
-    }, [])
+        if (isUpdated) {
+            toast.success("Password Updated Successfully");
+            navigate("/profile")
+            dispatch({type: UPDATE_PROFILE_RESET})
+        }
+    }, [loading, error, isUpdated])
 
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(userData)
-
+        dispatch(updatePassword(userData));
     }
 
     const handleRegisterEmailChange = async (event) => {
