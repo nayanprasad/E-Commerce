@@ -8,7 +8,7 @@ const cloudinary = require('cloudinary').v2;
 const jwt = require('jsonwebtoken');
 
 // Register new user   
-exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
+exports.registerUser = CatchAsyncErrors(async (req, res, next) => {
 
     const {name, email, password, avatar} = req.body;
 
@@ -35,32 +35,32 @@ exports.registerUser = CatchAsyncErrors( async(req, res, next) => {
     //   token
     // });
 
-    sendToken(user,201, res);
+    sendToken(user, 201, res);
 
 });
 
 
 // Login user
-exports.loginUser = CatchAsyncErrors( async(req, res, next) => {
+exports.loginUser = CatchAsyncErrors(async (req, res, next) => {
 
     const {email, password} = req.body;
 
-    if(!email || !password) {
+    if (!email || !password) {
         return next(new ErrorHandler("please enter email & password", 400));
     }
 
     const user = await User.findOne({email}).select("+password");
 
-    if(!user) {
+    if (!user) {
         return next(new ErrorHandler("invalid email or password", 401));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
 
-    if(!isPasswordMatched)
+    if (!isPasswordMatched)
         return next(new ErrorHandler("invalid email or password", 401));
 
-    sendToken(user,200, res)
+    sendToken(user, 200, res)
 
 });
 
@@ -80,13 +80,12 @@ exports.logout = (req, res, next) => {
 }
 
 
-
 //forgot password
 exports.forgotPassword = CatchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findOne({email: req.body.email});
 
-    if(!user)
+    if (!user)
         return next(new ErrorHandler("user not found", 404));
 
     const resetToken = user.getResetPasswordToken();
@@ -109,7 +108,7 @@ exports.forgotPassword = CatchAsyncErrors(async (req, res, next) => {
             message: `email send to ${user.email}`
         })
 
-    }catch (error ) {
+    } catch (error) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save({validateBeforeSave: false});
@@ -125,13 +124,13 @@ exports.resetPassword = CatchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findOne({
         resetPasswordToken,
-        resetPasswordExpire: { $gt: Date.now()}
+        resetPasswordExpire: {$gt: Date.now()}
     });
 
-    if(!user)
+    if (!user)
         return next(new ErrorHandler("reset password token in invalid or has expired", 400));
 
-    if(req.body.password !== req.body.confirmpassoword)
+    if (req.body.password !== req.body.confirmpassoword)
         return next(new ErrorHandler("password doesnt match", 400));
 
     user.password = req.body.password;
@@ -161,21 +160,20 @@ exports.getUser = CatchAsyncErrors(async (req, res, next) => {
 //update password
 exports.updatePassword = CatchAsyncErrors(async (req, res, next) => {
 
-
     const user = await User.findById(req.user.id).select("+password");
 
     const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
-    if(!isPasswordMatched)
+    if (!isPasswordMatched)
         return next(new ErrorHandler("invalid password", 401));
 
-    if(req.body.newPassword !== req.body.confirmPassword)
+    if (req.body.newPassword !== req.body.confirmPassword)
         return next(new ErrorHandler("password doesnt match", 400));
 
     user.password = req.body.newPassword;
     await user.save();
 
-    sendToken(user,200, res)
+    sendToken(user, 200, res)
 });
 
 
@@ -185,17 +183,15 @@ exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.user._id);
     console.log(user)
 
-    if(!user)
+    if (!user)
         return next(new ErrorHandler("user not found", 400))
 
-    let myCloud;
-    if(req.body.avatar !== "") {
-        myCloud = await cloudinary.uploader.upload(req.body.avatar, {
-            folder: "avatars",
-            width: 150,
-            crop: "scale"
-        });
-    }
+
+    const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale"
+    });
 
     const newData = {
         email: req.body.email,
@@ -218,7 +214,6 @@ exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
 });
 
 
-
 // get all user -- admin
 exports.getAllUsers = CatchAsyncErrors(async (req, res, next) => {
     const users = await User.find();
@@ -234,7 +229,7 @@ exports.getAllUsers = CatchAsyncErrors(async (req, res, next) => {
 exports.getSingleUser = CatchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
-    if(!user)
+    if (!user)
         return next(new ErrorHandler("user not found", 400));
 
     res.status(200).json({
@@ -249,7 +244,7 @@ exports.updateRole = CatchAsyncErrors(async (req, res, next) => {
 
     let user = await User.findById(req.params.id);
 
-    if(!user)
+    if (!user)
         return next(new ErrorHandler("user not found", 400));
 
     const newData = {
@@ -275,7 +270,7 @@ exports.deleteAUser = CatchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findById(req.params.id);
 
-    if(!user)
+    if (!user)
         return next(new ErrorHandler("user not found", 400));
 
     await User.findByIdAndDelete(req.params.id)
@@ -287,13 +282,12 @@ exports.deleteAUser = CatchAsyncErrors(async (req, res, next) => {
 });
 
 
-
 exports.isEmailUnique = CatchAsyncErrors(async (req, res, next) => {
     const {email} = req.body;
 
     const user = await User.findOne({email});
 
-    if(user) {
+    if (user) {
         res.status(200).json({
             success: true,
             email,
