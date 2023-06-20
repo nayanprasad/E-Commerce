@@ -9,6 +9,10 @@ import {
     LOAD_USER_SUCCESS,
     LOAD_USER_REQUEST,
     LOAD_USER_FAILS,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAILS,
+    UPDATE_PROFILE_RESET,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
 import {BASE_URL} from "../constants";
@@ -122,6 +126,38 @@ export const logout = () => async (dispatch) => {
         })
     }
 }
+
+
+export const updateProfile = (userData) => async (dispatch) => {
+
+        try {
+
+            dispatch({type: UPDATE_PROFILE_REQUEST});
+
+            const {data} = await axios({
+                method: "PUT",
+                url: `${BASE_URL}/api/v1/me/update`,
+                data: userData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            dispatch({
+                type: UPDATE_PROFILE_SUCCESS,
+                payload: data.success
+            })
+
+        }catch (e) {
+            dispatch({
+                type: UPDATE_PROFILE_FAILS,
+                payload: e.response.data.message
+            })
+        }
+}
+
+
 
 
 

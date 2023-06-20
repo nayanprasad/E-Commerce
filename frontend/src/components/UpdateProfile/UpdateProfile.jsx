@@ -9,14 +9,15 @@ import {useSelector, useDispatch } from "react-redux";
 import {} from "../../redux/actions/userAction";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
-import axios  from "axios";
+import {updateProfile} from "../../redux/actions/userAction";
 
 const LoginSignup = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
+    const {user} = useSelector(state => state.user)
+    const {loading, error, isUpdated}  = useSelector(state => state.updateProfile)
 
     const [userData, setUserData] = useState({
         name: "",
@@ -34,9 +35,6 @@ const LoginSignup = () => {
                 avatar: user.avatar.url
             })
         }
-
-
-
 
     }, [ ]);
 
@@ -63,6 +61,8 @@ const LoginSignup = () => {
         formData.append("password", userData.password);
         formData.append("avatar", userData.avatar);
 
+        dispatch(updateProfile(formData))
+
     }
 
     const handleRegisterEmailChange = async (event) => {
@@ -86,7 +86,7 @@ const LoginSignup = () => {
                             <form className="signup" onSubmit={handleSubmit}>
                                 <div className="field flex">
                                     <BadgeIcon />
-                                    <input type="text" placeholder="Name" required name="name" value={userData.name}
+                                    <input type="text" placeholder="Name" name="name" value={userData.name}
                                            onChange={(e) => setUserData({
                                                ...userData,
                                                [e.target.name]: e.target.value
@@ -94,7 +94,7 @@ const LoginSignup = () => {
                                 </div>
                                 <div className="field flex">
                                     <EmailIcon />
-                                    <input type="text" placeholder="Email Address" required name="email"
+                                    <input type="text" placeholder="Email Address" name="email"
                                            value={userData.email} onChange={handleRegisterEmailChange}/>
                                 </div>
                                 <div className="field flex FileSelector">
@@ -103,7 +103,7 @@ const LoginSignup = () => {
                                     ) : (
                                         <AccountCircleIcon fontSize="large" />
                                     )}
-                                    <input type="file" accept="image/*" name="avatar"  onChange={handleImageChange} required/>
+                                    <input type="file" accept="image/*" name="avatar"  onChange={handleImageChange}/>
                                 </div>
                                 <div className="field btn">
                                     <div className="btn-layer"></div>
