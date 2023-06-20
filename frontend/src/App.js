@@ -22,6 +22,7 @@ import UserIcon from "./components/layouts/Header/UserIcon";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import Profile from "./components/Profile/Profile";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
+import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
 
 export default function App() {
 
@@ -63,6 +64,7 @@ export default function App() {
                 <Route element={<ProtectedRoute/>}>
                     <Route exact path="/profile" element={<Profile/>}/>
                     <Route exact path="/profile/update" element={<UpdateProfile/>}/>
+                    <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
                 </Route>
 
             </Routes>
