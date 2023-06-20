@@ -189,9 +189,22 @@ exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
     if(!user)
         return next(new ErrorHandler("user not found", 400))
 
+    let myCloud;
+    if(req.body.avatar !== "") {
+        myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+            folder: "avatars",
+            width: 150,
+            crop: "scale"
+        });
+    }
+
     const newData = {
         email: req.body.email,
-        name: req.body.name
+        name: req.body.name,
+        avatar: {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
     };
 
     user = await User.findByIdAndUpdate(req.user.id, newData, {
