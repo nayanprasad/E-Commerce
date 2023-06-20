@@ -6,10 +6,10 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import {useSelector, useDispatch } from "react-redux";
-import {} from "../../redux/actions/userAction";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
 import {updateProfile} from "../../redux/actions/userAction";
+import {UPDATE_PROFILE_RESET} from "../../redux/constants/userConstant";
 
 const LoginSignup = () => {
 
@@ -36,7 +36,17 @@ const LoginSignup = () => {
             })
         }
 
-    }, [ ]);
+        if(error) {
+            toast.error(error);
+        }
+
+        if(isUpdated) {
+            toast.success("Profile Updated Successfully");
+            navigate("/profile");
+            dispatch({type: UPDATE_PROFILE_RESET})
+        }
+
+    }, [dispatch, error, isUpdated])
 
 
 
