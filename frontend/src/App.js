@@ -9,7 +9,7 @@ import {
 import Header from "./components/layouts/Header/Header";
 import Footer from "./components/layouts/Footer/Footer";
 import Home from "./components/Home/Home";
-import {ToastContainer, toast} from 'react-toastify';
+import {ToastContainer, toast, Zoom} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import "./App.css";
@@ -41,7 +41,7 @@ export default function App() {
             {isAuthenticated && <UserIcon user={user}/>}
             <ToastContainer
                 position="bottom-center"
-                autoClose={3000}
+                autoClose={1500}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -51,6 +51,7 @@ export default function App() {
                 pauseOnHover={true}
                 theme="dark"
                 limit={1}
+                transition= {Zoom}
             />
 
             <Routes>
