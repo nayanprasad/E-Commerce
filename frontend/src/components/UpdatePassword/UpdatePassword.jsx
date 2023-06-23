@@ -2,6 +2,8 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './UpdatePassword.css';
 import LockIcon from '@mui/icons-material/Lock';
+import KeyIcon from '@mui/icons-material/Key';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 import {useSelector, useDispatch} from "react-redux";
 import {toast} from "react-toastify"
 import Loader from "../Loader/Loader";
@@ -61,7 +63,7 @@ const LoginSignup = () => {
                         <div className="form-inner">
                             <form className="signup" onSubmit={handleSubmit}>
                                 <div className="field flex">
-                                    <LockIcon/>
+                                    <KeyIcon/>
                                     <input type="password" placeholder="Old password" name="oldPassword" value={userData.oldPassword}
                                            onChange={(e) => setUserData({
                                                ...userData,
@@ -69,7 +71,7 @@ const LoginSignup = () => {
                                            })}/>
                                 </div>
                                 <div className="field flex">
-                                    <LockIcon/>
+                                    <LockOpenIcon/>
                                     <input type="password" placeholder="New Password" name="newPassword"
                                            value={userData.newPassword} onChange={handleRegisterEmailChange}/>
                                 </div>
