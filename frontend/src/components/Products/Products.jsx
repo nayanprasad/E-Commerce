@@ -114,8 +114,8 @@ const Products = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                    {categories.map((category) => (
-                                            <li className="categoryItem" onClick={() => setCategory(category)}>{category}</li>
+                                    {categories.map((cat) => (
+                                            <li className="categoryItem" style={cat === category ? {color: "blue"} : {}} onClick={() => setCategory(cat)}>{cat}</li>
                                         )
                                     )}
                             </Typography>
