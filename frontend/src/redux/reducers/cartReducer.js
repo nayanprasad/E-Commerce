@@ -1,17 +1,18 @@
 import {ADD_TO_CART} from "../constants/cartConstants";
 
 
-export const cartReducer = (state = {cartItem : []}, action) => {
+export const cartReducer = (state = {cartItems : []}, action) => {
     switch (action.type) {
         case ADD_TO_CART:
+
             const item = action.payload;
 
-            const isItemExist = state.cartItem.find((i) => i.product === item.product);
+            const isItemExist = state.cartItems.find((i) => i.product === item.product);
 
             if(isItemExist) {
                 return {
                     ...state,
-                    cartItem: state.cartItem.map((i) =>
+                    cartItems: state.cartItems.map((i) =>
                         i.product === isItemExist.product ? item : i
                     )
                 };
@@ -19,7 +20,7 @@ export const cartReducer = (state = {cartItem : []}, action) => {
             else {
                 return {
                     ...state,
-                    cartItem: [...state.cartItem, item],
+                    cartItems: [...state.cartItems, item],
                 };
             }
 

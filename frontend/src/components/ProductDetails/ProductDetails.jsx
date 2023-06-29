@@ -4,13 +4,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import {useSelector, useDispatch} from "react-redux";
 import {getProductDetails} from "../../redux/actions/productAction";
+import {clearErrors} from "../../redux/actions/userAction";
+import {addToCart} from "../../redux/actions/cartAction";
 import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import Loader from "../Loader/Loader";
 import {toast} from "react-toastify";
 import MetaDate from "../MetaDate";
-import {clearErrors} from "../../redux/actions/userAction";
 
 const ProductDetails = () => {
 
@@ -54,6 +55,11 @@ const ProductDetails = () => {
         }
     }
 
+    const handleAddToCart = () => {
+        dispatch(addToCart(id, quantity));
+        toast.success("Item added to cart")
+    }
+
 
 
     if (loading)
@@ -93,11 +99,10 @@ const ProductDetails = () => {
                                 <input readOnly value={quantity} type="number"/>
                                 <button onClick={increaseProductQuantity}>+</button>
                             </div>
-                            {" "}
-                            <button>Add to Cart</button>
+                            <button onClick={handleAddToCart}>Add to Cart</button>
                         </div>
                         <p>
-                            Status:{""}
+                            Status:{" "}
                             <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                                 {product.Stock < 1 ? "OutOfStock" : "InStock"}
                             </b>
