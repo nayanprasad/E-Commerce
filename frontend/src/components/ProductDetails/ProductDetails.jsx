@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
@@ -18,6 +18,8 @@ const ProductDetails = () => {
     const dispatch = useDispatch();
 
     const {product, loading, error} = useSelector(state => state.productDetails);
+
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         dispatch(getProductDetails(id));
@@ -39,6 +41,18 @@ const ProductDetails = () => {
         color: "rgba(0,0,0,0.2)",
         isHalf: true
     };
+
+    const increaseProductQuantity = () => {
+        if (quantity < product?.stock) {
+            setQuantity(quantity + 1);
+        }
+    }
+
+    const decreaseProductQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    }
 
 
 
@@ -75,9 +89,9 @@ const ProductDetails = () => {
                         <h1>₹{product.price}</h1>
                         <div className="detailsBlock-3-1">
                             <div className="detailsBlock-3-1-1">
-                                <button>-</button>
-                                <input value="1" type="number"/>
-                                <button>+</button>
+                                <button onClick={decreaseProductQuantity}>-</button>
+                                <input readOnly value={quantity} type="number"/>
+                                <button onClick={increaseProductQuantity}>+</button>
                             </div>
                             {" "}
                             <button>Add to Cart</button>
