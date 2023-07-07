@@ -67,10 +67,9 @@ export default function App() {
                     <Route exact path="/profile" element={<Profile/>}/>
                     <Route exact path="/profile/update" element={<UpdateProfile/>}/>
                     <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
-
+                    <Route exact path="/cart" element={<Cart/>}/>
                 </Route>
 
-                <Route exact path="/cart" element={<Cart/>}/>
 
             </Routes>
 
