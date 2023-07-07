@@ -6,6 +6,8 @@ import PlaceIcon from '@mui/icons-material/Place';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PublicIcon from '@mui/icons-material/Public';
 import LanguageIcon from '@mui/icons-material/Language';
+import Stepper from "./Stepper";
+import StepperComponent from "./Stepper";
 
 const Shipping = () => {
 
@@ -18,6 +20,8 @@ const Shipping = () => {
 
     return (
         <Fragment>
+            
+            <StepperComponent activeStep={1}/>
 
             <div className="wrapperContainer" >
                 <div className="wrapper">

@@ -1,0 +1,7 @@
+.Mui-completed path {
+    color: tomato;
+}
+
+.Mui-disabled path {
+    color: lightgrey;
+}
