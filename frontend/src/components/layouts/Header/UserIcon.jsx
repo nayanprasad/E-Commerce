@@ -11,7 +11,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useNavigate } from 'react-router-dom';
 import './UserIcon.css';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { logout } from '../../../redux/actions/userAction';
 import { toast } from 'react-toastify';
 
@@ -36,11 +36,13 @@ export default function PlaygroundSpeedDial({ user }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const {cartItems} = useSelector(state => state.cart);
+
     const [open, setOpen] = useState(false);
 
     const actions = [
         { icon: <PersonIcon />, name: 'Profile' },
-        { icon: <ShoppingCartIcon />, name: 'Cart' },
+        { icon: <ShoppingCartIcon />, name: `Cart(${cartItems.length})` },
         { icon: <ListAltIcon />, name: 'Orders' },
         { icon: <LogoutIcon />, name: 'Logout' },
     ];
