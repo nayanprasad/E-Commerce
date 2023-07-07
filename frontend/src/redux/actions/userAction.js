@@ -56,7 +56,6 @@ export const login = (email, password) => async (dispatch) => {
 export const signup = (userData) => async (dispatch) => {
 
     try {
-
         dispatch({type: REGISTER_REQUEST});
 
         const {data} = await axios({
