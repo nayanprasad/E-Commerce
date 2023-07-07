@@ -2,7 +2,7 @@ import React,{useState, useEffect, Fragment} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import {addToCart} from '../../redux/actions/cartAction';
+import {addToCart, removeFromCart} from '../../redux/actions/cartAction';
 import './Cart.css';
 
 const Cart = () => {
@@ -10,12 +10,8 @@ const Cart = () => {
     const dispatch = useDispatch();
     const {cartItems} = useSelector((state) => state.cart);
 
-    useEffect(() => {
-
-    }, [cartItems]);
-
     const deleteCartItem = (id) => {
-        cartItems.filter((item) => item.product !== id);
+        dispatch(removeFromCart(id))
     }
 
     const increaseQuantity = (id, quantity, stock) => {
@@ -30,6 +26,18 @@ const Cart = () => {
             const newQuantity = quantity - 1;
             dispatch(addToCart(id, newQuantity))
         }
+    }
+
+    if(cartItems.length === 0 || !cartItems) {
+        return (
+            <Fragment>
+                <div className="emptyCart">
+                    <h2>No items in cart</h2>
+                    <Link to={"/products"}><button>Continue Shopping</button></Link>
+                </div>
+
+            </Fragment>
+        )
     }
 
 
