@@ -14,6 +14,8 @@ import './UserIcon.css';
 import {useDispatch, useSelector} from 'react-redux';
 import { logout } from '../../../redux/actions/userAction';
 import { toast } from 'react-toastify';
+import {isMobile } from 'react-device-detect';
+
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
     position: 'fixed',
@@ -70,7 +72,7 @@ export default function PlaygroundSpeedDial({ user }) {
             case 'Dashboard':
                 navigate('/admin/dashboard');
                 break;
-            case 'Cart':
+            case `Cart(${cartItems.length})`:
                 navigate('/cart');
                 break;
         }
@@ -108,6 +110,7 @@ export default function PlaygroundSpeedDial({ user }) {
                         onClick={(e) => {
                             handleClick(e, action.name);
                         }}
+                        tooltipOpen={isMobile ? true : false}
                     />
                 ))}
             </StyledSpeedDial>
