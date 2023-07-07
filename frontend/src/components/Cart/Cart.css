@@ -100,3 +100,62 @@
     background-color: #c05a48;
     transform: translateY(-2px);
 }
+
+
+.cartQuantity > button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    padding: 0.5vmax;
+    color: white;
+    transition: all 0.5s;
+}
+
+.cartQuantity > button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.cartQuantity > input {
+    width: 1vmax;
+    text-align: center;
+    border: none;
+    outline: none;
+    padding: 0.5vmax;
+    color: rgba(0, 0, 0, 0.7);
+    font: 400 0.8vmax 'Roboto';
+}
+
+
+@media screen and (max-width: 600px) {
+    .cart {
+        max-width: 100%;
+        margin-top: 7vmax;
+    }
+    .cartHeader {
+        font-size: 0.8rem;
+    }
+    .cartItem__details__info {
+        font-size: 0.5rem;
+    }
+    .cartItem__details img {
+        width: 3rem;
+        height: 3rem;
+    }
+    .cartItem__quantity {
+        margin-right: 3rem;
+    }
+    .ca
+    .cartItem__remove {
+        margin-left: 1rem;
+    }
+    .cartButtons button {
+        padding: 0.5rem 1rem;
+        margin: 0.5rem 0 0.5rem 0.5rem;
+    }
+    .cartTotal {
+        font-size: 0.5rem;
+    }
+    .cartHeader {
+        font-size: 0.5rem;
+    }
+}

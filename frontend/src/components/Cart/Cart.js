@@ -1,20 +1,36 @@
 import React,{useState, useEffect, Fragment} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Link} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {addToCart} from '../../redux/actions/cartAction';
 import './Cart.css';
 
 const Cart = () => {
 
-    const [cart, setCart] = useState([]);
+    const dispatch = useDispatch();
+    const {cartItems} = useSelector((state) => state.cart);
 
     useEffect(() => {
-        const cart = JSON.parse(localStorage.getItem('cartItems'));
-        if (cart) {
-            setCart(cart);
-        }
-        console.log(cart)
-    }, []);
 
+    }, [cartItems]);
+
+    const deleteCartItem = (id) => {
+        cartItems.filter((item) => item.product !== id);
+    }
+
+    const increaseQuantity = (id, quantity, stock) => {
+        if(quantity <= stock) {
+            const newQuantity = quantity + 1;
+            dispatch(addToCart(id, newQuantity))
+        }
+    }
+
+    const decreaseQuantity = (id, quantity) => {
+        if(quantity > 0 ) {
+            const newQuantity = quantity - 1;
+            dispatch(addToCart(id, newQuantity))
+        }
+    }
 
 
     return (
@@ -26,7 +42,7 @@ const Cart = () => {
                     <h1>SubTotal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
                 </div>
 
-                {cart?.map((item) => (
+                {cartItems?.map((item) => (
                     <>
                     <div className="cartItems">
                         <div className="cartItem">
@@ -38,17 +54,17 @@ const Cart = () => {
                                 </div>
                             </div>
                             <div className="cartItem__quantity">
-                                <div className="detailsBlock-3-1-1">
-                                    <button>-</button>
+                                <div className="cartQuantity">
+                                    <button onClick={() => decreaseQuantity(item.product, item.quantity, item.stock)}>-</button>
                                     <input readOnly value={item.quantity} type="number"/>
-                                    <button>+</button>
+                                    <button onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>+</button>
                                 </div>
                             </div>
                             <div className="cartItem__subtotal">
                                 ₹{item.price * item.quantity}
 
-                                <div className="cartItem__remove">
-                                    <DeleteIcon/>
+                                <div onClick={() => deleteCartItem(item.product)} className="cartItem__remove">
+                                    <DeleteIcon />
                                 </div>
                             </div>
                         </div>
@@ -59,14 +75,13 @@ const Cart = () => {
 
             <div  className="cartTotal">
                 <h1>Cart Total&nbsp;</h1>
-                <h1>₹{cart.reduce((acc, item) => acc + item.quantity * item.price, 0)}</h1>
+                <h1>₹{cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)}</h1>
             </div>
 
             <div className="cartButtons">
                 <Link to={"/products"}><button>Continue Shopping</button></Link>
                 <button>Checkout</button>
             </div>
-
 
         </Fragment>
     );

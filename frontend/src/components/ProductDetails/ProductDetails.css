@@ -255,6 +255,10 @@
         width: 20vmax;
     }
 
+    .cartItem__subtotal {
+        font-size: 1.5vmax;
+    }
+
     .reviewHeading {
         font-size: 2vmax;
         padding: 2.5vmax 0;
