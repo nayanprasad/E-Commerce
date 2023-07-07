@@ -20,8 +20,10 @@ const Shipping = () => {
 
     return (
         <Fragment>
-            
-            <StepperComponent activeStep={1}/>
+
+            <div className="stepperContainer">
+                <StepperComponent activeStep={0}/>
+            </div>
 
             <div className="wrapperContainer" >
                 <div className="wrapper">

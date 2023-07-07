@@ -9,3 +9,16 @@
     background-color: transparent;
 }
 
+.stepperContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vmax;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .stepperContainer {
+        margin-top: 12vmax;
+    }
+}
