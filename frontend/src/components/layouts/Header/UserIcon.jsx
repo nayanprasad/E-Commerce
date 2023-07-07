@@ -33,6 +33,16 @@ const DimmedOverlay = styled('div')({
     zIndex: 1,
 });
 
+const RedDot = styled('span')({
+    position: 'absolute',
+    top: '4px',
+    right: '4px',
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    backgroundColor: 'tomato',
+});
+
 export default function PlaygroundSpeedDial({ user }) {
 
     const navigate = useNavigate();
@@ -44,7 +54,7 @@ export default function PlaygroundSpeedDial({ user }) {
 
     const actions = [
         { icon: <PersonIcon />, name: 'Profile' },
-        { icon: <ShoppingCartIcon />, name: `Cart(${cartItems.length})` },
+        { icon: <><ShoppingCartIcon /> {cartItems.length > 0 && <RedDot/>} </>, name: `Cart(${cartItems.length})` },
         { icon: <ListAltIcon />, name: 'Orders' },
         { icon: <LogoutIcon />, name: 'Logout' },
     ];
