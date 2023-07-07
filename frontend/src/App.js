@@ -23,6 +23,7 @@ import ProtectedRoute from "./components/Route/ProtectedRoute";
 import Profile from "./components/Profile/Profile";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
+import Cart from "./components/Cart/Cart";
 
 export default function App() {
 
@@ -66,7 +67,10 @@ export default function App() {
                     <Route exact path="/profile" element={<Profile/>}/>
                     <Route exact path="/profile/update" element={<UpdateProfile/>}/>
                     <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
+
                 </Route>
+
+                <Route exact path="/cart" element={<Cart/>}/>
 
             </Routes>
 
