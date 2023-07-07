@@ -1,5 +1,6 @@
 import React,{useState, useEffect, Fragment} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {addToCart, removeFromCart} from '../../redux/actions/cartAction';
@@ -32,8 +33,9 @@ const Cart = () => {
         return (
             <Fragment>
                 <div className="emptyCart">
+                        <ProductionQuantityLimitsIcon style={{fontSize: "100px"}}/>
                     <h2>No items in cart</h2>
-                    <Link to={"/products"}><button>Continue Shopping</button></Link>
+                    <Link to={"/products"}><button>View Products</button></Link>
                 </div>
 
             </Fragment>
