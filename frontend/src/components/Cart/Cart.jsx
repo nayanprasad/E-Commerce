@@ -57,7 +57,7 @@ const Cart = () => {
                     <div className="cartItems">
                         <div className="cartItem">
                             <div className="cartItem__details">
-                                <img src="https://picsum.photos/seed/picsum/200/300" alt="hi"/>
+                                <img src={item.image} alt="image"/>
                                 <div className="cartItem__details__info">
                                     <p>{item.name}</p>
                                     <p>₹{item.price}</p>
@@ -84,13 +84,13 @@ const Cart = () => {
             </div>
 
             <div  className="cartTotal">
-                <h1>Cart Total&nbsp;</h1>
+                <h1>Total&nbsp;</h1>
                 <h1>₹{cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)}</h1>
             </div>
 
             <div className="cartButtons">
                 <Link to={"/products"}><button>Continue Shopping</button></Link>
-                <button>Checkout</button>
+                <Link to={"/shipping"}><button>Checkout</button></Link>
             </div>
 
         </Fragment>

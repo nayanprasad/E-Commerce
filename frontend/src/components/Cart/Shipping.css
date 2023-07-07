@@ -1,0 +1,11 @@
+.form-inner form .field select{
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    border-bottom-width: 2px;
+    font-size: 17px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
