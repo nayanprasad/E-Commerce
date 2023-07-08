@@ -6,14 +6,16 @@ import PlaceIcon from '@mui/icons-material/Place';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PublicIcon from '@mui/icons-material/Public';
 import LanguageIcon from '@mui/icons-material/Language';
-import Stepper from "./Stepper";
+import Stepper from "../Stepper/Stepper";
 import {useDispatch, useSelector} from "react-redux";
 import {saveShippingDetails} from "../../redux/actions/cartAction";
 import { Country, State, City }  from 'country-state-city';
+import {useNavigate} from "react-router-dom";
 
 
 const Shipping = () => {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const {shippingDetails} = useSelector(state => state.cart)
 
@@ -55,7 +57,8 @@ const Shipping = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(saveShippingDetails(data))
+        dispatch(saveShippingDetails(data));
+        navigate("/order/confirm")
     }
 
 
@@ -117,7 +120,7 @@ const Shipping = () => {
 
                                 <div className="field btn">
                                     <div className="btn-layer"></div>
-                                    <input type="submit" value="SAVE"/>
+                                    <input type="submit" value="Confirm Order"/>
                                 </div>
                             </form>
                         </div>

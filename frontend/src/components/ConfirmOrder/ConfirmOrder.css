@@ -1,0 +1,110 @@
+.confimOrderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*width: 80%;*/
+}
+
+.confirmOrder {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vmax;
+}
+
+.confirmOrder h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2vmax;
+}
+
+.confirmOrder__top {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2vmax;
+}
+
+.confirmOrder__left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+
+.confirmOrder__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2vmax;
+    padding: 1.5vmax 2vmax 0 2vmax;
+}
+
+.confirmOrder__item img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.confirmOrder__right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    gap: 1.5vmax;
+}
+
+.confirmOrder__summary {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: #999999 1px solid;
+    border-top: #999999 1px solid;
+    padding: 2vmax;
+}
+
+.confirmOrder__summary__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2vmax;
+}
+.confirmOrder__summary__item p:last-child {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.confirmOrder__right button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+    background-color: tomato;
+    padding: 0.625vmax 2.5vmax;
+    border-radius: 20px;
+    margin: 1vmax 0 1vmax 1vmax;
+    outline: none;
+}
+
+.confirmOrder__right button:hover {
+    background-color: #c05a48;
+    transform: translateY(-2px);
+}
+
+
+
+.confirmOrder__bottom {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.confirmOrder__shippingDetails {
+    padding: 1.2vmax 0;
+}

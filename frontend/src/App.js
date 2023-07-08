@@ -24,7 +24,8 @@ import Profile from "./components/Profile/Profile";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
 import Cart from "./components/Cart/Cart";
-import Shipping from "./components/Cart/Shipping";
+import Shipping from "./components/Shipping/Shipping";
+import ConfirmOrder from "./components/ConfirmOrder/ConfirmOrder";
 
 export default function App() {
 
@@ -70,8 +71,9 @@ export default function App() {
                     <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
                     <Route exact path="/cart" element={<Cart/>}/>
                     <Route exact path="/shipping" element={<Shipping/>}/>
-                </Route>
 
+                </Route>
+                <Route exact path="/order/confirm" element={<ConfirmOrder/>}/>
 
             </Routes>
 
