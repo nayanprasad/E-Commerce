@@ -108,3 +108,33 @@
 .confirmOrder__shippingDetails {
     padding: 1.2vmax 0;
 }
+
+
+@media screen and (max-width: 600px) {
+    .confirmOrder {
+        width: 100%;
+    }
+    .confirmOrder__top {
+        flex-direction: column;
+    }
+    .confirmOrder__left {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .confirmOrder__right {
+        width: 100%;
+    }
+    .confirmOrder__bottom {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .confirmOrder__shippingDetails p {
+        width: 100%;
+        padding: 0 1vmax;
+    }
+    .confirmOrder__item {
+        justify-content: center;
+    }
+}
