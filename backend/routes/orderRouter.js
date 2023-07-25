@@ -2,7 +2,6 @@ const express = require("express");
 const Router = express.Router();
 const {isAuthenticatedUser, isAuthorizedRoles} = require("../middleware/auth");
 const {createOrder, sayHello, getSingleOrder, getMyOrder, getAllOrders, updateOrderStatus, deleteOrder} = require("../controllers/orderController");
-const {updatePassword} = require("../controllers/userController");
 
 
 Router.route("/order/new").post(isAuthenticatedUser, createOrder)
