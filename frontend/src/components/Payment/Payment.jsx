@@ -17,17 +17,22 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import axios from "axios";
-import HomeIcon from "@mui/icons-material/Home";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
-import PlaceIcon from "@mui/icons-material/Place";
-import PhoneIcon from "@mui/icons-material/Phone";
-import PublicIcon from "@mui/icons-material/Public";
-import LanguageIcon from "@mui/icons-material/Language";
+import Loader from "../Loader/Loader";
 
 
 const Payment = () => {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const {shippingDetails, cartItems} = useSelector(state => state.cart)
+    const {user} = useSelector(state => state.user)
+
     const [stripeApiKey, setStripeApiKey] = useState('')
+    const [loading, setLoading] = useState(true)
+    const [finalPrice, setFinalPrice] = useState(0)
+
+
 
     const getStripeApiKey = async () => {
         console.log("getStripeApiKey")
@@ -39,13 +44,24 @@ const Payment = () => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         });
-        console.log(data)
         setStripeApiKey(data.stripeApiKey)
+        setLoading(false)
     }
 
     useEffect(() => {
+        const totalPrice = cartItems.reduce((price, item) => price + item.price * item.quantity, 0);
+        const shippingPrice = totalPrice > 100 ? 0 : 100
+        const taxPrice = (totalPrice * 0.18).toFixed(2)
+        const finalPrice = (totalPrice + shippingPrice + Number(taxPrice)).toFixed(2)
+        setFinalPrice(finalPrice)
+
         getStripeApiKey()
     }, [])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+    }
 
     return (
         <Fragment>
@@ -53,7 +69,7 @@ const Payment = () => {
                 <div className="stepperContainer">
                     <Stepper activeStep={2}/>
                 </div>
-
+                {loading && <Loader />}
                 <div className="wrapperContainerPayment">
                     <div className="wrapper">
                         <div className="title-text">
@@ -61,7 +77,7 @@ const Payment = () => {
                         </div>
                         <div className="form-container">
                             <div className="form-inner">
-                                <form className="signup">
+                                <form className="signup" onSubmit={handleSubmit}>
                                     <div className="field flex">
                                         <CreditCardIcon/>
                                         <div className=" payment__details__item">
@@ -82,7 +98,7 @@ const Payment = () => {
                                     </div>
                                     <div className="field btn">
                                         <div className="btn-layer"></div>
-                                        <input type="submit" value="Confirm Order"/>
+                                        <input type="submit" value={`Pay ₹${finalPrice}`}/>
                                     </div>
                                 </form>
                             </div>

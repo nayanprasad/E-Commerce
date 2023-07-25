@@ -71,7 +71,6 @@ export default function App() {
 
 
                 </Route>
-
                 <Route exact path="/order/payment" element={<Payment/>}/>
 
 
