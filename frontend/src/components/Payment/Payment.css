@@ -1,0 +1,135 @@
+/* Styles for the .paymentContainer */
+.paymentContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for the .payment */
+.payment {
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styles for the .payment__top */
+.payment__top {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Styles for the .payment__left */
+.payment__left {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styles for the h3 inside .payment__left */
+.payment__left h3 {
+    margin-bottom: 20px;
+}
+
+/* Styles for the .payment__details */
+.payment__details {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styles for the .payment__details__item */
+.payment__details__item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Styles for the .payment__details__item__right */
+.payment__details__item__right {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styles for the h4 inside .payment__details__item__right */
+.payment__details__item__right h4 {
+    margin-bottom: 10px;
+}
+
+/* Styles for the .payment__right */
+.payment__right {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styles for the h3 inside .payment__right */
+.payment__right h3 {
+    margin-bottom: 20px;
+}
+
+/* Styles for the .payment__summary */
+.payment__summary {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styles for the .payment__summary__item */
+.payment__summary__item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Styles for the p inside .payment__summary__item */
+.payment__summary__item p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Styles for the button inside .payment__right */
+.payment__right button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover styles for the button inside .payment__right */
+.payment__right button:hover {
+    background-color: #fff;
+    color: #000;
+}
+

@@ -1,11 +1,5 @@
-import React, {Fragment, useEffect} from "react";
-import {
-    BrowserRouter as Router,
-    // Switch,
-    Route,
-    // Link,
-    Routes
-} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Header from "./components/layouts/Header/Header";
 import Footer from "./components/layouts/Footer/Footer";
 import Home from "./components/Home/Home";
@@ -26,16 +20,18 @@ import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Shipping/Shipping";
 import ConfirmOrder from "./components/ConfirmOrder/ConfirmOrder";
+import Payment from "./components/Payment/Payment";
+
 
 export default function App() {
 
     const dispatch = useDispatch();
     const {user, isAuthenticated} = useSelector(state => state.user);
 
+
     useEffect(() => {
         dispatch(loadUser())
-
-    }, [dispatch, toast] );
+    }, [dispatch, toast]);
 
 
     return (
@@ -54,7 +50,7 @@ export default function App() {
                 pauseOnHover={true}
                 theme="dark"
                 limit={1}
-                transition= {Zoom}
+                transition={Zoom}
             />
 
             <Routes>
@@ -71,9 +67,13 @@ export default function App() {
                     <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
                     <Route exact path="/cart" element={<Cart/>}/>
                     <Route exact path="/shipping" element={<Shipping/>}/>
+                    <Route exact path="/order/confirm" element={<ConfirmOrder/>}/>
+
 
                 </Route>
-                <Route exact path="/order/confirm" element={<ConfirmOrder/>}/>
+
+                <Route exact path="/order/payment" element={<Payment/>}/>
+
 
             </Routes>
 

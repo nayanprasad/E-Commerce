@@ -1,10 +1,12 @@
 import React, {Fragment} from 'react';
+import {useNavigate} from "react-router-dom";
 import "./ConfirmOrder.css";
 import Stepper from "../Stepper/Stepper";
 import {useSelector} from "react-redux";
 
 const ConfirmOrder = () => {
 
+    const navigate = useNavigate()
     const {shippingDetails, cartItems} = useSelector(state => state.cart)
     const {user} = useSelector(state => state.user)
 
@@ -21,7 +23,6 @@ const ConfirmOrder = () => {
             <div className="confimOrderContainer">
                 <div className="confirmOrder">
                     <h1>Confirm Order</h1>
-
                     <div className="confirmOrder__top">
                         <div className="confirmOrder__left">
                             <h3>Your Cart Items</h3>
@@ -53,7 +54,7 @@ const ConfirmOrder = () => {
                                     <p>: ₹ {finalPrice}</p>
                                 </div>
                             </div>
-                            <button>Proceed for Payment</button>
+                            <button onClick={() => navigate("/order/payment")}>Proceed for Payment</button>
                         </div>
                     </div>
                     <div className="confirmOrder__bottom">
@@ -68,11 +69,8 @@ const ConfirmOrder = () => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
         </Fragment>
 
     );
