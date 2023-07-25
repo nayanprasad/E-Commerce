@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation } from "react-router-dom";
 import './LoginSignup.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BadgeIcon from '@mui/icons-material/Badge';
@@ -14,6 +14,7 @@ import axios  from "axios";
 const LoginSignup = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
 
     const {loading, error, user, isAuthenticated}  = useSelector(state => state.user)
@@ -30,6 +31,7 @@ const LoginSignup = () => {
         avatar: undefined
     });
 
+    const redirect = location.search ? location.search.split("=")[1] : "/";
 
     useEffect(() => {
 
@@ -40,7 +42,7 @@ const LoginSignup = () => {
 
         if(isAuthenticated) {
             toast.success("Authenticated Successful");
-            navigate("/")
+            navigate("/" + redirect)
         }
 
 
@@ -80,9 +82,7 @@ const LoginSignup = () => {
 
     const handleLoginSubmit = (event) => {
         event.preventDefault();
-
         dispatch(login(loginData.email, loginData.password))
-
     }
 
     const handleImageChange = (event) => {

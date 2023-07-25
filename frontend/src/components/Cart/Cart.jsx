@@ -90,7 +90,7 @@ const Cart = () => {
 
             <div className="cartButtons">
                 <Link to={"/products"}><button>Continue Shopping</button></Link>
-                <Link to={"/shipping"}><button>Checkout</button></Link>
+                <Link to={"/login?redirect=shipping"}><button>Checkout</button></Link>
             </div>
 
         </Fragment>
