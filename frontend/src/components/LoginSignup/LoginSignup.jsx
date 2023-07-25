@@ -31,7 +31,7 @@ const LoginSignup = () => {
         avatar: undefined
     });
 
-    const redirect = location.search ? location.search.split("=")[1] : "/";
+    const redirect = location.search ? `/${location.search.split("=")[1]}`: "/";
 
     useEffect(() => {
 
@@ -42,7 +42,7 @@ const LoginSignup = () => {
 
         if(isAuthenticated) {
             toast.success("Authenticated Successful");
-            navigate("/" + redirect)
+            navigate(redirect)
         }
 
 

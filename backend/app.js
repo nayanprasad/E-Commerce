@@ -51,7 +51,17 @@ app.use((req, res, next) => {
             methodColor = RESET;
     }
 
-    console.log(`\n${arrow}[${timestamp}] Incoming request: ${methodColor}${method}${RESET} ${GRAYISH}${url}${RESET} from ${ip}`);
+    const formattedTimestamp = new Date(timestamp).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+    });
+
+    console.log(`\n${arrow}[${formattedTimestamp}] Incoming request: ${methodColor}${method}${RESET} ${GRAYISH}${url}${RESET} from ${ip}`);
     // console.log(`${GRAYISH}Headers:${RESET}`, req.headers);
     // console.log(`${GRAYISH}Body:${RESET}`, req.body);
 
@@ -63,7 +73,7 @@ app.use((req, res, next) => {
         } else {
             statusColor = LIGHT_GREEN;
         }
-        console.log(`${GRAYISH}[${timestamp}] Response status: ${statusColor}${statusCode}${RESET}`);
+        console.log(`${GRAYISH}[${formattedTimestamp}] Response status to ${methodColor}${method}${RESET} ${GRAYISH}${url}${RESET}: ${statusColor}${statusCode}${RESET}`);
     });
 
     next();

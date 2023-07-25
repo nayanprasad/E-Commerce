@@ -11,22 +11,36 @@ import {
     CardExpiryElement,
     CardCvcElement
 } from "@stripe/react-stripe-js";
+import {loadStripe} from '@stripe/stripe-js';
+import {BASE_URL} from "../../redux/constants";
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import {loadStripe} from '@stripe/stripe-js';
+import axios from "axios";
+import HomeIcon from "@mui/icons-material/Home";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import PlaceIcon from "@mui/icons-material/Place";
+import PhoneIcon from "@mui/icons-material/Phone";
+import PublicIcon from "@mui/icons-material/Public";
+import LanguageIcon from "@mui/icons-material/Language";
+
 
 const Payment = () => {
 
     const [stripeApiKey, setStripeApiKey] = useState('')
 
     const getStripeApiKey = async () => {
-        fetch(`BASE_URL/api/v1/stripeapi`)
-            .then(res => res.json())
-            .then(data => {
-                setStripeApiKey(data.stripeApiKey)
-            })
-            .catch(err => console.error(err));
+        console.log("getStripeApiKey")
+        const {data} = await axios({
+            method: "GET",
+            url: `${BASE_URL}/api/v1/stripeapi`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        console.log(data)
+        setStripeApiKey(data.stripeApiKey)
     }
 
     useEffect(() => {
@@ -40,53 +54,37 @@ const Payment = () => {
                     <Stepper activeStep={2}/>
                 </div>
 
-                <div className="paymentContainer">
-                    <div className="payment">
-                        <h1>Payment</h1>
-                        <div className="payment__top">
-                            <div className="payment__left">
-                                <h3>Payment Details</h3>
-                                <div className="payment__details">
-                                    <div className="payment__details__item">
+                <div className="wrapperContainerPayment">
+                    <div className="wrapper">
+                        <div className="title-text">
+                            <div className="title login">Payment details</div>
+                        </div>
+                        <div className="form-container">
+                            <div className="form-inner">
+                                <form className="signup">
+                                    <div className="field flex">
                                         <CreditCardIcon/>
-                                        <div className="payment__details__item__right">
-                                            <h4>Card Number</h4>
+                                        <div className=" payment__details__item">
                                             <CardNumberElement/>
                                         </div>
                                     </div>
-                                    <div className="payment__details__item">
+                                    <div className="field flex">
                                         <EventIcon/>
-                                        <div className="payment__details__item__right">
-                                            <h4>Expiry Date</h4>
+                                        <div className=" payment__details__item">
                                             <CardExpiryElement/>
                                         </div>
                                     </div>
-                                    <div className="payment__details__item">
+                                    <div className="field flex">
                                         <VpnKeyIcon/>
-                                        <div className="payment__details__item__right">
-                                            <h4>CVC</h4>
+                                        <div className=" payment__details__item">
                                             <CardCvcElement/>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="payment__right">
-                                <h3>Order Summary</h3>
-                                <div className="payment__summary">
-                                    <div className="payment__summary__item">
-                                        <p>Items</p>
-                                        <p>Shipping</p>
-                                        <p>Tax</p>
-                                        <p>Total</p>
+                                    <div className="field btn">
+                                        <div className="btn-layer"></div>
+                                        <input type="submit" value="Confirm Order"/>
                                     </div>
-                                    <div className="payment__summary__item">
-                                        <p>: ₹ 1000</p>
-                                        <p>: ₹ 100</p>
-                                        <p>: ₹ 180</p>
-                                        <p>: ₹ 1280</p>
-                                    </div>
-                                </div>
-                                <button>Pay Now</button>
+                                </form>
                             </div>
                         </div>
                     </div>
