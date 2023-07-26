@@ -76,7 +76,7 @@ const Payment = () => {
                             city: shippingDetails.city,
                             state: shippingDetails.state,
                             postal_code: shippingDetails.pinCode,
-                            country: shippingDetails.country
+                            // country: shippingDetails.country
                         }
                     }
                 }
@@ -94,6 +94,7 @@ const Payment = () => {
             }
         } catch (e) {
             payButton.current.disabled = false
+            console.log(e.response.data.message)
             toast.error(e.response.data.message)
         }
     }
