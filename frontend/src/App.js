@@ -20,7 +20,7 @@ import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Shipping/Shipping";
 import ConfirmOrder from "./components/ConfirmOrder/ConfirmOrder";
-import Payment from "./components/Payment/Payment";
+import Payment from "./components/Payment/PaymentWrapper";
 
 
 export default function App() {
