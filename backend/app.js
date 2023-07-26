@@ -4,8 +4,9 @@ const cookieParse = require("cookie-parser")
 const core = require("cors")
 const fileUpload = require("express-fileupload")
 const bodyParser = require("body-parser")
-const morgan = require('morgan');
+const dotenv = require("dotenv");
 
+dotenv.config({ path: 'backend/config/config.env' })
 
 const errorMiddleware = require("./middleware/error")
 
