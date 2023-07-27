@@ -9,7 +9,7 @@ const ProtectedRoute = ({element: element, ...rest}) => {
     if(!loading) {
         return (
             <Fragment>
-                {isAuthenticated ? <Outlet/> : <Navigate to="/login" />}
+                {isAuthenticated === true ? <Outlet/> : <Navigate to="/login" />}
             </Fragment>
         );
     }

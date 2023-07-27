@@ -70,18 +70,10 @@ export default function App() {
                     <Route exact path="/shipping" element={<Shipping/>}/>
                     <Route exact path="/order/confirm" element={<ConfirmOrder/>}/>
                     <Route exact path="/order/payment" element={<Payment/>}/>
-
-
-
+                    <Route exact path="/order/success" element={<OrderSuccess/>}/>
                 </Route>
-
-                <Route exact path="/order/success" element={<OrderSuccess/>}/>
-
-
             </Routes>
-
             <Footer/>
-
         </Router>
     );
 }
