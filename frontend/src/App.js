@@ -21,6 +21,7 @@ import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Shipping/Shipping";
 import ConfirmOrder from "./components/ConfirmOrder/ConfirmOrder";
 import Payment from "./components/Payment/PaymentWrapper";
+import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
 
 
 export default function App() {
@@ -68,10 +69,13 @@ export default function App() {
                     <Route exact path="/cart" element={<Cart/>}/>
                     <Route exact path="/shipping" element={<Shipping/>}/>
                     <Route exact path="/order/confirm" element={<ConfirmOrder/>}/>
+                    <Route exact path="/order/payment" element={<Payment/>}/>
+
 
 
                 </Route>
-                <Route exact path="/order/payment" element={<Payment/>}/>
+
+                <Route exact path="/order/success" element={<OrderSuccess/>}/>
 
 
             </Routes>
