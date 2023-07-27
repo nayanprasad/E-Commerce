@@ -16,7 +16,7 @@ app.use(express.json()); // This is a middleware that allows us to accept json d
 app.use(cookieParse());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(fileUpload());
-app.use(requestLogger({logHeaders: true, logBody: true}));
+app.use(requestLogger());
 
 
 const productRouter = require("./routes/productRouter");
