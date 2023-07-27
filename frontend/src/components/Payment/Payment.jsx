@@ -17,6 +17,7 @@ import Loader from "../Loader/Loader";
 import axios from "axios";
 import {BASE_URL} from "../../redux/constants";
 import {toast} from "react-toastify";
+import {createOrder} from "../../redux/actions/orderAction";
 
 
 const Payment = () => {
@@ -26,21 +27,27 @@ const Payment = () => {
 
     const {shippingDetails, cartItems} = useSelector(state => state.cart)
     const {user} = useSelector(state => state.user)
+    const {error} = useSelector(state => state.newOrder)
 
     const [loading, setLoading] = useState(true)
-    const [finalPrice, setFinalPrice] = useState(0)
 
     const stripe = useStripe();
     const elements = useElements();
     const payButton = useRef(null)
 
+    const totalPrice = cartItems.reduce((price, item) => price + item.price * item.quantity, 0);
+    const shippingPrice = totalPrice > 100 ? 0 : 100
+    const taxPrice = (totalPrice * 0.18).toFixed(2)
+    const finalPrice = (totalPrice + shippingPrice + Number(taxPrice)).toFixed(2)
+
 
     useEffect(() => {
-        const totalPrice = cartItems.reduce((price, item) => price + item.price * item.quantity, 0);
-        const shippingPrice = totalPrice > 100 ? 0 : 100
-        const taxPrice = (totalPrice * 0.18).toFixed(2)
-        const finalPrice = (totalPrice + shippingPrice + Number(taxPrice)).toFixed(2)
-        setFinalPrice(finalPrice)
+
+        if(error){
+            toast.error(error)
+            navigate("/order/payment")
+        }
+
 
     }, [])
 
@@ -86,6 +93,20 @@ const Payment = () => {
                 payButton.current.disabled = false
                 toast.error(result.error.message)
             } else if (result.paymentIntent.status === "succeeded") {
+
+                dispatch(createOrder({
+                    orderItems: cartItems,
+                    shippingAddress: shippingDetails,
+                    paymentMethod: "Card",
+                    itemsPrice: totalPrice,
+                    taxPrice: taxPrice,
+                    shippingPrice: shippingPrice,
+                    totalPrice: finalPrice,
+                    paymentResult: {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    }
+                }))
                 toast("Payment Successfull")
                 navigate("/order/success")
             } else {

@@ -27,7 +27,6 @@ const OrderSuccess = () => {
                         <Link to={"/orders/me"}><button>Go to Orders</button></Link>
                     </div>
                 </div>
-
             </div>
         </Fragment>
     );
