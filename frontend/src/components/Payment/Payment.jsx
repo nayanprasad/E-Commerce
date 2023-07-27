@@ -18,6 +18,7 @@ import axios from "axios";
 import {BASE_URL} from "../../redux/constants";
 import {toast} from "react-toastify";
 import {createOrder} from "../../redux/actions/orderAction";
+import {clearCart} from "../../redux/actions/cartAction";
 
 
 const Payment = () => {
@@ -93,7 +94,6 @@ const Payment = () => {
                 payButton.current.disabled = false
                 toast.error(result.error.message)
             } else if (result.paymentIntent.status === "succeeded") {
-
                 dispatch(createOrder({
                     orderItems: cartItems,
                     shippingAddress: shippingDetails,
@@ -107,6 +107,7 @@ const Payment = () => {
                         status: result.paymentIntent.status
                     }
                 }))
+                dispatch(clearCart())
                 toast("Payment Successfull")
                 navigate("/order/success")
             } else {

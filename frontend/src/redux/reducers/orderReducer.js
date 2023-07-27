@@ -6,7 +6,7 @@ import {
 } from '../constants/orderConstants'
 
 
-export const orderReducer = (state = {}, action) => {
+export const orderReducer = (state = {order: []}, action) => {
     switch (action.type) {
         case CREATE_ORDER_REQUEST:
             return {
@@ -16,7 +16,7 @@ export const orderReducer = (state = {}, action) => {
         case CREATE_ORDER_SUCCESS:
             return {
                 loading: false,
-                order: action.payload
+                order: action.payload,
             }
         case CREATE_ORDER_FAIL:
             return {
