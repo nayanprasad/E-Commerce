@@ -10,8 +10,6 @@ exports.processPayment = CatchAsyncErrors(async (req, res, next) => {
         metadata: {integration_check: "accept_a_payment"},
     });
 
-    console.log(paymentIntent)
-
     res.status(200).json({
         success: true,
         client_secret: paymentIntent.client_secret,

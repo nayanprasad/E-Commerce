@@ -23,8 +23,6 @@ exports.createOrder = CatchAsyncErrors(async (req, res, next) => {
         paymentMethod
     } = req.body;
 
-    console.log(req.body)
-
     const order = await Order.create({
         orderItems,
         shippingAddress,
