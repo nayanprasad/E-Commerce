@@ -1,15 +1,15 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState} from "react";
 import "./Shipping.css"
-import HomeIcon from '@mui/icons-material/Home';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import PlaceIcon from '@mui/icons-material/Place';
-import PhoneIcon from '@mui/icons-material/Phone';
-import PublicIcon from '@mui/icons-material/Public';
-import LanguageIcon from '@mui/icons-material/Language';
+import HomeIcon from "@mui/icons-material/Home";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import PlaceIcon from "@mui/icons-material/Place";
+import PhoneIcon from "@mui/icons-material/Phone";
+import PublicIcon from "@mui/icons-material/Public";
+import LanguageIcon from "@mui/icons-material/Language";
 import Stepper from "../Stepper/Stepper";
 import {useDispatch, useSelector} from "react-redux";
 import {saveShippingDetails} from "../../redux/actions/cartAction";
-import { Country, State, City }  from 'country-state-city';
+import { Country, State, City }  from "country-state-city";
 import {useNavigate} from "react-router-dom";
 
 
