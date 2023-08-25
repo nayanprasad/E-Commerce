@@ -4,11 +4,10 @@ import MetaData from "../MetaDate"
 import { useSelector, useDispatch } from "react-redux";
 import {getMyOrders} from "../../redux/actions/orderAction";
 import Loader from "../Loader/Loader";
-import { DataGrid } from '@mui/x-data-grid';
+import {DataGrid, GridActionsCellItem} from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
-import Typography from '@mui/material/Typography';
-
 import LaunchIcon from '@mui/icons-material/Launch';
+import {toast} from "react-toastify";
 
 const MyOrders = () => {
 
@@ -19,7 +18,6 @@ const MyOrders = () => {
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
-
     {
       field: "status",
       headerName: "Status",
@@ -56,7 +54,7 @@ const MyOrders = () => {
       sortable: false,
       renderCell: (params) => {
         return (
-          <Link to={`/order/${params.value}`}>
+          <Link to={`/order/${params.id}`}>
             <LaunchIcon />
           </Link>
         );
@@ -77,12 +75,10 @@ const MyOrders = () => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error)
     }
-
     dispatch(getMyOrders());
   }, [dispatch, alert, error]);
-
 
 
   return (
@@ -92,7 +88,6 @@ const MyOrders = () => {
       {loading ? (
         <Loader />
       ) : (
-
         <div className="myOrdersPage">
           <DataGrid
             rows={rows}
@@ -102,8 +97,6 @@ const MyOrders = () => {
             className="myOrdersTable"
             autoHeight
           />
-
-          {/*<Typography id="myOrdersHeading">{user.name}'s Orders</Typography>*/}
         </div>
       )}
     </Fragment>
