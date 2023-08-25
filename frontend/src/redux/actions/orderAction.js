@@ -3,6 +3,9 @@ import {
     CREATE_ORDER_FAIL,
     CREATE_ORDER_REQUEST,
     CREATE_ORDER_SUCCESS,
+    MY_ORDERS_REQUEST,
+    MY_ORDERS_SUCCESS,
+    MY_ORDERS_FAIL,
 } from '../constants/orderConstants'
 import axios from 'axios';
 import {BASE_URL} from "../constants";
@@ -35,5 +38,34 @@ export const createOrder = (order) => async (dispatch, getState) => {
             payload: error.response.data.message
         })
     }
+}
 
+export const getMyOrders = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: MY_ORDERS_REQUEST
+        });
+
+        const {data} = await axios({
+            method: "GET",
+            url: `${BASE_URL}/api/v1/orders/me`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+
+
+
+        dispatch({
+            type: MY_ORDERS_SUCCESS,
+            payload: data.myOrders
+        })
+
+    } catch (error) {
+        dispatch({
+            type: MY_ORDERS_FAIL,
+            payload: error.response.data.message
+        })
+    }
 }

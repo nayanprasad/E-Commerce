@@ -73,7 +73,7 @@ export default function PlaygroundSpeedDial({ user }) {
                 navigate('/profile');
                 break;
             case 'Orders':
-                navigate('/orders');
+                navigate('/orders/me');
                 break;
             case 'Logout':
                 dispatch(logout());
