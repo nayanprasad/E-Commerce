@@ -42,7 +42,7 @@ const OrderDetails = () => {
                 <div>
                   <p>Phone:</p>
                   <span>
-                    {order.shippingAddress && order.shippingAddress.phoneNo}
+                    {order.shippingAddress && order.shippingAddress.phone}
                   </span>
                 </div>
                 <div>
