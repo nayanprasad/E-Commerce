@@ -18,6 +18,7 @@ const MyOrders = () => {
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    {field: "date", headerName: "Date", minWidth: 150, flex: 0.5, type: "date"},
     {
       field: "status",
       headerName: "Status",
@@ -67,6 +68,7 @@ const MyOrders = () => {
     orders.forEach((item, index) => {
       rows.push({
         id: item._id,
+        date: new Date(item.createdAt),
         status: item.orderStatus,
         itemsQty: item.orderItems.length,
         amount: item.totalPrice,
