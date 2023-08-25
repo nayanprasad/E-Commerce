@@ -23,6 +23,7 @@ import ConfirmOrder from "./components/ConfirmOrder/ConfirmOrder";
 import Payment from "./components/Payment/PaymentWrapper";
 import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
 import MyOrders from "./components/MyOrders/MyOrders";
+import OrderDetails from "./components/OrderDetails/OrderDetails";
 
 
 export default function App() {
@@ -72,10 +73,13 @@ export default function App() {
                     <Route exact path="/order/confirm" element={<ConfirmOrder/>}/>
                     <Route exact path="/order/payment" element={<Payment/>}/>
                     <Route exact path="/order/success" element={<OrderSuccess/>}/>
+                    <Route exact path="/orders/me" element={<MyOrders/>}/>
+
+
 
                 </Route>
 
-                <Route exact path="/orders/me" element={<MyOrders/>}/>
+                <Route exact path="/order/:id" element={<OrderDetails/>}/>
 
 
             </Routes>

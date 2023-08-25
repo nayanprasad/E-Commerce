@@ -1,27 +1,26 @@
 import React, { Fragment, useEffect } from "react";
-import "./orderDetails.css";
+import "./OrderDetails.css";
 import { useSelector, useDispatch } from "react-redux";
-import MetaData from "../layout/MetaData";
-import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
-import { getOrderDetails, clearErrors } from "../../actions/orderAction";
-import Loader from "../layout/Loader/Loader";
-import { useAlert } from "react-alert";
+import MetaData from "../MetaDate"
+import {Link, useParams} from "react-router-dom";
+import {getOrderDetails} from "../../redux/actions/orderAction";
+import Loader from "../Loader/Loader";
+import {toast} from "react-toastify";
+import { Typography } from '@mui/material';
 
-const OrderDetails = ({ match }) => {
-  const { order, error, loading } = useSelector((state) => state.orderDetails);
+const OrderDetails = () => {
 
+  const {id} = useParams();
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const { order, error, loading } = useSelector((state) => state.orderDetails);
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
+      toast.error(error);
     }
+    dispatch(getOrderDetails(id));
+  }, [dispatch, error, id]);
 
-    dispatch(getOrderDetails(match.params.id));
-  }, [dispatch, alert, error, match.params.id]);
   return (
     <Fragment>
       {loading ? (
@@ -43,14 +42,14 @@ const OrderDetails = ({ match }) => {
                 <div>
                   <p>Phone:</p>
                   <span>
-                    {order.shippingInfo && order.shippingInfo.phoneNo}
+                    {order.shippingAddress && order.shippingAddress.phoneNo}
                   </span>
                 </div>
                 <div>
                   <p>Address:</p>
                   <span>
-                    {order.shippingInfo &&
-                      `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
+                    {order.shippingAddress &&
+                      `${order.shippingAddress.address}, ${order.shippingAddress.city}, ${order.shippingAddress.state}, ${order.shippingAddress.pinCode}, ${order.shippingAddress.country}`}
                   </span>
                 </div>
               </div>
@@ -59,14 +58,14 @@ const OrderDetails = ({ match }) => {
                 <div>
                   <p
                     className={
-                      order.paymentInfo &&
-                      order.paymentInfo.status === "succeeded"
+                      order.paymentResult &&
+                      order.paymentResult.status === "succeeded"
                         ? "greenColor"
                         : "redColor"
                     }
                   >
-                    {order.paymentInfo &&
-                    order.paymentInfo.status === "succeeded"
+                    {order.paymentResult &&
+                    order.paymentResult.status === "succeeded"
                       ? "PAID"
                       : "NOT PAID"}
                   </p>
