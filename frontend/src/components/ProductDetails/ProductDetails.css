@@ -49,6 +49,11 @@
     align-items: center;
     padding: 1vmax 0;
 }
+.detailsBlock-2 > span:last-child {
+    font-size: .8vmax;
+}
+
+
 
 .detailsBlock-3 {
     width: 70%;

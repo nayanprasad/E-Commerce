@@ -26,10 +26,10 @@
     justify-content: flex-start;
 }
 
-.ProductCard > div > span{
+.ProductCard > div > span:last-child{
     align-items: center;
     margin: 0.5vmax;
-    font: 300 1.5vmax "Roboto";
+    font: 300 1vmax "Roboto";
 }
 
 .price {
