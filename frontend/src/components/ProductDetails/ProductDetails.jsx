@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import {useSelector, useDispatch} from "react-redux";
 import {getProductDetails, newReview} from "../../redux/actions/productAction";
+import {ADD_NEW_REVIEW_RESET} from "../../redux/constants/productConstant"
 import {clearErrors} from "../../redux/actions/userAction";
 import {addToCart} from "../../redux/actions/cartAction";
 import ReactStars from "react-rating-stars-component";
@@ -16,7 +17,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -28,6 +28,7 @@ const ProductDetails = () => {
     const dispatch = useDispatch();
 
     const {product, loading, error} = useSelector(state => state.productDetails);
+    const {success, error: reviewError} = useSelector(state => state.newReview);
 
     const [quantity, setQuantity] = useState(1);
     const [open, setOpen] = React.useState(false);
@@ -46,24 +47,26 @@ const ProductDetails = () => {
     };
 
     const handleSubmitReview = () => {
-        const formData = new FormData();
-        formData.set("productId", id);
-        formData.set("rating", rating);
-        formData.set("comment", comment);
         dispatch(newReview({productId: id, rating, comment}));
+
         setOpen(false);
     }
 
     useEffect(() => {
         dispatch(getProductDetails(id));
-
         if (error) {
             toast.error(error);
             // dispatch(clearErrors())
         }
-
-
-    }, [dispatch, id, error]);
+        if (reviewError) {
+            toast.error(reviewError);
+            // dispatch(clearErrors())
+        }
+        if(success) {
+            dispatch(getProductDetails(id));
+            dispatch({type: "ADD_NEW_REVIEW_RESET"})
+        }
+    }, [dispatch, id, error, reviewError, success]);
 
 
     const option = {
