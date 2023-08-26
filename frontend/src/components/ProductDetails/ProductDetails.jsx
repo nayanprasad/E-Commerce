@@ -42,7 +42,6 @@ const ProductDetails = () => {
 
     const handleSubmitReview = () => {
         dispatch(newReview({productId: id, rating, comment}));
-
         setOpen(false);
     }
 
@@ -57,6 +56,7 @@ const ProductDetails = () => {
             // dispatch(clearErrors())
         }
         if(success) {
+            toast.success("Review Added")
             dispatch(getProductDetails(id));
             dispatch({type: "ADD_NEW_REVIEW_RESET"})
         }
