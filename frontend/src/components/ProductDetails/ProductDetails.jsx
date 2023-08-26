@@ -7,7 +7,6 @@ import {getProductDetails, newReview} from "../../redux/actions/productAction";
 import {ADD_NEW_REVIEW_RESET} from "../../redux/constants/productConstant"
 import {clearErrors} from "../../redux/actions/userAction";
 import {addToCart} from "../../redux/actions/cartAction";
-import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import Loader from "../Loader/Loader";
@@ -18,8 +17,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 
 const ProductDetails = () => {
@@ -67,12 +64,10 @@ const ProductDetails = () => {
 
 
     const option = {
-        size: window.innerHeight < 600 ? 20 : 25,
+        size: "large",
         value: product.ratings,
-        edit: false,
-        activeColor: "tomato",
-        color: "rgba(0,0,0,0.2)",
-        isHalf: true
+        readOnly: true,
+        precision: 0.5,
     };
 
     const increaseProductQuantity = () => {
@@ -120,7 +115,7 @@ const ProductDetails = () => {
                         <p>Product # {product._id}</p>
                     </div>
                     <div className="detailsBlock-2">
-                        <ReactStars {...option} />
+                        <Rating {...option} />
                         <span> ({product.numOfReviews} Reviews)</span>
                     </div>
                     <div className="detailsBlock-3">

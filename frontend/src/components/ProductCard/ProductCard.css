@@ -27,8 +27,9 @@
 }
 
 .ProductCard > div > span{
+    align-items: center;
     margin: 0.5vmax;
-    font: 300 1vmax "Roboto";
+    font: 300 1.5vmax "Roboto";
 }
 
 .price {

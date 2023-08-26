@@ -34,7 +34,7 @@
 }
 
 .reviewCard > div > span {
-    font: 300 0.8vmax 'Roboto';
+    font: 300 1.4vmax 'Roboto';
     color: rgba(0, 0, 0, 0.5);
     padding: 0.5vmax;
 }
