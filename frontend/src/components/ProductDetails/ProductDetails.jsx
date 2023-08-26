@@ -35,9 +35,6 @@ const ProductDetails = () => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
 
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -151,7 +148,6 @@ const ProductDetails = () => {
 
                     <div>
                         <Dialog
-                            fullScreen={fullScreen}
                             open={open}
                             onClose={handleClose}
                             aria-labelledby="responsive-dialog-title"
@@ -160,7 +156,7 @@ const ProductDetails = () => {
                                 {"Submit Review"}
                             </DialogTitle>
                             <DialogContent>
-                                <DialogContent>
+                                <div className={"reviewSubmitBox"}>
                                     <Rating
                                         onChange={(e) => setRating(e.target.value)}
                                         value={rating}
@@ -173,7 +169,7 @@ const ProductDetails = () => {
                                         value={comment}
                                         onChange={(e) => setComment(e.target.value)}
                                     ></textarea>
-                                </DialogContent>
+                                </div>
                             </DialogContent>
                             <DialogActions>
                                 <Button autoFocus onClick={handleClose} color="secondary">
