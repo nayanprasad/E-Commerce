@@ -65,7 +65,7 @@ export default function App() {
                 <Route path="/search/:keyword" element={<Products/>}/>
                 <Route exact path="/login" element={<LoginSignup/>}/>
 
-                <Route element={<ProtectedRoute isAdmin={true}/>}>
+                <Route element={<ProtectedRoute/>}>
                     <Route exact path="/profile" element={<Profile/>}/>
                     <Route exact path="/profile/update" element={<UpdateProfile/>}/>
                     <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
@@ -76,11 +76,13 @@ export default function App() {
                     <Route exact path="/order/success" element={<OrderSuccess/>}/>
                     <Route exact path="/orders/me" element={<MyOrders/>}/>
                     <Route exact path="/order/:id" element={<OrderDetails/>}/>
+                </Route>
 
-                    <Route exact path="/admin/dashboard" element={<Dashboard/>}/>
-
+                <Route element={<ProtectedRoute isAdmin={true}/>}>
 
                 </Route>
+
+                <Route exact path="/admin/dashboard" element={<Dashboard/>}/>
 
 
 
