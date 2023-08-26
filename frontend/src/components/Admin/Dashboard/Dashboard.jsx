@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from "react-redux";
 // import { getAllOrders } from "../../actions/orderAction.js";
 // import { getAllUsers } from "../../actions/userAction.js";
 import { CategoryScale, Chart } from "chart.js/auto";
-
 Chart.register(CategoryScale);
 
 const Dashboard = () => {

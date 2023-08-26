@@ -25,6 +25,7 @@ import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
 import MyOrders from "./components/MyOrders/MyOrders";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import Dashboard from "./components/Admin/Dashboard/Dashboard";
+import ProductList from "./components/Admin/ProductList/ProductList";
 
 
 export default function App() {
@@ -83,6 +84,7 @@ export default function App() {
                 </Route>
 
                 <Route exact path="/admin/dashboard" element={<Dashboard/>}/>
+                <Route exact path="/admin/products" element={<ProductList/>}/>
 
 
 

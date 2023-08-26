@@ -1,0 +1,26 @@
+.adminProductsPage {
+    max-width: 100%;
+    display: flex;
+    padding: 0 5vmax;
+}
+
+.sidebar {
+    width: 20%;
+}
+
+.adminProductsTable {
+    width: 80%;
+    padding-top: 5vmax;
+    border-left: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+
+@media screen and (max-width: 600px) {
+    .adminProductsPage {
+        flex-direction: column;
+    }
+
+    .adminProductsTable {
+        width: 100%;
+    }
+}
