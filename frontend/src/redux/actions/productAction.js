@@ -6,6 +6,10 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILS, CLEAR_ERRORS,
+    ADD_NEW_REVIEW_REQUEST,
+    ADD_NEW_REVIEW_SUCCESS,
+    ADD_NEW_REVIEW_FAILS,
+    ADD_NEW_REVIEW_RESET
 } from "../constants/productConstant";
 import {BASE_URL} from"../constants"
 
@@ -61,6 +65,38 @@ export const getProductDetails = (id) => async (dispatch) => {
         })
     }
 }
+
+
+export const newReview = (reviewData) => async (dispatch) => {
+    try{
+        dispatch({type: ADD_NEW_REVIEW_REQUEST});
+
+        console.log(reviewData)
+
+        const response = await axios({
+            method: "PUT",
+            url: `${BASE_URL}/api/v1/review`,
+            data: reviewData,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADD_NEW_REVIEW_SUCCESS,
+            payload: response.data.success
+        });
+    }
+    catch (err) {
+        dispatch({
+            type: ADD_NEW_REVIEW_FAILS,
+            payload: err.response.data.message
+        })
+    }
+}
+
+
 
 export const clearErrors = () => async (dispatch) => {
     dispatch({
