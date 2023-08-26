@@ -24,6 +24,7 @@ import Payment from "./components/Payment/PaymentWrapper";
 import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
 import MyOrders from "./components/MyOrders/MyOrders";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
+import Dashboard from "./components/Admin/Dashboard/Dashboard";
 
 
 export default function App() {
@@ -64,7 +65,7 @@ export default function App() {
                 <Route path="/search/:keyword" element={<Products/>}/>
                 <Route exact path="/login" element={<LoginSignup/>}/>
 
-                <Route element={<ProtectedRoute/>}>
+                <Route element={<ProtectedRoute isAdmin={true}/>}>
                     <Route exact path="/profile" element={<Profile/>}/>
                     <Route exact path="/profile/update" element={<UpdateProfile/>}/>
                     <Route exact path="/profile/changePassword" element={<UpdatePassword/>}/>
@@ -75,6 +76,8 @@ export default function App() {
                     <Route exact path="/order/success" element={<OrderSuccess/>}/>
                     <Route exact path="/orders/me" element={<MyOrders/>}/>
                     <Route exact path="/order/:id" element={<OrderDetails/>}/>
+
+                    <Route exact path="/admin/dashboard" element={<Dashboard/>}/>
 
 
                 </Route>
