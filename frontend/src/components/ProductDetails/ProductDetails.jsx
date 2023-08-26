@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import {useSelector, useDispatch} from "react-redux";
-import {getProductDetails} from "../../redux/actions/productAction";
+import {getProductDetails, newReview} from "../../redux/actions/productAction";
 import {clearErrors} from "../../redux/actions/userAction";
 import {addToCart} from "../../redux/actions/cartAction";
 import ReactStars from "react-rating-stars-component";
@@ -12,6 +12,15 @@ import ReviewCard from "../ReviewCard/ReviewCard";
 import Loader from "../Loader/Loader";
 import {toast} from "react-toastify";
 import MetaDate from "../MetaDate";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import Rating from '@mui/material/Rating';
 
 const ProductDetails = () => {
 
@@ -21,6 +30,29 @@ const ProductDetails = () => {
     const {product, loading, error} = useSelector(state => state.productDetails);
 
     const [quantity, setQuantity] = useState(1);
+    const [open, setOpen] = React.useState(false);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleSubmitReview = () => {
+        const formData = new FormData();
+        formData.set("productId", id);
+        formData.set("rating", rating);
+        formData.set("comment", comment);
+        dispatch(newReview({productId: id, rating, comment}));
+        setOpen(false);
+    }
 
     useEffect(() => {
         dispatch(getProductDetails(id));
@@ -112,7 +144,45 @@ const ProductDetails = () => {
                     <div className="detailsBlock-4">
                         Description: <p>{product.description}</p>
                     </div>
-                    <button className="submitReview">Submit Review</button>
+                    <button onClick={handleClickOpen} className="submitReview">Submit Review</button>
+
+                    <div>
+                        <Dialog
+                            fullScreen={fullScreen}
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="responsive-dialog-title"
+                        >
+                            <DialogTitle id="responsive-dialog-title">
+                                {"Submit Review"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContent>
+                                    <Rating
+                                        onChange={(e) => setRating(e.target.value)}
+                                        value={rating}
+                                        size="large"
+                                    />
+                                    <textarea
+                                        className="submitDialogTextArea"
+                                        cols="30"
+                                        rows="5"
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                    ></textarea>
+                                </DialogContent>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button autoFocus onClick={handleClose} color="secondary">
+                                    Cancel
+                                </Button>
+                                <Button onClick={handleSubmitReview} autoFocus color="primary">
+                                    Add
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+
                 </div>
             </div>
 
