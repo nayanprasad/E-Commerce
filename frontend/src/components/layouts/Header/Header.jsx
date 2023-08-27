@@ -4,6 +4,8 @@ import "./Header.css"
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
 import SearchIcon from '@mui/icons-material/Search';
+import Tooltip from '@mui/material/Tooltip';
+
 
 const Header = () => {
 
@@ -59,9 +61,15 @@ const Header = () => {
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/cotact">Contact</Link></li>
                         <div className="headerIcons">
-                            <Link className="headerIcon" to="/search"><SearchIcon fontSize="large"/></Link>
-                            <Link className="headerIcon" to="/cart"><ShoppingCartIcon fontSize="large"/></Link>
-                            <Link className="headerIcon" to="/login"><LoginIcon fontSize="large"/></Link>
+                            <Tooltip title={"Search"} placement={"bottom"}>
+                                <Link className="headerIcon" to="/search"><SearchIcon fontSize="large"/></Link>
+                            </Tooltip>
+                            <Tooltip title={"Cart"} placement={"bottom"}>
+                                <Link className="headerIcon" to="/cart"><ShoppingCartIcon fontSize="large"/></Link>
+                            </Tooltip>
+                            <Tooltip title={"Login"} placement={"bottom"}>
+                                <Link className="headerIcon" to="/login"><LoginIcon fontSize="large"/></Link>
+                            </Tooltip>
                         </div>
                     </ul>
                 </nav>
