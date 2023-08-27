@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import "./ProductList.css";
+import "./ProductsList.css";
 import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
 import {useSelector, useDispatch} from "react-redux";

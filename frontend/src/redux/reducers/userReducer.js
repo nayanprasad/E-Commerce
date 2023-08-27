@@ -18,6 +18,9 @@ import {
     UPDATE_PASSWORD_SUCCESS,
     UPDATE_PASSWORD_FAILS,
     UPDATE_PASSWORD_RESET,
+    ADMIN_USERS_REQUEST,
+    ADMIN_USERS_SUCCESS,
+    ADMIN_USERS_FAILS,
     CLEAR_ERRORS
 } from "../constants/userConstant";
 
@@ -102,6 +105,34 @@ export const updateProfileReducer = (state = {}, action) => {
             return {
                 ...state,
                 isUpdated: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+
+export const adminUsersReducer = (state = {users: []}, action) => {
+    switch (action.type) {
+        case ADMIN_USERS_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_USERS_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload
+            }
+        case ADMIN_USERS_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
         case CLEAR_ERRORS:
             return {
