@@ -9,7 +9,10 @@ import {
     ADD_NEW_REVIEW_REQUEST,
     ADD_NEW_REVIEW_SUCCESS,
     ADD_NEW_REVIEW_FAILS,
-    ADD_NEW_REVIEW_RESET
+    ADD_NEW_REVIEW_RESET,
+    ADMIN_PRODUCT_LIST_REQUEST,
+    ADMIN_PRODUCT_LIST_SUCCESS,
+    ADMIN_PRODUCT_LIST_FAILS,
 } from "../constants/productConstant";
 import {BASE_URL} from"../constants"
 
@@ -91,6 +94,33 @@ export const newReview = (reviewData) => async (dispatch) => {
     catch (err) {
         dispatch({
             type: ADD_NEW_REVIEW_FAILS,
+            payload: err.response.data.message
+        })
+    }
+}
+
+
+export const getAdminPruducts = () => async (dispatch) => {
+    try{
+        dispatch({type: ADMIN_PRODUCT_LIST_REQUEST});
+
+        const response = await axios({
+            method: "GET",
+            url: `${BASE_URL}/api/v1/admin/products`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_PRODUCT_LIST_SUCCESS,
+            payload: response.data.products
+        });
+    }
+    catch (err) {
+        dispatch({
+            type: ADMIN_PRODUCT_LIST_FAILS,
             payload: err.response.data.message
         })
     }

@@ -9,7 +9,10 @@ import {
     ADD_NEW_REVIEW_REQUEST,
     ADD_NEW_REVIEW_SUCCESS,
     ADD_NEW_REVIEW_FAILS,
-    ADD_NEW_REVIEW_RESET
+    ADD_NEW_REVIEW_RESET,
+    ADMIN_PRODUCT_LIST_REQUEST,
+    ADMIN_PRODUCT_LIST_SUCCESS,
+    ADMIN_PRODUCT_LIST_FAILS,
 } from "../constants/productConstant";
 
 
@@ -97,6 +100,34 @@ export const newReviewReducer = (state = {}, action) => {
             return {
                 ...state,
                 success: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state;
+    }
+}
+
+
+export const adminProductReducer = (state = {products: []}, action) => {
+    switch (action.type) {
+        case ADMIN_PRODUCT_LIST_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_PRODUCT_LIST_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload
+            }
+        case ADMIN_PRODUCT_LIST_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
         case CLEAR_ERRORS:
             return {
