@@ -129,10 +129,12 @@ input[type="radio"] {
     transition: all 0.3s ease;
 }
 
-.form-inner form .field input[type="text"],[type="email"],[type="password"] {
+.form-inner form .field input[type="text"],[type="email"],[type="password"], [type="number"] {
     padding-left: 15px;
 }
-
+.form-inner form .field select {
+    padding-left: 15px;
+}
 
 .form-inner form .field input:focus {
     /*border-color: rgba(255, 67, 67, 0.9);*/

@@ -37,7 +37,7 @@ const Profile = () => {
 
                                 </div>
                                 <div>
-                                   <button onClick={() => navigate("/profile/myorders")}> My Orders</button>
+                                   <button onClick={() => navigate("/orders/me")}> My Orders</button>
                                     <button onClick={() => navigate("/profile/changePassword")}>Change Password</button>
                                 </div>
                             </div>

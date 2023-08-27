@@ -1,0 +1,31 @@
+.grayColor {
+    color: #999999;
+}
+.blackColor {
+    color: #000000;
+}
+
+.createContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.sidebarCreate {
+    width: 20%;
+    margin-left: 4rem;
+    margin-top: 4rem;
+    align-self: flex-start;
+}
+
+.wrapperContainer {
+    width: 80%;
+}
+
+@media screen and (max-width: 600px) {
+    .createContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
