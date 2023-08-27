@@ -87,8 +87,6 @@ const ProductDetails = () => {
         toast.success("Item added to cart")
     }
 
-
-
     if (loading)
         return <Loader/>
 

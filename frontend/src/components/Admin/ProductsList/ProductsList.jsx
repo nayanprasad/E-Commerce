@@ -79,7 +79,7 @@ const MyOrders = () => {
                 toast.error(deleteError)
             }
             if (isDeleted) {
-                toast.success("Product deleted successfully")
+                toast.warning("Product deleted successfully")
                 dispatch({type: ADMIN_PRODUCT_DELETE_RESET});
             }
             dispatch(getAdminPruducts());

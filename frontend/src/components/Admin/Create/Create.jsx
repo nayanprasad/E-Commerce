@@ -13,6 +13,9 @@ import AbcIcon from '@mui/icons-material/Abc';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {toast} from "react-toastify";
 import {ADMIN_NEW_PRODUCT_RESET} from "../../../redux/constants/productConstant";
+import ClearIcon from '@mui/icons-material/Clear';
+import Tooltip from '@mui/material/Tooltip';
+
 
 const Shipping = () => {
 
@@ -81,12 +84,10 @@ const Shipping = () => {
     }
 
 
-
-
     useEffect(() => {
-        if(error)
+        if (error)
             toast.error(error)
-        if(success){
+        if (success) {
             toast.success("Product created successfully")
             // navigate("/admin/products");
             dispatch({type: ADMIN_NEW_PRODUCT_RESET})
@@ -146,12 +147,20 @@ const Shipping = () => {
 
                                     <div className="field flex FileSelector">
                                         <AddPhotoAlternateIcon fontSize="large"/>
-                                        <input multiple type="file" accept="image/*" name="avatar" onChange={handleImageChange}/>
+                                        <input multiple type="file" accept="image/*" name="avatar"
+                                               onChange={handleImageChange}/>
                                     </div>
 
                                     <div className="imagePreview">
                                         {images.map((image, index) => (
-                                            <img  key={index} src={image} alt="Product Preview" />
+                                            <div className="previewImageContainer">
+                                                <img key={index} src={image} alt="Product Preview"/>
+                                                <Tooltip title="Remove Image">
+                                                    <ClearIcon fontSize={"large"} onClick={() => {
+                                                        setImages(images.filter((img, i) => i !== index))
+                                                    }}/>
+                                                </Tooltip>
+                                            </div>
                                         ))}
                                     </div>
 

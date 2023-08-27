@@ -90,7 +90,7 @@ const MyOrders = () => {
             dispatch({
                 type: ADMIN_ORDER_DELETE_RESET
             })
-            toast.success("Order deleted successfully")
+            toast.warning("Order deleted successfully")
         }
         dispatch(getAdminOrders());
     }, [dispatch, alert, error, isDeleted]);

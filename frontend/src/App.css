@@ -28,3 +28,11 @@ input[type="number"] {
 .orangeColor {
     color: #ff6f00;
 }
+
+.grayColor {
+    color: #999999;
+}
+
+.blackColor {
+    color: #000000;
+}

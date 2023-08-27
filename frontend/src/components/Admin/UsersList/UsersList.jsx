@@ -79,7 +79,7 @@ const MyOrders = () => {
             dispatch({
                 type: ADMIN_USER_DELETE_RESET
             })
-            toast.success("User deleted successfully")
+            toast.warning("User deleted successfully")
         }
         dispatch(getAdminUsers());
     }, [dispatch, alert, error, isDeleted]);
