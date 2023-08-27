@@ -3,18 +3,20 @@ import "./ProductList.css";
 import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
 import { useSelector, useDispatch } from "react-redux";
-import {getMyOrders} from "../../../redux/actions/orderAction";
+import {getAdminPruducts} from "../../../redux/actions/productAction";
 import Loader from "../../Loader/Loader";
 import {DataGrid, GridActionsCellItem} from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import LaunchIcon from '@mui/icons-material/Launch';
 import {toast} from "react-toastify";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const MyOrders = () => {
 
     const dispatch = useDispatch();
 
-    const {loading, error, orders} = useSelector(state => state.myOrders);
+    const {loading, error, products} = useSelector(state => state.adminProducts);
     const {user} = useSelector(state => state.user)
 
     const columns = [
@@ -44,32 +46,37 @@ const MyOrders = () => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <Link to={`/order/${params.id}`}>
-                        <LaunchIcon />
-                    </Link>
+                    <>
+                    {/*<Link to={`/order/${params.id}`}>*/}
+                        <EditIcon />
+                    {/*</Link>*/}
+                    {/*<Link to={`/order/${params.id}`}>*/}
+                        <DeleteIcon />
+                    {/*</Link>*/}
+                    </>
                 );
             },
         },
     ];
     const rows = [];
 
-    // orders &&
-    // orders.forEach((item, index) => {
-    //     rows.push({
-    //         id: item._id,
-    //         date: new Date(item.createdAt),
-    //         status: item.orderStatus,
-    //         itemsQty: item.orderItems.length,
-    //         amount: item.totalPrice,
-    //     });
-    // });
+    products &&
+    products.forEach((item, index) => {
+        rows.push({
+            id: item._id,
+            name: item.name,
+            date: new Date(item.createdAt),
+            price: item.price,
+            stock: item.stock,
+        });
+    });
 
-    // useEffect(() => {
-    //     if (error) {
-    //         toast.error(error)
-    //     }
-    //     dispatch(getMyOrders());
-    // }, [dispatch, alert, error]);
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+        }
+        dispatch(getAdminPruducts());
+    }, [dispatch, alert, error]);
 
 
     return (
