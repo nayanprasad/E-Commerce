@@ -24,3 +24,7 @@ input[type="number"] {
 .redColor {
     color: red;
 }
+
+.orangeColor {
+    color: #ff6f00;
+}

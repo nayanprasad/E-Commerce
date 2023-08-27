@@ -14,100 +14,106 @@ import {Typography} from "@mui/material";
 
 const MyOrders = () => {
 
-    const dispatch = useDispatch();
+        const dispatch = useDispatch();
 
-    const {loading, error, products} = useSelector(state => state.adminProducts);
-    const {loading: deleleLoading, error: deleteError, isDeleted} = useSelector(state => state.adminProductDelete);
-    const {user} = useSelector(state => state.user)
+        const {loading, error, products} = useSelector(state => state.adminProducts);
+        const {loading: deleleLoading, error: deleteError, isDeleted} = useSelector(state => state.adminProductDelete);
+        const {user} = useSelector(state => state.user)
 
-    const columns = [
-        {field: "id", headerName: "Order ID", minWidth: 300, flex: 1},
-        {field: "name", headerName: "Name", minWidth: 270, flex: 0.5},
-        {field: "date", headerName: "Date", minWidth: 150, flex: 0.5, type: "date"},
-        {field: "price", headerName: "Price", minWidth: 150, flex: 0.5, type: "number"},
-        {
-            field: "stock",
-            headerName: "Stock",
-            type: "number",
-            minWidth: 100,
-            flex: 0.3,
-            cellClassName: (params) => {
-                return params.value !== 0
-                    ? "greenColor"
-                    : "redColor";
+        const columns = [
+            {field: "id", headerName: "Order ID", minWidth: 300, flex: 1},
+            {field: "name", headerName: "Name", minWidth: 270, flex: 0.5},
+            {field: "date", headerName: "Date", minWidth: 150, flex: 0.5, type: "date"},
+            {field: "price", headerName: "Price", minWidth: 150, flex: 0.5, type: "number"},
+            {
+                field: "stock",
+                headerName: "Stock",
+                type: "number",
+                minWidth: 100,
+                flex: 0.3,
+                cellClassName: (params) => {
+                    if (params.value === 0)
+                        return "redColor";
+                    if(params.value < 10)
+                        return "orangeColor";
+                    else
+                        return "greenColor";
+                }
             },
-        },
 
-        {
-            field: "actions",
-            flex: 0.3,
-            headerName: "Actions",
-            minWidth: 100,
-            type: "number",
-            sortable: false,
-            renderCell: (params) => {
-                return (
-                    <>
-                        <EditIcon color={"primary"}/>
-                        <DeleteIcon className={"redColor"} onClick={() => dispatch(adminDeleteProduct(params.id))}/>
-                    </>
-                );
+            {
+                field: "actions",
+                flex: 0.3,
+                headerName: "Actions",
+                minWidth: 100,
+                type: "number",
+                sortable: false,
+                renderCell: (params) => {
+                    return (
+                        <>
+                            <EditIcon color={"primary"}/>
+                            <DeleteIcon className={"redColor"} onClick={() => dispatch(adminDeleteProduct(params.id))}/>
+                        </>
+                    );
+                },
             },
-        },
-    ];
-    const rows = [];
+        ];
+        const rows = [];
 
-    products &&
-    products.forEach((item, index) => {
-        rows.push({
-            id: item._id,
-            name: item.name,
-            date: new Date(item.createdAt),
-            price: item.price,
-            stock: item.stock,
+        products &&
+        products.forEach((item, index) => {
+            rows.push({
+                id: item._id,
+                name: item.name,
+                date: new Date(item.createdAt),
+                price: item.price,
+                stock: item.stock,
+            });
         });
-    });
 
-    useEffect(() => {
-        if (error) {
-            toast.error(error)
-        }if (deleteError) {
-            toast.error(deleteError)
-        }if (isDeleted) {
-            toast.success("Product deleted successfully")
-            dispatch({type: ADMIN_PRODUCT_DELETE_RESET});
-        }
-        dispatch(getAdminPruducts());
-    }, [dispatch, alert, error, isDeleted]);
-
-
-    return (
-        <Fragment>
-
-            <MetaData title={`${user?.name} - Orders`}/>
+        useEffect(() => {
+            if (error) {
+                toast.error(error)
+            }
+            if (deleteError) {
+                toast.error(deleteError)
+            }
+            if (isDeleted) {
+                toast.success("Product deleted successfully")
+                dispatch({type: ADMIN_PRODUCT_DELETE_RESET});
+            }
+            dispatch(getAdminPruducts());
+        }, [dispatch, alert, error, isDeleted]);
 
 
-            {loading || deleleLoading ? (
-                <Loader/>
-            ) : (
-                <div className="adminProductsPage">
+        return (
+            <Fragment>
+
+                <MetaData title={`${user?.name} - Orders`}/>
 
 
-                    <div className="sidebar">
-                        <Sidebar/>
+                {loading || deleleLoading ? (
+                    <Loader/>
+                ) : (
+                    <div className="adminProductsPage">
+
+
+                        <div className="sidebar">
+                            <Sidebar/>
+                        </div>
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            pageSize={10}
+                            disableSelectionOnClick
+                            className="adminProductsTable"
+                            autoHeight
+                        />
                     </div>
-                    <DataGrid
-                        rows={rows}
-                        columns={columns}
-                        pageSize={10}
-                        disableSelectionOnClick
-                        className="adminProductsTable"
-                        autoHeight
-                    />
-                </div>
-            )}
-        </Fragment>
-    );
-};
+                )}
+            </Fragment>
+        );
+    }
+;
 
 export default MyOrders;
