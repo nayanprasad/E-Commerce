@@ -1,7 +1,7 @@
 const Order = require("../models/orderModel");
+const Product = require("../models/productModel");
 const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Errorhandler = require("../utils/errorhandler");
-const Product = require("../models/productModel");
 
 
 exports.sayHello = (req, res, next) => {
@@ -23,6 +23,16 @@ exports.createOrder = CatchAsyncErrors(async (req, res, next) => {
         paymentMethod,
         paymentResult
     } = req.body;
+
+    async function updateStock(product, quantity) {
+        const productStock = await Product.findById(product);
+        productStock.stock = productStock.stock - quantity;
+        await productStock.save({validateBeforeSave: false});
+    }
+
+    orderItems.forEach(async (item) => {
+        await updateStock(item.product, item.quantity);
+    });
 
     const order = await Order.create({
         orderItems,
@@ -63,7 +73,7 @@ exports.getMyOrder = CatchAsyncErrors(async (req, res, next) => {
 
     const myOrders = await Order.find({user: req.user.id});
 
-    if(!myOrders) {
+    if (!myOrders) {
         return next(new Errorhandler("No order found", 404));
     }
 
@@ -79,7 +89,7 @@ exports.getAllOrders = CatchAsyncErrors(async (req, res, next) => {
 
     const orders = await Order.find();
 
-    if(!orders) {
+    if (!orders) {
         return next(new Errorhandler("No order found", 404));
     }
 
@@ -100,17 +110,17 @@ exports.updateOrderStatus = CatchAsyncErrors(async (req, res, next) => {
 
     const orders = await Order.findById(req.params.id);
 
-    if(!orders) {
+    if (!orders) {
         return next(new Errorhandler("No order found", 404));
     }
 
-    if(orders.orderStatus === "Delivered") {
+    if (orders.orderStatus === "Delivered") {
         return next(new Errorhandler("order delivered", 400));
     }
 
     orders.orderStatus = req.body.status;
 
-    if(orders.orderStatus === "Delivered") {
+    if (orders.orderStatus === "Delivered") {
         orders.deliveredAt = Date.now();
     }
 
@@ -127,7 +137,7 @@ exports.deleteOrder = CatchAsyncErrors(async (req, res, next) => {
 
     const order = await Order.findById(req.params.id);
 
-    if(!order) {
+    if (!order) {
         return next(new Errorhandler("No order found", 404));
     }
 
