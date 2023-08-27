@@ -22,6 +22,18 @@
     width: 80%;
 }
 
+.imagePreview {
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*margin-right: 1rem;*/
+}
+.imagePreview img {
+    margin: 1rem 1rem;
+    max-width: 4rem;
+    max-height: 4rem;
+    object-fit: cover;
+}
+
 @media screen and (max-width: 600px) {
     .createContainer {
         flex-direction: column;
