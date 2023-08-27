@@ -12,7 +12,16 @@ import {
     ADMIN_ORDERS_REQUEST,
     ADMIN_ORDERS_SUCCESS,
     ADMIN_ORDERS_FAIL,
+    ADMIN_ORDER_DELETE_REQUEST,
+    ADMIN_ORDER_DELETE_FAILS,
+    ADMIN_ORDER_DELETE_RESET,
+    ADMIN_ORDER_DELETE_SUCCESS
 } from '../constants/orderConstants'
+import {
+    ADMIN_PRODUCT_DELETE_FAILS,
+    ADMIN_PRODUCT_DELETE_REQUEST, ADMIN_PRODUCT_DELETE_RESET,
+    ADMIN_PRODUCT_DELETE_SUCCESS
+} from "../constants/productConstant";
 
 
 export const orderReducer = (state = {order: []}, action) => {
@@ -123,5 +132,38 @@ export const adminOrdersReducer = (state = {orders: []}, action) => {
             }
         default:
             return state;
+    }
+}
+
+
+export const adminOrderDeleteReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_ORDER_DELETE_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_ORDER_DELETE_SUCCESS:
+            return {
+                loading: false,
+                isDeleted: action.payload
+            }
+        case ADMIN_ORDER_DELETE_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_ORDER_DELETE_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
     }
 }

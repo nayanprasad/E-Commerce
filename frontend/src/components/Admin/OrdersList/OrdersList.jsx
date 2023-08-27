@@ -3,7 +3,8 @@ import "./OrdersList.css";
 import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
 import {useSelector, useDispatch} from "react-redux";
-import {getAdminOrders} from "../../../redux/actions/orderAction";
+import {getAdminOrders, adminDeleteOrder} from "../../../redux/actions/orderAction";
+import {ADMIN_ORDER_DELETE_RESET} from "../../../redux/constants/orderConstants"
 import Loader from "../../Loader/Loader";
 import {DataGrid} from '@mui/x-data-grid';
 import {toast} from "react-toastify";
@@ -11,12 +12,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Typography} from "@mui/material";
 
-
 const MyOrders = () => {
 
     const dispatch = useDispatch();
 
     const {loading, error, orders} = useSelector(state => state.adminOrders);
+    const {loading: deleteLoading, error: deleteError, isDeleted} = useSelector(state => state.adminOrderDelete)
     const {user} = useSelector(state => state.user)
 
     const columns = [
@@ -60,7 +61,7 @@ const MyOrders = () => {
                 return (
                     <>
                         <EditIcon color={"primary"}/>
-                        <DeleteIcon className={"redColor"}/>
+                        <DeleteIcon className={"redColor"} onClick={() => dispatch(adminDeleteOrder(params.id))}/>
                     </>
                 );
             },
@@ -83,9 +84,16 @@ const MyOrders = () => {
     useEffect(() => {
         if (error) {
             toast.error(error)
+        }if (deleteError) {
+            toast.error(deleteError)
+        }if (isDeleted) {
+            dispatch({
+                type: ADMIN_ORDER_DELETE_RESET
+            })
+            toast.success("Order deleted successfully")
         }
         dispatch(getAdminOrders());
-    }, [dispatch, alert, error]);
+    }, [dispatch, alert, error, isDeleted]);
 
 
     return (
