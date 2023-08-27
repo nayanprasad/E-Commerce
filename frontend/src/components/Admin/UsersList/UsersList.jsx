@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
 import {useSelector, useDispatch} from "react-redux";
 import {getAdminUsers, adminDeleteUser} from "../../../redux/actions/userAction";
+import {ADMIN_USER_DELETE_RESET} from "../../../redux/constants/userConstant"
 import Loader from "../../Loader/Loader";
 import {DataGrid} from '@mui/x-data-grid';
 import {toast} from "react-toastify";
@@ -75,6 +76,9 @@ const MyOrders = () => {
             toast.error(deleteError)
         }
         if (isDeleted) {
+            dispatch({
+                type: ADMIN_USER_DELETE_RESET
+            })
             toast.success("User deleted successfully")
         }
         dispatch(getAdminUsers());
@@ -87,7 +91,7 @@ const MyOrders = () => {
             <MetaData title={`${user?.name} - Orders`}/>
 
 
-            {loading ? (
+            {loading || deleteLoading ? (
                 <Loader/>
             ) : (
                 <div className="adminUsersPage">

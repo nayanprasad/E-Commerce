@@ -3,7 +3,8 @@ import "./ProductsList.css";
 import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
 import {useSelector, useDispatch} from "react-redux";
-import {getAdminPruducts} from "../../../redux/actions/productAction";
+import {getAdminPruducts, adminDeleteProduct} from "../../../redux/actions/productAction";
+import {ADMIN_PRODUCT_DELETE_RESET} from "../../../redux/constants/productConstant"
 import Loader from "../../Loader/Loader";
 import {DataGrid} from '@mui/x-data-grid';
 import {toast} from "react-toastify";
@@ -16,6 +17,7 @@ const MyOrders = () => {
     const dispatch = useDispatch();
 
     const {loading, error, products} = useSelector(state => state.adminProducts);
+    const {loading: deleleLoading, error: deleteError, isDeleted} = useSelector(state => state.adminProductDelete);
     const {user} = useSelector(state => state.user)
 
     const columns = [
@@ -46,12 +48,8 @@ const MyOrders = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        {/*<Link to={`/order/${params.id}`}>*/}
                         <EditIcon color={"primary"}/>
-                        {/*</Link>*/}
-                        {/*<Link to={`/order/${params.id}`}>*/}
-                        <DeleteIcon className={"redColor"}/>
-                        {/*</Link>*/}
+                        <DeleteIcon className={"redColor"} onClick={() => dispatch(adminDeleteProduct(params.id))}/>
                     </>
                 );
             },
@@ -73,9 +71,14 @@ const MyOrders = () => {
     useEffect(() => {
         if (error) {
             toast.error(error)
+        }if (deleteError) {
+            toast.error(deleteError)
+        }if (isDeleted) {
+            toast.success("Product deleted successfully")
+            dispatch({type: ADMIN_PRODUCT_DELETE_RESET});
         }
         dispatch(getAdminPruducts());
-    }, [dispatch, alert, error]);
+    }, [dispatch, alert, error, isDeleted]);
 
 
     return (
@@ -84,7 +87,7 @@ const MyOrders = () => {
             <MetaData title={`${user?.name} - Orders`}/>
 
 
-            {loading ? (
+            {loading || deleleLoading ? (
                 <Loader/>
             ) : (
                 <div className="adminProductsPage">

@@ -9,12 +9,16 @@ import {
     ADD_NEW_REVIEW_REQUEST,
     ADD_NEW_REVIEW_SUCCESS,
     ADD_NEW_REVIEW_FAILS,
-    ADD_NEW_REVIEW_RESET,
     ADMIN_PRODUCT_LIST_REQUEST,
     ADMIN_PRODUCT_LIST_SUCCESS,
     ADMIN_PRODUCT_LIST_FAILS,
+    ADMIN_PRODUCT_DELETE_REQUEST,
+    ADMIN_PRODUCT_DELETE_FAILS,
+    ADMIN_PRODUCT_DELETE_RESET,
+    ADMIN_PRODUCT_DELETE_SUCCESS
 } from "../constants/productConstant";
 import {BASE_URL} from"../constants"
+import {ADMIN_USER_DELETE_FAILS, ADMIN_USER_DELETE_REQUEST, ADMIN_USER_DELETE_SUCCESS} from "../constants/userConstant";
 
 export const listProducts = (keyword = "", page = 1, price = [0, 25000], category, ratings = 0) => async (dispatch) => {
     try{
@@ -122,6 +126,35 @@ export const getAdminPruducts = () => async (dispatch) => {
         dispatch({
             type: ADMIN_PRODUCT_LIST_FAILS,
             payload: err.response.data.message
+        })
+    }
+}
+
+
+
+export const adminDeleteProduct = (id) => async (dispatch) => {
+    try {
+
+        dispatch({type: ADMIN_PRODUCT_DELETE_REQUEST});
+
+        const {data} = await axios({
+            method: "DELETE",
+            url: `${BASE_URL}/api/v1/admin/product/${id}`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_PRODUCT_DELETE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (e) {
+        dispatch({
+            type: ADMIN_PRODUCT_DELETE_FAILS,
+            payload: e.response.data.message
         })
     }
 }

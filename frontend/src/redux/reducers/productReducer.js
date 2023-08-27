@@ -13,11 +13,14 @@ import {
     ADMIN_PRODUCT_LIST_REQUEST,
     ADMIN_PRODUCT_LIST_SUCCESS,
     ADMIN_PRODUCT_LIST_FAILS,
+    ADMIN_PRODUCT_DELETE_REQUEST,
+    ADMIN_PRODUCT_DELETE_FAILS,
+    ADMIN_PRODUCT_DELETE_RESET,
+    ADMIN_PRODUCT_DELETE_SUCCESS
 } from "../constants/productConstant";
 
-
 export const productListReducer = (state = {loading: true, products: []}, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return {
                 loading: true,
@@ -48,8 +51,7 @@ export const productListReducer = (state = {loading: true, products: []}, action
 };
 
 
-
-export const productDetailsReducer = (state = {loading: true, product : {}}, action) => {
+export const productDetailsReducer = (state = {loading: true, product: {}}, action) => {
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
             return {
@@ -111,7 +113,6 @@ export const newReviewReducer = (state = {}, action) => {
     }
 }
 
-
 export const adminProductReducer = (state = {products: []}, action) => {
     switch (action.type) {
         case ADMIN_PRODUCT_LIST_REQUEST:
@@ -140,3 +141,34 @@ export const adminProductReducer = (state = {products: []}, action) => {
 }
 
 
+export const adminProductDeleteReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_PRODUCT_DELETE_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_PRODUCT_DELETE_SUCCESS:
+            return {
+                loading: false,
+                isDeleted: action.payload
+            }
+        case ADMIN_PRODUCT_DELETE_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_PRODUCT_DELETE_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
