@@ -33,7 +33,7 @@ exports.getAllProducts = CatchAsyncErrors( async (req, res, next) => {
 
   apiFeature.pagination(resultPerPage);
 
-  const products = await apiFeature.query;  // apiFeature is the same class and search() will return the new obj , 
+  const products = await apiFeature.query;  // apiFeature is the same class and search() will return the new obj ,
   const productsCount = await Product.countDocuments(); // this will count the total number of documents in the collection
   res.status(200).json({
     success: true,
@@ -43,6 +43,16 @@ exports.getAllProducts = CatchAsyncErrors( async (req, res, next) => {
     resultPerPage
   })
 });
+
+//get all product -- admin
+exports.getAllProductsAdmin = CatchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find();
+
+  res.status(200).json({
+    success: true,
+    products
+  })
+})
 
 
 // Get single product details
@@ -65,7 +75,7 @@ exports.getSingleProduct = CatchAsyncErrors( async (req, res, next) => {
 
 // Update the product  --Admin
 exports.updateProduct = CatchAsyncErrors( async (req, res, next) => {
-  
+
   const product = Product.findById(req.params.id);
 
   if(!product) {
