@@ -3,7 +3,7 @@ import "./UsersList.css";
 import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
 import {useSelector, useDispatch} from "react-redux";
-import {getAdminUsers} from "../../../redux/actions/userAction";
+import {getAdminUsers, adminDeleteUser} from "../../../redux/actions/userAction";
 import Loader from "../../Loader/Loader";
 import {DataGrid} from '@mui/x-data-grid';
 import {toast} from "react-toastify";
@@ -18,6 +18,7 @@ const MyOrders = () => {
 
     const {loading, error, users} = useSelector(state => state.adminUsers);
     const {user} = useSelector(state => state.user)
+    const {loading: deleteLoading, error: deleteError, isDeleted} = useSelector(state => state.adminUserDelete)
 
     const columns = [
         {field: "id", headerName: "Order ID", minWidth: 250, flex: 1},
@@ -46,7 +47,7 @@ const MyOrders = () => {
                 return (
                     <>
                         <EditIcon color={"primary"}/>
-                        <DeleteIcon className={"redColor"}/>
+                        <DeleteIcon className={"redColor"} onClick={() => dispatch(adminDeleteUser(params.id))}/>
                     </>
                 );
             },
@@ -70,8 +71,14 @@ const MyOrders = () => {
         if (error) {
             toast.error(error)
         }
+        if (deleteError) {
+            toast.error(deleteError)
+        }
+        if (isDeleted) {
+            toast.success("User deleted successfully")
+        }
         dispatch(getAdminUsers());
-    }, [dispatch, alert, error]);
+    }, [dispatch, alert, error, isDeleted]);
 
 
     return (
