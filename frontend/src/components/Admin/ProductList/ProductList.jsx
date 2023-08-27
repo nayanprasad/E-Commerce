@@ -1,16 +1,15 @@
-import React, { Fragment, useEffect } from "react";
+import React, {Fragment, useEffect} from "react";
 import "./ProductList.css";
 import Sidebar from "../Sidebar/Sidebar";
 import MetaData from "../../MetaDate"
-import { useSelector, useDispatch } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {getAdminPruducts} from "../../../redux/actions/productAction";
 import Loader from "../../Loader/Loader";
-import {DataGrid, GridActionsCellItem} from '@mui/x-data-grid';
-import { Link } from "react-router-dom";
-import LaunchIcon from '@mui/icons-material/Launch';
+import {DataGrid} from '@mui/x-data-grid';
 import {toast} from "react-toastify";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import {Typography} from "@mui/material";
 
 const MyOrders = () => {
 
@@ -20,7 +19,7 @@ const MyOrders = () => {
     const {user} = useSelector(state => state.user)
 
     const columns = [
-        { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+        {field: "id", headerName: "Order ID", minWidth: 300, flex: 1},
         {field: "name", headerName: "Name", minWidth: 270, flex: 0.5},
         {field: "date", headerName: "Date", minWidth: 150, flex: 0.5, type: "date"},
         {field: "price", headerName: "Price", minWidth: 150, flex: 0.5, type: "number"},
@@ -47,12 +46,12 @@ const MyOrders = () => {
             renderCell: (params) => {
                 return (
                     <>
-                    {/*<Link to={`/order/${params.id}`}>*/}
-                        <EditIcon />
-                    {/*</Link>*/}
-                    {/*<Link to={`/order/${params.id}`}>*/}
-                        <DeleteIcon />
-                    {/*</Link>*/}
+                        {/*<Link to={`/order/${params.id}`}>*/}
+                        <EditIcon color={"primary"}/>
+                        {/*</Link>*/}
+                        {/*<Link to={`/order/${params.id}`}>*/}
+                        <DeleteIcon className={"redColor"}/>
+                        {/*</Link>*/}
                     </>
                 );
             },
@@ -82,17 +81,18 @@ const MyOrders = () => {
     return (
         <Fragment>
 
-            <MetaData title={`${user?.name} - Orders`} />
+            <MetaData title={`${user?.name} - Orders`}/>
+
 
             {loading ? (
-                <Loader />
+                <Loader/>
             ) : (
                 <div className="adminProductsPage">
 
-                    <div className="sidebar">
-                        <Sidebar />
-                    </div>
 
+                    <div className="sidebar">
+                        <Sidebar/>
+                    </div>
                     <DataGrid
                         rows={rows}
                         columns={columns}
