@@ -1,28 +1,25 @@
-import React, {Fragment, useState} from "react";
-import "./Create.css"
-import HomeIcon from "@mui/icons-material/Home";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
-import PlaceIcon from "@mui/icons-material/Place";
-import PhoneIcon from "@mui/icons-material/Phone";
-import PublicIcon from "@mui/icons-material/Public";
-import LanguageIcon from "@mui/icons-material/Language";
+import React, {Fragment, useEffect, useState} from "react";
+import "./Create.css";
 import {useDispatch, useSelector} from "react-redux";
-// import {saveShippingDetails} from "../../redux/actions/cartAction";
-import {Country, State, City} from "country-state-city";
+import {newProduct} from "../../../redux/actions/productAction";
 import {useNavigate} from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
+import Loader from "../../Loader/Loader";
 import CategoryIcon from '@mui/icons-material/Category';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import DescriptionIcon from '@mui/icons-material/Description';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import AbcIcon from '@mui/icons-material/Abc';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import {toast} from "react-toastify";
+import {ADMIN_NEW_PRODUCT_RESET} from "../../../redux/constants/productConstant";
 
 const Shipping = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const {shippingDetails} = useSelector(state => state.cart)
+
+    const {loading, error, success} = useSelector(state => state.adminNewProduct);
 
     const [data, setData] = useState({
         name: "",
@@ -52,10 +49,8 @@ const Shipping = () => {
     }
 
     const handleSubmit = (e) => {
-
-        console.log(images)
-
         e.preventDefault()
+        console.log(data)
         const formData = new FormData();
         formData.set("name", data.name);
         formData.set("price", data.price);
@@ -66,8 +61,7 @@ const Shipping = () => {
             formData.append("images", image)
         })
 
-        // dispatch(saveShippingDetails(data));
-        // navigate("/order/confirm")
+        dispatch(newProduct(formData));
     }
 
 
@@ -86,10 +80,26 @@ const Shipping = () => {
         })
     }
 
+
+
+
+    useEffect(() => {
+        if(error)
+            toast.error(error)
+        if(success){
+            toast.success("Product created successfully")
+            // navigate("/admin/products");
+            dispatch({type: ADMIN_NEW_PRODUCT_RESET})
+        }
+    }, [error, success]);
+
     return (
         <Fragment>
-            <div className="createContainer">
 
+            {loading && <Loader/>}
+
+
+            <div className="createContainer">
 
                 <div className="sidebarCreate">
                     <Sidebar/>
@@ -130,7 +140,7 @@ const Shipping = () => {
                                     </div>
                                     <div className="field flex">
                                         <Inventory2Icon/>
-                                        <input type="number" placeholder="Stock" name="Stock"
+                                        <input type="number" placeholder="Stock" name="stock"
                                                value={data.stock} onChange={handleChange}/>
                                     </div>
 

@@ -15,7 +15,11 @@ import {
     ADMIN_PRODUCT_DELETE_REQUEST,
     ADMIN_PRODUCT_DELETE_FAILS,
     ADMIN_PRODUCT_DELETE_RESET,
-    ADMIN_PRODUCT_DELETE_SUCCESS
+    ADMIN_PRODUCT_DELETE_SUCCESS,
+    ADMIN_NEW_PRODUCT_REQUEST,
+    ADMIN_NEW_PRODUCT_SUCCESS,
+    ADMIN_NEW_PRODUCT_RESET,
+    ADMIN_NEW_PRODUCT_FAIL
 } from "../constants/productConstant";
 import {BASE_URL} from"../constants"
 import {ADMIN_USER_DELETE_FAILS, ADMIN_USER_DELETE_REQUEST, ADMIN_USER_DELETE_SUCCESS} from "../constants/userConstant";
@@ -155,6 +159,34 @@ export const adminDeleteProduct = (id) => async (dispatch) => {
         dispatch({
             type: ADMIN_PRODUCT_DELETE_FAILS,
             payload: e.response.data.message
+        })
+    }
+}
+
+
+export const newProduct = (productData) => async (dispatch) => {
+    try{
+        dispatch({type: ADMIN_NEW_PRODUCT_REQUEST});
+
+        const response = await axios({
+            method: "POST",
+            url: `${BASE_URL}/api/v1/admin/product/new`,
+            data: productData,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_NEW_PRODUCT_SUCCESS,
+            payload: response.data
+        });
+    }
+    catch (err) {
+        dispatch({
+            type: ADMIN_NEW_PRODUCT_FAIL,
+            payload: err.response.data.message
         })
     }
 }

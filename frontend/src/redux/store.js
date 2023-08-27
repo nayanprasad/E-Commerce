@@ -1,10 +1,22 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {productDetailsReducer, productListReducer, newReviewReducer, adminProductReducer, adminProductDeleteReducer} from "./reducers/productReducer";
-import {userReducer, updateProfileReducer, adminUsersReducer, adminUserDeleteReducer} from "./reducers/userReducer"
+import {productDetailsReducer,
+    productListReducer,
+    newReviewReducer,
+    adminProductReducer,
+    adminProductDeleteReducer,
+    newProductReducer} from "./reducers/productReducer";
+import {userReducer,
+    updateProfileReducer,
+    adminUsersReducer,
+    adminUserDeleteReducer} from "./reducers/userReducer"
 import {cartReducer} from "./reducers/cartReducer";
-import {orderReducer, myOrdersReducers, orderDetailsReducer, adminOrdersReducer, adminOrderDeleteReducer} from "./reducers/orderReducer";
+import {orderReducer,
+    myOrdersReducers,
+    orderDetailsReducer,
+    adminOrdersReducer,
+    adminOrderDeleteReducer} from "./reducers/orderReducer";
 
 
 const reducer = combineReducers({
@@ -18,6 +30,7 @@ const reducer = combineReducers({
     orderDetails: orderDetailsReducer,
     newReview: newReviewReducer,
     adminProducts: adminProductReducer,
+    adminNewProduct: newProductReducer,
     adminProductDelete:adminProductDeleteReducer,
     adminOrders: adminOrdersReducer,
     adminOrderDelete:adminOrderDeleteReducer,

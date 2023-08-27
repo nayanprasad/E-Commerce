@@ -16,7 +16,11 @@ import {
     ADMIN_PRODUCT_DELETE_REQUEST,
     ADMIN_PRODUCT_DELETE_FAILS,
     ADMIN_PRODUCT_DELETE_RESET,
-    ADMIN_PRODUCT_DELETE_SUCCESS
+    ADMIN_PRODUCT_DELETE_SUCCESS,
+    ADMIN_NEW_PRODUCT_REQUEST,
+    ADMIN_NEW_PRODUCT_SUCCESS,
+    ADMIN_NEW_PRODUCT_RESET,
+    ADMIN_NEW_PRODUCT_FAIL
 } from "../constants/productConstant";
 
 export const productListReducer = (state = {loading: true, products: []}, action) => {
@@ -141,6 +145,8 @@ export const adminProductReducer = (state = {products: []}, action) => {
 }
 
 
+
+
 export const adminProductDeleteReducer = (state = {}, action) => {
     switch (action.type) {
         case ADMIN_PRODUCT_DELETE_REQUEST:
@@ -172,3 +178,39 @@ export const adminProductDeleteReducer = (state = {}, action) => {
             return state
     }
 }
+
+
+export const newProductReducer = (state = {product: {}}, action) => {
+    switch (action.type) {
+        case ADMIN_NEW_PRODUCT_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_NEW_PRODUCT_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload.success,
+                product: action.payload.product
+            }
+        case ADMIN_NEW_PRODUCT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_NEW_PRODUCT_RESET:
+            return {
+                ...state,
+                success: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+
