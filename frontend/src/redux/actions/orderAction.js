@@ -8,7 +8,10 @@ import {
     MY_ORDERS_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
-    ORDER_DETAILS_FAIL
+    ORDER_DETAILS_FAIL,
+    ADMIN_ORDERS_REQUEST,
+    ADMIN_ORDERS_SUCCESS,
+    ADMIN_ORDERS_FAIL,
 } from '../constants/orderConstants'
 import axios from 'axios';
 import {BASE_URL} from "../constants";
@@ -58,8 +61,6 @@ export const getMyOrders = () => async (dispatch, getState) => {
             }
         })
 
-
-
         dispatch({
             type: MY_ORDERS_SUCCESS,
             payload: data.myOrders
@@ -89,8 +90,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             }
         })
 
-        console.log(data)
-
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
             payload: data.order
@@ -99,6 +98,35 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: ORDER_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
+export const getAdminOrders = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ADMIN_ORDERS_REQUEST
+        });
+
+        const {data} = await axios({
+            method: "GET",
+            url: `${BASE_URL}/api/v1/admin/orders`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+
+        dispatch({
+            type: ADMIN_ORDERS_SUCCESS,
+            payload: data.orders
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_ORDERS_FAIL,
             payload: error.response.data.message
         })
     }

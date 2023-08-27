@@ -1,4 +1,4 @@
-.adminProductsPage {
+.adminOrdersPage {
     max-width: 100%;
     display: flex;
     padding: 0 5vmax;
@@ -8,7 +8,7 @@
     width: 20%;
 }
 
-.adminProductsTable {
+.adminOrdersTable {
     width: 80%;
     padding-top: 5vmax;
     border-left: 1px solid rgba(0, 0, 0, 0.13);
@@ -20,11 +20,11 @@ svg:hover {
 }
 
 @media screen and (max-width: 600px) {
-    .adminProductsPage {
+    .adminOrdersPage {
         flex-direction: column;
     }
 
-    .adminProductsTable {
+    .adminOrdersTable {
         width: 100%;
     }
 }
