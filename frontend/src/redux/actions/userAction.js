@@ -122,6 +122,8 @@ export const logout = () => async (dispatch) => {
         await axios.get(`${BASE_URL}/api/v1/logout`);
 
         localStorage.removeItem("token");
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("shippingInfo");
 
         dispatch({
             type: LOAD_USER_FAILS,
