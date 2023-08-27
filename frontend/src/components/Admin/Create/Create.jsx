@@ -89,7 +89,7 @@ const Shipping = () => {
             toast.error(error)
         if (success) {
             toast.success("Product created successfully")
-            // navigate("/admin/products");
+            navigate("/admin/products");
             dispatch({type: ADMIN_NEW_PRODUCT_RESET})
         }
     }, [error, success]);
