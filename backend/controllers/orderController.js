@@ -141,6 +141,19 @@ exports.deleteOrder = CatchAsyncErrors(async (req, res, next) => {
         return next(new Errorhandler("No order found", 404));
     }
 
+    async function updateStock(product, quantity) {
+        const productStock = await Product.findById(product);
+        productStock.stock = productStock.stock + quantity;
+        await productStock.save({validateBeforeSave: false});
+    }
+
+    if(order.orderStatus !== "Delivered"){
+        const orderItems = order.orderItems;
+        orderItems.forEach(async (item) => {
+            await updateStock(item.product, item.quantity);
+        });
+    }
+
     await Order.findByIdAndDelete(req.params.id);
 
     res.status(200).json({
