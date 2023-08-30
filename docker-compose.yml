@@ -6,7 +6,7 @@ services:
     container_name: ecom-mongo
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - ./data:/data/db
     networks:
@@ -33,7 +33,7 @@ services:
       dockerfile: Dockerfile
       target: Production
     ports:
-      - 3000:3000
+      - "3000:3000"
     depends_on:
       - backend
     networks:
