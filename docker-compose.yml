@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  mongoDB:
+    image: mongo:5.0.20
+    container_name: ecom-mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+    networks:
+      - mongo-network
+  backend:
+    container_name: ecom-backend
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: Production
+    ports:
+      - 5000:5000
+    networks:
+      - shared-network
+    depends_on:
+      - mongoDB
+
+  frontend:
+    container_name: ecom-fronend
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: frontend/Dockerfile
+      target: Production
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - shared-network
+
+
+networks:
+  shared-network:
+  mongo-network:
