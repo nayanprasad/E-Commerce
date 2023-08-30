@@ -1,4 +1,4 @@
-FROM node:18.17.1alpine3.18 as Production
+FROM node:18.17.1 as Production
 
 WORKDIR /app/client
 
@@ -10,4 +10,4 @@ COPY . .
 
 RUN npm run build
 
-RUN ["sh", "-c", "npm start"]
+RUN ["sh", "-c", "npm run start:prod"]
