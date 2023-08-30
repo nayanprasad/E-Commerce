@@ -26,11 +26,11 @@ services:
       - mongoDB
 
   frontend:
-    container_name: ecom-fronend
+    container_name: ecom-frontend
     restart: unless-stopped
     build:
-      context: ./
-      dockerfile: frontend/Dockerfile
+      context: frontend
+      dockerfile: Dockerfile
       target: Production
     ports:
       - 3000:3000
@@ -38,6 +38,8 @@ services:
       - backend
     networks:
       - shared-network
+    tty: true
+    stdin_open: true
 
 
 networks:
