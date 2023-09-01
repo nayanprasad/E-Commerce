@@ -6,17 +6,21 @@ import {productDetailsReducer,
     newReviewReducer,
     adminProductReducer,
     adminProductDeleteReducer,
-    newProductReducer} from "./reducers/productReducer";
+    newProductReducer,
+    productEditReducer
+} from "./reducers/productReducer";
 import {userReducer,
     updateProfileReducer,
     adminUsersReducer,
-    adminUserDeleteReducer} from "./reducers/userReducer"
+    adminUserDeleteReducer
+} from "./reducers/userReducer"
 import {cartReducer} from "./reducers/cartReducer";
 import {orderReducer,
     myOrdersReducers,
     orderDetailsReducer,
     adminOrdersReducer,
-    adminOrderDeleteReducer} from "./reducers/orderReducer";
+    adminOrderDeleteReducer
+} from "./reducers/orderReducer";
 
 
 const reducer = combineReducers({
@@ -32,6 +36,7 @@ const reducer = combineReducers({
     adminProducts: adminProductReducer,
     adminNewProduct: newProductReducer,
     adminProductDelete:adminProductDeleteReducer,
+    adminProductEdit: productEditReducer,
     adminOrders: adminOrdersReducer,
     adminOrderDelete:adminOrderDeleteReducer,
     adminUsers: adminUsersReducer,

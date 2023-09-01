@@ -5,6 +5,7 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILS,
+    PRODUCT_DETAILS_RESET,
     CLEAR_ERRORS,
     ADD_NEW_REVIEW_REQUEST,
     ADD_NEW_REVIEW_SUCCESS,
@@ -20,7 +21,11 @@ import {
     ADMIN_NEW_PRODUCT_REQUEST,
     ADMIN_NEW_PRODUCT_SUCCESS,
     ADMIN_NEW_PRODUCT_RESET,
-    ADMIN_NEW_PRODUCT_FAIL
+    ADMIN_NEW_PRODUCT_FAIL,
+    ADMIN_NEW_PRODUCT_EDIT_REQUEST,
+    ADMIN_NEW_PRODUCT_EDIT_SUCCESS,
+    ADMIN_NEW_PRODUCT_EDIT_RESET,
+    ADMIN_NEW_PRODUCT_EDIT_FAIL
 } from "../constants/productConstant";
 
 export const productListReducer = (state = {loading: true, products: []}, action) => {
@@ -72,6 +77,11 @@ export const productDetailsReducer = (state = {loading: true, product: {}}, acti
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+        case PRODUCT_DETAILS_RESET:
+            return {
+                ...state,
+                product: {}
             }
         case CLEAR_ERRORS:
             return {
@@ -202,6 +212,39 @@ export const newProductReducer = (state = {product: {}}, action) => {
             return {
                 ...state,
                 success: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+
+export const productEditReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_NEW_PRODUCT_EDIT_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_NEW_PRODUCT_EDIT_SUCCESS:
+            return {
+                loading: false,
+                isUpdated: action.payload
+            }
+        case ADMIN_NEW_PRODUCT_EDIT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_NEW_PRODUCT_EDIT_RESET:
+            return {
+                ...state,
+                isUpdated: false
             }
         case CLEAR_ERRORS:
             return {

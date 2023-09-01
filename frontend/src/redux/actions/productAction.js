@@ -19,7 +19,11 @@ import {
     ADMIN_NEW_PRODUCT_REQUEST,
     ADMIN_NEW_PRODUCT_SUCCESS,
     ADMIN_NEW_PRODUCT_RESET,
-    ADMIN_NEW_PRODUCT_FAIL
+    ADMIN_NEW_PRODUCT_FAIL,
+    ADMIN_NEW_PRODUCT_EDIT_REQUEST,
+    ADMIN_NEW_PRODUCT_EDIT_SUCCESS,
+    ADMIN_NEW_PRODUCT_EDIT_RESET,
+    ADMIN_NEW_PRODUCT_EDIT_FAIL
 } from "../constants/productConstant";
 import {BASE_URL} from"../constants"
 import {ADMIN_USER_DELETE_FAILS, ADMIN_USER_DELETE_REQUEST, ADMIN_USER_DELETE_SUCCESS} from "../constants/userConstant";
@@ -186,6 +190,34 @@ export const newProduct = (productData) => async (dispatch) => {
     catch (err) {
         dispatch({
             type: ADMIN_NEW_PRODUCT_FAIL,
+            payload: err.response.data.message
+        })
+    }
+}
+
+
+export const updateProduct = (id, productData) => async (dispatch) => {
+    try{
+        dispatch({type: ADMIN_NEW_PRODUCT_EDIT_REQUEST});
+
+        const response = await axios({
+            method: "PUT",
+            url: `${BASE_URL}/api/v1/admin/product/${id}`,
+            data: productData,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_NEW_PRODUCT_EDIT_SUCCESS,
+            payload: response.data.success
+        });
+    }
+    catch (err) {
+        dispatch({
+            type: ADMIN_NEW_PRODUCT_EDIT_FAIL,
             payload: err.response.data.message
         })
     }

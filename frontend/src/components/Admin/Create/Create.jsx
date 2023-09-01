@@ -17,7 +17,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from '@mui/material/Tooltip';
 
 
-const Shipping = () => {
+const Create = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -178,4 +178,4 @@ const Shipping = () => {
     );
 };
 
-export default Shipping;
+export default Create;

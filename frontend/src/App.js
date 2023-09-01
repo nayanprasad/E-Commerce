@@ -40,7 +40,6 @@ export default function App() {
 
     useEffect(() => {
         dispatch(loadUser());
-        console.log(process.env.REACT_APP_BASE_URL)
     }, [dispatch, toast]);
 
 

@@ -110,7 +110,7 @@ exports.getSingleProduct = CatchAsyncErrors(async (req, res, next) => {
 // Update the product  --Admin
 exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
 
-    const product = Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id);
 
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));

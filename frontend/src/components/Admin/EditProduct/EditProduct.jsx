@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import "./EditProduct.css";
 import {useDispatch, useSelector} from "react-redux";
-import {newProduct} from "../../../redux/actions/productAction";
+import {updateProduct, getProductDetails} from "../../../redux/actions/productAction";
 import {useNavigate, useParams} from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import Loader from "../../Loader/Loader";
@@ -12,28 +12,25 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import AbcIcon from '@mui/icons-material/Abc';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {toast} from "react-toastify";
-import {ADMIN_NEW_PRODUCT_RESET} from "../../../redux/constants/productConstant";
+import {ADMIN_NEW_PRODUCT_EDIT_RESET, PRODUCT_DETAILS_RESET} from "../../../redux/constants/productConstant";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from '@mui/material/Tooltip';
 
 
-const Shipping = () => {
+const EditProduct = () => {
 
     const {id} = useParams();
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const {loading, error, success} = useSelector(state => state.adminNewProduct);
+    const {loading, error, isUpdated} = useSelector(state => state.adminProductEdit);
+    const {
+        product,
+        loading: productDetailsLoading,
+        error: productDetailsError
+    } = useSelector(state => state.productDetails);
 
-    const [data, setData] = useState({
-        name: "",
-        price: null,
-        description: "",
-        category: "",
-        stock: null,
-    })
     const [images, setImages] = useState([])
-    // const [imagesPreview, setImagesPreview] = useState([])
 
     const categories = [
         "Laptop",
@@ -46,26 +43,24 @@ const Shipping = () => {
     ];
 
     const handleChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
+        product[e.target.name] = e.target.value
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(data)
+        console.log(product)
         const formData = new FormData();
-        formData.set("name", data.name);
-        formData.set("price", data.price);
-        formData.set("description", data.description);
-        formData.set("category", data.category);
-        formData.set("stock", data.stock);
+        formData.set("name", product.name);
+        formData.set("price", product.price);
+        formData.set("description", product.description);
+        formData.set("category", product.category);
+        formData.set("stock", product.stock);
         images.forEach(image => {
             formData.append("images", image)
         })
 
-        dispatch(newProduct(formData));
+        dispatch(updateProduct(id, formData));
     }
 
 
@@ -86,19 +81,23 @@ const Shipping = () => {
 
 
     useEffect(() => {
+        dispatch(getProductDetails(id));
+
+        if (productDetailsError)
+            toast.error(productDetailsError);
         if (error)
             toast.error(error)
-        if (success) {
-            toast.success("Product created successfully")
-            navigate("/admin/products");
-            dispatch({type: ADMIN_NEW_PRODUCT_RESET})
+        if (isUpdated) {
+            toast.success("Product Edited successfully")
+            // navigate("/admin/products");
+            dispatch({type: ADMIN_NEW_PRODUCT_EDIT_RESET})
         }
-    }, [error, success]);
+    }, [error, productDetailsError, isUpdated, id, dispatch]);
 
     return (
         <Fragment>
 
-            {loading && <Loader/>}
+            {loading || productDetailsLoading && <Loader/>}
 
 
             <div className="createContainer">
@@ -117,22 +116,22 @@ const Shipping = () => {
                                 <form className="signup" onSubmit={handleSubmit}>
                                     <div className="field flex">
                                         <AbcIcon/>
-                                        <input type="text" placeholder="Name" name="name" value={data.name}
+                                        <input type="text" placeholder="Name" name="name" value={product.name}
                                                onChange={handleChange}/>
                                     </div>
                                     <div className="field flex">
                                         <CurrencyRupeeIcon/>
                                         <input type="number" placeholder="Price" name="price"
-                                               value={data.price} onChange={handleChange}/>
+                                               value={product.price} onChange={handleChange}/>
                                     </div>
                                     <div className="field flex">
                                         <DescriptionIcon/>
                                         <input type="text" placeholder="description" name="description"
-                                               value={data.description} onChange={handleChange}/>
+                                               value={product.description} onChange={handleChange}/>
                                     </div>
                                     <div className="field flex">
                                         <CategoryIcon/>
-                                        <select className={data.category === "" ? "grayColor" : "blackColor"}
+                                        <select className={product.category === "" ? "grayColor" : "blackColor"}
                                                 name="category" id="category" onChange={handleChange}>
                                             <option selected value="">Category</option>
                                             {categories.map((category, i) => (
@@ -143,7 +142,7 @@ const Shipping = () => {
                                     <div className="field flex">
                                         <Inventory2Icon/>
                                         <input type="number" placeholder="Stock" name="stock"
-                                               value={data.stock} onChange={handleChange}/>
+                                               value={product.stock} onChange={handleChange}/>
                                     </div>
 
                                     <div className="field flex FileSelector">
@@ -179,4 +178,4 @@ const Shipping = () => {
     );
 };
 
-export default Shipping;
+export default EditProduct;
