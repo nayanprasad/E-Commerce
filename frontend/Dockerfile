@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-RUN ["sh", "-c", "npm start"]
+RUN ["npm", "start"]
