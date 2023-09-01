@@ -116,7 +116,47 @@ exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Product not found", 404));
     }
 
-    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedData = {
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        category: req.body.category,
+        stock: req.body.stock,
+    }
+
+    if (req.body.images) {
+        let images = [];
+
+        if (typeof req.body.images === "string") {
+            images.push(req.body.images);
+        } else {
+            images = req.body.images;
+        }
+
+        // delete images associated with the product
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.uploader.destroy(product.images[i].public_id);
+        }
+
+        const imagesLinks = [];
+
+        for (let i = 0; i < images.length; i++) {
+            const result = await cloudinary.uploader.upload(images[i], {
+                folder: "products",
+                width: 150,
+                crop: "scale"
+            });
+
+            imagesLinks.push({
+                public_id: result.public_id,
+                url: result.secure_url,
+            });
+        }
+
+        updatedData.images = imagesLinks;
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updatedData, {
         new: true, // This will return the updated product
         runValidators: true, // This will validate the data
         useFindAndModify: false // This will use the new method of updating
@@ -138,7 +178,7 @@ exports.deleteProduct = CatchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Product not found", 404));
     }
 
-    for(let i = 0; i < product.images.length; i++){
+    for (let i = 0; i < product.images.length; i++) {
         await cloudinary.uploader.destroy(product.images[i].public_id);
     }
 
