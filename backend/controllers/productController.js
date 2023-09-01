@@ -112,6 +112,8 @@ exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
 
     const product = await Product.findById(req.params.id);
 
+    console.log(req.body)
+
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));
     }
@@ -124,6 +126,14 @@ exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
         stock: req.body.stock,
     }
 
+    let oldImages = product.images;
+
+    if(req.body.imagesToDelete) {
+        oldImages = oldImages.filter(img => !req.body.imagesToDelete.includes(img.public_id));
+        updatedData.images = [...oldImages];
+    }
+
+
     if (req.body.images) {
         let images = [];
 
@@ -131,11 +141,6 @@ exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
             images.push(req.body.images);
         } else {
             images = req.body.images;
-        }
-
-        // delete images associated with the product
-        for (let i = 0; i < product.images.length; i++) {
-            await cloudinary.uploader.destroy(product.images[i].public_id);
         }
 
         const imagesLinks = [];
@@ -153,18 +158,22 @@ exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
             });
         }
 
-        updatedData.images = imagesLinks;
+        updatedData.images = [...oldImages, ...imagesLinks];
     }
 
-    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updatedData, {
-        new: true, // This will return the updated product
-        runValidators: true, // This will validate the data
-        useFindAndModify: false // This will use the new method of updating
-    })
+    console.log(updatedData.images)
+
+
+    // const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updatedData, {
+    //     new: true, // This will return the updated product
+    //     runValidators: true, // This will validate the data
+    //     useFindAndModify: false // This will use the new method of updating
+    // })
+
 
     res.status(200).json({
         success: true,
-        updatedProduct
+        // updatedProduct
     })
 });
 
