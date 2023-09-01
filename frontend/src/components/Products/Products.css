@@ -88,3 +88,7 @@
         width: 100%;
     }
 }
+
+.MuiAccordionSummary-root:hover {
+    background: #e1e1e1 ;
+}
