@@ -16,6 +16,15 @@ import {ADMIN_NEW_PRODUCT_RESET} from "../../../redux/constants/productConstant"
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from '@mui/material/Tooltip';
 
+const categories = [
+    "mobile",
+    "laptop",
+    "camera",
+    "headphone",
+    "accessories",
+    "speaker",
+    "electronics",
+];
 
 const Create = () => {
 
@@ -33,16 +42,6 @@ const Create = () => {
     })
     const [images, setImages] = useState([])
     // const [imagesPreview, setImagesPreview] = useState([])
-
-    const categories = [
-        "Laptop",
-        "Footwear",
-        "Bottom",
-        "Tops",
-        "Attire",
-        "Camera",
-        "SmartPhones",
-    ];
 
     const handleChange = (e) => {
         setData({

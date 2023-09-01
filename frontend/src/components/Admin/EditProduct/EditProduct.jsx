@@ -15,6 +15,17 @@ import {toast} from "react-toastify";
 import {ADMIN_NEW_PRODUCT_EDIT_RESET} from "../../../redux/constants/productConstant";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from '@mui/material/Tooltip';
+import RestoreIcon from '@mui/icons-material/Restore';
+
+const categories = [
+    "mobile",
+    "laptop",
+    "camera",
+    "headphone",
+    "accessories",
+    "speaker",
+    "electronics",
+];
 
 
 const EditProduct = () => {
@@ -31,16 +42,8 @@ const EditProduct = () => {
     } = useSelector(state => state.productDetails);
 
     const [images, setImages] = useState([])
-
-    const categories = [
-        "Laptop",
-        "Footwear",
-        "Bottom",
-        "Tops",
-        "Attire",
-        "Camera",
-        "SmartPhones",
-    ];
+    const [oldImages, setOldImages] = useState([])
+    const [deletedImages, setDeletedImages] = useState([])
 
     const handleChange = (e) => {
         product[e.target.name] = e.target.value
@@ -48,8 +51,10 @@ const EditProduct = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(data)
-        console.log(product)
+
+        console.log(deletedImages)
+
+
         const formData = new FormData();
         formData.set("name", product.name);
         formData.set("price", product.price);
@@ -59,6 +64,9 @@ const EditProduct = () => {
         images.forEach(image => {
             formData.append("images", image)
         })
+        deletedImages.forEach(image => {
+            formData.append("imagesToDelete", image.public_id)
+        });
 
         dispatch(updateProduct(id, formData));
     }
@@ -71,7 +79,6 @@ const EditProduct = () => {
             const reader = new FileReader()
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    // setImagesPreview(oldArray => [...oldArray, reader.result])
                     setImages(oldArray => [...oldArray, reader.result])
                 }
             }
@@ -89,8 +96,10 @@ const EditProduct = () => {
             toast.error(error)
         if (isUpdated) {
             toast.success("Product Edited successfully")
-            // navigate("/admin/products");
+            navigate("/admin/products");
             dispatch({type: ADMIN_NEW_PRODUCT_EDIT_RESET})
+            setDeletedImages([])
+            setImages([])
         }
     }, [error, productDetailsError, isUpdated, id, dispatch]);
 
@@ -152,6 +161,24 @@ const EditProduct = () => {
                                     </div>
 
                                     <div className="imagePreview">
+                                        {product?.images?.map((image, index) => (
+                                            <div className={`previewImageContainer`} >
+                                                <img key={index} src={image.url} style={{opacity: image.deleted ? "0.5" : "1"}} alt="Product Preview"/>
+                                                <Tooltip title="Remove Image">
+                                                    <ClearIcon fontSize={"large"} onClick={() => {
+                                                       setDeletedImages(oldArray => [...oldArray, image])
+                                                        image.deleted = true;
+                                                    }}/>
+                                                </Tooltip>
+                                                {image.deleted && <Tooltip title="Restore Image">
+                                                    <RestoreIcon fontSize={"large"} onClick={() => {
+                                                        setDeletedImages(deletedImages.filter((img, i) => img !== image))
+                                                        image.deleted = false;
+                                                    }}/>
+                                                </Tooltip>}
+
+                                            </div>
+                                        ))}
                                         {images.map((image, index) => (
                                             <div className="previewImageContainer">
                                                 <img key={index} src={image} alt="Product Preview"/>
@@ -166,7 +193,7 @@ const EditProduct = () => {
 
                                     <div className="field btn">
                                         <div className="btn-layer"></div>
-                                        <input type="submit" value="Create"/>
+                                        <input type="submit" value="Update"/>
                                     </div>
                                 </form>
                             </div>
