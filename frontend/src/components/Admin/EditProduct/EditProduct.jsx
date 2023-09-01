@@ -12,7 +12,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import AbcIcon from '@mui/icons-material/Abc';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {toast} from "react-toastify";
-import {ADMIN_NEW_PRODUCT_EDIT_RESET, PRODUCT_DETAILS_RESET} from "../../../redux/constants/productConstant";
+import {ADMIN_NEW_PRODUCT_EDIT_RESET} from "../../../redux/constants/productConstant";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from '@mui/material/Tooltip';
 

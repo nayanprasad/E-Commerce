@@ -5,7 +5,6 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILS,
-    PRODUCT_DETAILS_RESET,
     CLEAR_ERRORS,
     ADD_NEW_REVIEW_REQUEST,
     ADD_NEW_REVIEW_SUCCESS,
@@ -77,11 +76,6 @@ export const productDetailsReducer = (state = {loading: true, product: {}}, acti
                 ...state,
                 loading: false,
                 error: action.payload
-            }
-        case PRODUCT_DETAILS_RESET:
-            return {
-                ...state,
-                product: {}
             }
         case CLEAR_ERRORS:
             return {
