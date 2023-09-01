@@ -161,19 +161,16 @@ exports.updateProduct = CatchAsyncErrors(async (req, res, next) => {
         updatedData.images = [...oldImages, ...imagesLinks];
     }
 
-    console.log(updatedData.images)
-
-
-    // const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updatedData, {
-    //     new: true, // This will return the updated product
-    //     runValidators: true, // This will validate the data
-    //     useFindAndModify: false // This will use the new method of updating
-    // })
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updatedData, {
+        new: true, // This will return the updated product
+        runValidators: true, // This will validate the data
+        useFindAndModify: false // This will use the new method of updating
+    })
 
 
     res.status(200).json({
         success: true,
-        // updatedProduct
+        updatedProduct
     })
 });
 
