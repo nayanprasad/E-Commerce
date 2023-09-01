@@ -11,9 +11,11 @@ import {toast} from "react-toastify";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 const MyOrders = () => {
 
+        const navigate = useNavigate();
         const dispatch = useDispatch();
 
         const {loading, error, products} = useSelector(state => state.adminProducts);
@@ -51,7 +53,7 @@ const MyOrders = () => {
                 renderCell: (params) => {
                     return (
                         <>
-                            <EditIcon color={"primary"}/>
+                            <EditIcon color={"primary"} onClick={() => navigate(`/admin/product/${params.id}/edit`)}/>
                             <DeleteIcon className={"redColor"} onClick={() => dispatch(adminDeleteProduct(params.id))}/>
                         </>
                     );
