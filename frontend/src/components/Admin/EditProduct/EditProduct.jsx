@@ -47,6 +47,23 @@ const EditProduct = () => {
 
     const handleChange = (e) => {
         product[e.target.name] = e.target.value
+        /*
+        to  avoid using like this
+            1. api data is not able to set to the state initial rendering
+            2. infinite re-rendering if we add the state to the dependency array
+
+        we can create a two use effect like follows
+                useEffect(() => {
+                    dispatch(getProductDetails(id));
+                }, [erro, isUpdated, id, dispatch]);
+
+                useEffect(() => {
+                    setProductData(product);
+                }, [product]);
+
+          this will avoid the infinite re-render, and we can use the state directly
+
+         */
     }
 
     const handleSubmit = (e) => {
@@ -162,11 +179,13 @@ const EditProduct = () => {
 
                                     <div className="imagePreview">
                                         {product?.images?.map((image, index) => (
-                                            <div className={`previewImageContainer`} >
-                                                <img key={index} src={image.url} style={{opacity: image.deleted ? "0.5" : "1"}} alt="Product Preview"/>
+                                            <div className={`previewImageContainer`}>
+                                                <img key={index} src={image.url}
+                                                     style={{opacity: image.deleted ? "0.5" : "1"}}
+                                                     alt="Product Preview"/>
                                                 <Tooltip title="Remove Image">
                                                     <ClearIcon fontSize={"large"} onClick={() => {
-                                                       setDeletedImages(oldArray => [...oldArray, image])
+                                                        setDeletedImages(oldArray => [...oldArray, image])
                                                         image.deleted = true;
                                                     }}/>
                                                 </Tooltip>
