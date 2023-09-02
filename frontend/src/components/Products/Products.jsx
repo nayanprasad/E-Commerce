@@ -18,6 +18,7 @@ import MetaDate from "../MetaDate";
 
 
 const categories = [
+    "All",
     "mobile",
     "laptop",
     "camera",
@@ -57,6 +58,9 @@ const Products = () => {
 
 
     useEffect(() => {
+        if(category === "All") {
+            setCategory("");
+        }
         dispatch(listProducts(keyword, currentPage, price, category, ratings));
 
         if (error) {
