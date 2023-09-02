@@ -25,6 +25,10 @@ import {
     ADMIN_USER_DELETE_SUCCESS,
     ADMIN_USER_DELETE_FAILS,
     ADMIN_USER_DELETE_RESET,
+    ADMIN_USER_DETAILS_REQUEST,
+    ADMIN_USER_DETAILS_SUCCESS,
+    ADMIN_USER_DETAILS_FAILS,
+    ADMIN_USER_DETAILS_RESET,
     CLEAR_ERRORS
 } from "../constants/userConstant";
 
@@ -170,6 +174,41 @@ export const adminUserDeleteReducer = (state = {}, action) => {
             return {
                 ...state,
                 isDeleted: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+
+export const adminUserDetailsReducer = (state = {user: {}}, action) => {
+    switch (action.type) {
+        case ADMIN_USER_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case ADMIN_USER_DETAILS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                user: action.payload
+            }
+        case ADMIN_USER_DETAILS_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_USER_DETAILS_RESET:
+            return {
+                ...state,
+                user: {}
             }
         case CLEAR_ERRORS:
             return {

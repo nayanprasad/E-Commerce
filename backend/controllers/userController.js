@@ -246,10 +246,21 @@ exports.updateRole = CatchAsyncErrors(async (req, res, next) => {
     if (!user)
         return next(new ErrorHandler("user not found", 400));
 
+    const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale"
+    });
+
+
     const newData = {
         email: req.body.email,
         name: req.body.name,
-        role: req.body.role
+        role: req.body.role,
+        avatar: {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
     };
 
     user = await User.findByIdAndUpdate(req.params.id, newData, {
