@@ -20,6 +20,10 @@ import {
     ADMIN_ORDER_DETAILS_SUCCESS,
     ADMIN_ORDER_DETAILS_FAIL,
     ADMIN_ORDER_DETAILS_RESET,
+    ADMIN_ORDER_UPDATE_REQUEST,
+    ADMIN_ORDER_UPDATE_SUCCESS,
+    ADMIN_ORDER_UPDATE_FAILS,
+    ADMIN_ORDER_UPDATE_RESET
 } from '../constants/orderConstants'
 
 
@@ -189,6 +193,38 @@ export const adminOrderDetailsReducer = (state = {order: {}}, action) => {
             return {
                 ...state,
                 order: {}
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+export const adminOrderUpdateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_ORDER_UPDATE_REQUEST:
+            return {
+                loading: true
+            }
+        case ADMIN_ORDER_UPDATE_SUCCESS:
+            return {
+                loading: false,
+                isUpdated: action.payload
+            }
+        case ADMIN_ORDER_UPDATE_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_ORDER_UPDATE_RESET:
+            return {
+                ...state,
+                isUpdated: false
             }
         case CLEAR_ERRORS:
             return {

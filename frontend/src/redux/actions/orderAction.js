@@ -20,6 +20,10 @@ import {
     ADMIN_ORDER_DETAILS_SUCCESS,
     ADMIN_ORDER_DETAILS_FAIL,
     ADMIN_ORDER_DETAILS_RESET,
+    ADMIN_ORDER_UPDATE_REQUEST,
+    ADMIN_ORDER_UPDATE_SUCCESS,
+    ADMIN_ORDER_UPDATE_FAILS,
+    ADMIN_ORDER_UPDATE_RESET
 } from '../constants/orderConstants'
 import axios from 'axios';
 import {BASE_URL} from "../constants";
@@ -190,6 +194,34 @@ export const getOrderDetailsAdmin = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: ADMIN_ORDER_DETAILS_FAIL,
+            payload: e.response.data.message
+        })
+    }
+}
+
+export const updateOrder = (id, orderData) => async (dispatch) => {
+    try {
+
+        dispatch({type: ADMIN_ORDER_UPDATE_REQUEST});
+
+        const {data} = await axios({
+            method: "PUT",
+            url: `${BASE_URL}/api/v1/admin/order/${id}`,
+            data: orderData,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_ORDER_UPDATE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (e) {
+        dispatch({
+            type: ADMIN_ORDER_UPDATE_FAILS,
             payload: e.response.data.message
         })
     }
