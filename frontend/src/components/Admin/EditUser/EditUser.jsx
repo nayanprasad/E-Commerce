@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import "./EditUser.css";
 import {useDispatch, useSelector} from "react-redux";
-import {adminGetUserDetails} from "../../../redux/actions/userAction";
+import {adminGetUserDetails, adminUpdateUser, clearErrors} from "../../../redux/actions/userAction";
 import {ADMIN_USER_DETAILS_RESET, ADMIN_USER_UPDATE_RESET} from "../../../redux/constants/userConstant";
 import {useNavigate, useParams} from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
@@ -20,6 +20,7 @@ const EditProduct = () => {
     const dispatch = useDispatch()
 
     const {loading, error, user} = useSelector(state => state.adminUserDetails);
+    const {loading: updateLoading, error: updateError, isUpdated} = useSelector(state => state.adminUserUpdate);
 
     const [image, setImage] = useState("")
     const [userData, setUserData] = useState({
@@ -32,16 +33,21 @@ const EditProduct = () => {
 
     useEffect(() => {
         dispatch(adminGetUserDetails(id));
-        if (error)
+        if (error) {
             toast.error(error)
-        // if (isUpdated) {
-        //     toast.success("Product Edited successfully")
-        //     navigate("/admin/products");
-        //     dispatch({type: ADMIN_NEW_PRODUCT_EDIT_RESET})
-        //     setDeletedImages([])
-        //     setImages([])
-        // }
-    }, [error, id, dispatch]);
+            dispatch(clearErrors())
+        }
+        if (updateError) {
+            toast.error(updateError)
+            dispatch(clearErrors())
+        }
+        if (isUpdated) {
+            toast.success("Updated successfully")
+            navigate("/admin/users");
+            dispatch({type: ADMIN_USER_DETAILS_RESET})
+            dispatch({type: ADMIN_USER_UPDATE_RESET})
+        }
+    }, [error, updateError, id, dispatch, isUpdated]);
 
 
     useEffect(() => {
@@ -69,22 +75,20 @@ const EditProduct = () => {
         console.log(userData)
         console.log(image)
         const formData = new FormData();
-        formData.set("name", user.name);
-        formData.set("email", user.email);
-        formData.set("role", user.role);
+        formData.set("name", userData.name);
+        formData.set("email", userData.email);
+        formData.set("role", userData.role);
         if (image) {
             formData.set("avatar", image);
-        } else {
-            formData.append("avatar", userData.avatar);
         }
 
-        // dispatch(updateProduct(id, formData));
+        dispatch(adminUpdateUser(id, formData));
     }
 
     return (
         <Fragment>
 
-            {loading && <Loader/>}
+            {loading || updateLoading && <Loader/>}
 
             <div className="createContainer">
 

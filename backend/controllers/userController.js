@@ -181,7 +181,6 @@ exports.updatePassword = CatchAsyncErrors(async (req, res, next) => {
 exports.updateProfile = CatchAsyncErrors(async (req, res, next) => {
 
     let user = await User.findById(req.user._id);
-    console.log(user)
 
     if (!user)
         return next(new ErrorHandler("user not found", 400))
@@ -241,27 +240,34 @@ exports.getSingleUser = CatchAsyncErrors(async (req, res, next) => {
 //update user role --admin
 exports.updateRole = CatchAsyncErrors(async (req, res, next) => {
 
+
     let user = await User.findById(req.params.id);
 
     if (!user)
         return next(new ErrorHandler("user not found", 400));
-
-    const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
-        folder: "avatars",
-        width: 150,
-        crop: "scale"
-    });
 
 
     const newData = {
         email: req.body.email,
         name: req.body.name,
         role: req.body.role,
-        avatar: {
+    };
+
+    if(req.body.avatar){
+
+        await cloudinary.uploader.destroy(user.avatar.public_id);
+
+        const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+            folder: "avatars",
+            width: 150,
+            crop: "scale"
+        });
+
+        newData.avatar = {
             public_id: myCloud.public_id,
             url: myCloud.secure_url
         }
-    };
+    }
 
     user = await User.findByIdAndUpdate(req.params.id, newData, {
         new: true,

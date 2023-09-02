@@ -26,6 +26,10 @@ import {
     ADMIN_USER_DETAILS_SUCCESS,
     ADMIN_USER_DETAILS_FAILS,
     ADMIN_USER_DETAILS_RESET,
+    ADMIN_USER_UPDATE_REQUEST,
+    ADMIN_USER_UPDATE_SUCCESS,
+    ADMIN_USER_UPDATE_FAILS,
+    ADMIN_USER_UPDATE_RESET,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
 import {BASE_URL} from "../constants";
@@ -282,6 +286,34 @@ export const adminGetUserDetails = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: ADMIN_USER_DETAILS_FAILS,
+            payload: e.response.data.message
+        })
+    }
+}
+
+export const adminUpdateUser = (id, userData) => async (dispatch) => {
+    try {
+
+        dispatch({type: ADMIN_USER_UPDATE_REQUEST});
+
+        const {data} = await axios({
+            method: "PUT",
+            url: `${BASE_URL}/api/v1/admin/user/${id}`,
+            data: userData,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_USER_UPDATE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (e) {
+        dispatch({
+            type: ADMIN_USER_UPDATE_FAILS,
             payload: e.response.data.message
         })
     }

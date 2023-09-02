@@ -13,7 +13,8 @@ import {userReducer,
     updateProfileReducer,
     adminUsersReducer,
     adminUserDeleteReducer,
-    adminUserDetailsReducer
+    adminUserDetailsReducer,
+    adminUserUpdateReducer
 } from "./reducers/userReducer"
 import {cartReducer} from "./reducers/cartReducer";
 import {orderReducer,
@@ -42,7 +43,8 @@ const reducer = combineReducers({
     adminOrderDelete:adminOrderDeleteReducer,
     adminUsers: adminUsersReducer,
     adminUserDelete: adminUserDeleteReducer,
-    adminUserDetails: adminUserDetailsReducer
+    adminUserDetails: adminUserDetailsReducer,
+    adminUserUpdate: adminUserUpdateReducer,
 });
 
 const initialState = {

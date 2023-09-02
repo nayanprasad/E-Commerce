@@ -29,6 +29,10 @@ import {
     ADMIN_USER_DETAILS_SUCCESS,
     ADMIN_USER_DETAILS_FAILS,
     ADMIN_USER_DETAILS_RESET,
+    ADMIN_USER_UPDATE_REQUEST,
+    ADMIN_USER_UPDATE_SUCCESS,
+    ADMIN_USER_UPDATE_FAILS,
+    ADMIN_USER_UPDATE_RESET,
     CLEAR_ERRORS
 } from "../constants/userConstant";
 
@@ -209,6 +213,40 @@ export const adminUserDetailsReducer = (state = {user: {}}, action) => {
             return {
                 ...state,
                 user: {}
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+export const adminUserUpdateReducer = (state = {user: {}}, action) => {
+    switch (action.type) {
+        case ADMIN_USER_UPDATE_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case ADMIN_USER_UPDATE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload
+            }
+        case ADMIN_USER_UPDATE_FAILS:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ADMIN_USER_UPDATE_RESET:
+            return {
+                ...state,
+                isUpdated: false
             }
         case CLEAR_ERRORS:
             return {
