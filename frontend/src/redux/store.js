@@ -21,7 +21,8 @@ import {orderReducer,
     myOrdersReducers,
     orderDetailsReducer,
     adminOrdersReducer,
-    adminOrderDeleteReducer
+    adminOrderDeleteReducer,
+    adminOrderDetailsReducer
 } from "./reducers/orderReducer";
 
 
@@ -41,6 +42,7 @@ const reducer = combineReducers({
     adminProductEdit: productEditReducer,
     adminOrders: adminOrdersReducer,
     adminOrderDelete:adminOrderDeleteReducer,
+    adminOrderDetails: adminOrderDetailsReducer,
     adminUsers: adminUsersReducer,
     adminUserDelete: adminUserDeleteReducer,
     adminUserDetails: adminUserDetailsReducer,

@@ -31,6 +31,7 @@ import UsersList from "./components/Admin/UsersList/UsersList";
 import Create from "./components/Admin/Create/Create";
 import EditProduct from "./components/Admin/EditProduct/EditProduct";
 import EditUser from "./components/Admin/EditUser/EditUser";
+import EditOrder from "./components/Admin/EditOrder/EditOrder";
 
 
 export default function App() {
@@ -95,6 +96,7 @@ export default function App() {
                 <Route exact path="/admin/product/create" element={<Create/>}/>
                 <Route exact path="/admin/product/:id/edit" element={<EditProduct/>}/>
                 <Route exact path="/admin/user/:id/edit" element={<EditUser/>}/>
+                <Route exact path="/admin/order/:id/edit" element={<EditOrder/>}/>
 
 
 

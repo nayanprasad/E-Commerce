@@ -15,15 +15,14 @@ import {
     ADMIN_ORDER_DELETE_REQUEST,
     ADMIN_ORDER_DELETE_FAILS,
     ADMIN_ORDER_DELETE_RESET,
-    ADMIN_ORDER_DELETE_SUCCESS
+    ADMIN_ORDER_DELETE_SUCCESS,
+    ADMIN_ORDER_DETAILS_REQUEST,
+    ADMIN_ORDER_DETAILS_SUCCESS,
+    ADMIN_ORDER_DETAILS_FAIL,
+    ADMIN_ORDER_DETAILS_RESET,
 } from '../constants/orderConstants'
 import axios from 'axios';
 import {BASE_URL} from "../constants";
-import {
-    ADMIN_PRODUCT_DELETE_FAILS,
-    ADMIN_PRODUCT_DELETE_REQUEST,
-    ADMIN_PRODUCT_DELETE_SUCCESS
-} from "../constants/productConstant";
 
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -167,4 +166,38 @@ export const adminDeleteOrder = (id) => async (dispatch) => {
             payload: e.response.data.message
         })
     }
+}
+
+export const getOrderDetailsAdmin = (id) => async (dispatch) => {
+    try {
+
+        dispatch({type: ADMIN_ORDER_DETAILS_REQUEST});
+
+        const {data} = await axios({
+            method: "GET",
+            url: `${BASE_URL}/api/v1/admin/order/${id}`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_ORDER_DETAILS_SUCCESS,
+            payload: data.order
+        })
+
+    } catch (e) {
+        dispatch({
+            type: ADMIN_ORDER_DETAILS_FAIL,
+            payload: e.response.data.message
+        })
+    }
+}
+
+
+export const clearErrors = () => async (dispatch) => {
+    dispatch({
+        type: CLEAR_ERRORS
+    })
 }

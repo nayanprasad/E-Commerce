@@ -1,5 +1,6 @@
 const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
+const User = require("../models/userModel");
 const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Errorhandler = require("../utils/errorhandler");
 
@@ -105,6 +106,24 @@ exports.getAllOrders = CatchAsyncErrors(async (req, res, next) => {
     });
 });
 
+exports.getAdminOrderDetails = CatchAsyncErrors(async (req, res, next) => {
+
+    const order = await Order.findById(req.params.id).populate("user", "name email");
+
+    if (!order) {
+        return next(new Errorhandler("No order found", 404));
+    }
+
+    const orderedUser = await User.findById(order.user);
+
+    res.status(200).json({
+        success: true,
+        order,
+        orderedUser
+    });
+});
+
+
 // update order status  --admin
 exports.updateOrderStatus = CatchAsyncErrors(async (req, res, next) => {
 
@@ -147,7 +166,7 @@ exports.deleteOrder = CatchAsyncErrors(async (req, res, next) => {
         await productStock.save({validateBeforeSave: false});
     }
 
-    if(order.orderStatus !== "Delivered"){
+    if (order.orderStatus !== "Delivered") {
         const orderItems = order.orderItems;
         orderItems.forEach(async (item) => {
             await updateStock(item.product, item.quantity);
