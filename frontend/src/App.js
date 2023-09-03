@@ -86,19 +86,15 @@ export default function App() {
                 </Route>
 
                 <Route element={<ProtectedRoute isAdmin={true}/>}>
-
+                    <Route exact path="/admin/dashboard" element={<Dashboard/>}/>
+                    <Route exact path="/admin/products" element={<ProductsList/>}/>
+                    <Route exact path="/admin/orders" element={<OrdersList/>}/>
+                    <Route exact path="/admin/users" element={<UsersList/>}/>
+                    <Route exact path="/admin/product/create" element={<Create/>}/>
+                    <Route exact path="/admin/product/:id/edit" element={<EditProduct/>}/>
+                    <Route exact path="/admin/user/:id/edit" element={<EditUser/>}/>
+                    <Route exact path="/admin/order/:id/edit" element={<EditOrder/>}/>
                 </Route>
-
-                <Route exact path="/admin/dashboard" element={<Dashboard/>}/>
-                <Route exact path="/admin/products" element={<ProductsList/>}/>
-                <Route exact path="/admin/orders" element={<OrdersList/>}/>
-                <Route exact path="/admin/users" element={<UsersList/>}/>
-                <Route exact path="/admin/product/create" element={<Create/>}/>
-                <Route exact path="/admin/product/:id/edit" element={<EditProduct/>}/>
-                <Route exact path="/admin/user/:id/edit" element={<EditUser/>}/>
-                <Route exact path="/admin/order/:id/edit" element={<EditOrder/>}/>
-
-
 
             </Routes>
             <Footer/>
