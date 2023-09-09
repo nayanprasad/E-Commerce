@@ -30,7 +30,8 @@ const Payment = () => {
     const {user} = useSelector(state => state.user)
     const {error} = useSelector(state => state.newOrder)
 
-    const [loading, setLoading] = useState(true)
+    const [isPaying, setIsPaying] = useState(false)
+
 
     const stripe = useStripe();
     const elements = useElements();
@@ -54,6 +55,7 @@ const Payment = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setIsPaying(true)
         payButton.current.disabled = true
 
         try {
@@ -91,6 +93,7 @@ const Payment = () => {
             })
 
             if (result.error) {
+                setIsPaying(false)
                 payButton.current.disabled = false
                 toast.error(result.error.message)
             } else if (result.paymentIntent.status === "succeeded") {
@@ -111,6 +114,7 @@ const Payment = () => {
                 toast("Payment Successfull")
                 navigate("/order/success")
             } else {
+                setIsPaying(false)
                 payButton.current.disabled = false
                 toast.error("Something went wrong")
             }
@@ -154,7 +158,7 @@ const Payment = () => {
                                 </div>
                                 <div className="field btn">
                                     <div className="btn-layer"></div>
-                                    <input ref={payButton} type="submit" value={`Pay ₹${finalPrice}`}/>
+                                    <input ref={payButton} type="submit" value={isPaying ? "Processingad..." : `Pay ₹${finalPrice}`}/>
                                 </div>
                             </form>
                         </div>
