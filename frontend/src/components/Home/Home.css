@@ -13,8 +13,15 @@
     opacity: 1;
 }
 
+.banner-fade {
+    height: 10vmax;
+    width: 100%;
+    /*background-image: linear-gradient(to top, rgba(247, 243, 243, 0), rgb(136, 112, 230));*/
+}
+
 .banner > h1 {
-    margin: 5vmax;
+    margin-bottom: 19vmax;
+    margin-top: 2vmax;
     font: 600 2.5vmax "Roboto";
 }
 
@@ -23,7 +30,6 @@
 }
 
 .banner > a > button {
-    margin: 10vmax;
     padding: 1vmax 2vmax;
     border: none;
     border-radius: 5px;

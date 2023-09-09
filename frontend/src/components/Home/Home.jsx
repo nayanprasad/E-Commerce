@@ -37,6 +37,8 @@ const Home = () => {
                     </button>
                 </a>
             </div>
+            <div className="banner-fade">
+            </div>
 
             <h2 className="homeHeading">Featured Products</h2>
 
