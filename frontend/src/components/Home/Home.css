@@ -1,14 +1,16 @@
 .banner {
-    background-image: linear-gradient(to right,
-    #635dc0,
-    #3027ae);
+    /*background-image: linear-gradient(to right,*/
+    /*#635dc0,*/
+    /*#3027ae);*/
+    background-image: url("banner.jpg");
     height: 100vmin;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #dfe6f0;
+    opacity: 1;
 }
 
 .banner > h1 {
@@ -21,7 +23,7 @@
 }
 
 .banner > a > button {
-    margin: 2vmax;
+    margin: 10vmax;
     padding: 1vmax 2vmax;
     border: none;
     border-radius: 5px;
@@ -53,7 +55,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    clip-path: polygon(100% 74%, 0% 100%, 100% 100%);
+    clip-path: polygon(100% 74%, 100% 100%, 100% 100%);
     max-width: 100%;
 }
 

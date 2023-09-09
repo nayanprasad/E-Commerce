@@ -95,7 +95,6 @@ export default function App() {
                     <Route exact path="/admin/user/:id/edit" element={<EditUser/>}/>
                     <Route exact path="/admin/order/:id/edit" element={<EditOrder/>}/>
                 </Route>
-
             </Routes>
             <Footer/>
         </Router>

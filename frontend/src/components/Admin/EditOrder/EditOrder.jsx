@@ -39,6 +39,10 @@ const ConfirmOrder = () => {
             dispatch({type: ADMIN_ORDER_DETAILS_RESET})
             dispatch({type: ADMIN_ORDER_UPDATE_RESET})
         }
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [id, dispatch, isUpdated])
 
     return (

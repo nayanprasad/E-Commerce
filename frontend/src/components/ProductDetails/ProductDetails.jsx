@@ -60,6 +60,10 @@ const ProductDetails = () => {
             dispatch(getProductDetails(id));
             dispatch({type: "ADD_NEW_REVIEW_RESET"})
         }
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [dispatch, id, error, reviewError, success]);
 
 

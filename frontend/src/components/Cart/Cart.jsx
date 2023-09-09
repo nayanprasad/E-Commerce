@@ -1,4 +1,4 @@
-import React,{useState, useEffect, Fragment} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import {Link} from 'react-router-dom';
@@ -16,26 +16,35 @@ const Cart = () => {
     }
 
     const increaseQuantity = (id, quantity, stock) => {
-        if(quantity <= stock) {
+        if (quantity <= stock) {
             const newQuantity = quantity + 1;
             dispatch(addToCart(id, newQuantity))
         }
     }
 
     const decreaseQuantity = (id, quantity) => {
-        if(quantity > 0 ) {
+        if (quantity > 0) {
             const newQuantity = quantity - 1;
             dispatch(addToCart(id, newQuantity))
         }
     }
 
-    if(cartItems.length === 0 || !cartItems) {
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, []);
+
+    if (cartItems.length === 0 || !cartItems) {
         return (
             <Fragment>
                 <div className="emptyCart">
-                        <ProductionQuantityLimitsIcon style={{fontSize: "100px"}}/>
+                    <ProductionQuantityLimitsIcon style={{fontSize: "100px"}}/>
                     <h2>No items in cart</h2>
-                    <Link to={"/products"}><button>View Products</button></Link>
+                    <Link to={"/products"}>
+                        <button>View Products</button>
+                    </Link>
                 </div>
 
             </Fragment>
@@ -54,43 +63,51 @@ const Cart = () => {
 
                 {cartItems?.map((item) => (
                     <>
-                    <div className="cartItems">
-                        <div className="cartItem">
-                            <div className="cartItem__details">
-                                <img src={item.image} alt="image"/>
-                                <div className="cartItem__details__info">
-                                    <p>{item.name}</p>
-                                    <p>₹{item.price}</p>
+                        <div className="cartItems">
+                            <div className="cartItem">
+                                <div className="cartItem__details">
+                                    <img src={item.image} alt="image"/>
+                                    <div className="cartItem__details__info">
+                                        <p>{item.name}</p>
+                                        <p>₹{item.price}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="cartItem__quantity">
-                                <div className="cartQuantity">
-                                    <button onClick={() => decreaseQuantity(item.product, item.quantity, item.stock)}>-</button>
-                                    <input readOnly value={item.quantity} type="number"/>
-                                    <button onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>+</button>
+                                <div className="cartItem__quantity">
+                                    <div className="cartQuantity">
+                                        <button
+                                            onClick={() => decreaseQuantity(item.product, item.quantity, item.stock)}>-
+                                        </button>
+                                        <input readOnly value={item.quantity} type="number"/>
+                                        <button
+                                            onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>+
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="cartItem__subtotal">
-                                ₹{item.price * item.quantity}
+                                <div className="cartItem__subtotal">
+                                    ₹{item.price * item.quantity}
 
-                                <div onClick={() => deleteCartItem(item.product)} className="cartItem__remove">
-                                    <DeleteIcon />
+                                    <div onClick={() => deleteCartItem(item.product)} className="cartItem__remove">
+                                        <DeleteIcon/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </>
                 ))}
             </div>
 
-            <div  className="cartTotal">
+            <div className="cartTotal">
                 <h1>Total&nbsp;</h1>
                 <h1>₹{cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)}</h1>
             </div>
 
             <div className="cartButtons">
-                <Link to={"/products"}><button>Continue Shopping</button></Link>
-                <Link to={"/login?redirect=shipping"}><button>Checkout</button></Link>
+                <Link to={"/products"}>
+                    <button>Continue Shopping</button>
+                </Link>
+                <Link to={"/login?redirect=shipping"}>
+                    <button>Checkout</button>
+                </Link>
             </div>
 
         </Fragment>

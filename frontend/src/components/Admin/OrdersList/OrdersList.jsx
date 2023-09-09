@@ -95,6 +95,10 @@ const MyOrders = () => {
             toast.warning("Order deleted successfully")
         }
         dispatch(getAdminOrders());
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [dispatch, alert, error, isDeleted]);
 
 

@@ -7,7 +7,6 @@ import { useDispatch, useSelector} from "react-redux";
 import {listProducts} from "../../redux/actions/productAction";
 import {toast } from 'react-toastify';
 import Loader from "../Loader/Loader";
-import testImg from "../../assets/images/micromaxInB.jpg"
 
 const Home = () => {
 

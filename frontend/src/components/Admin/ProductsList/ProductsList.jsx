@@ -85,6 +85,10 @@ const MyOrders = () => {
                 dispatch({type: ADMIN_PRODUCT_DELETE_RESET});
             }
             dispatch(getAdminPruducts());
+            window.scrollTo ({
+                top: 0,
+                behavior: "smooth"
+            });
         }, [dispatch, alert, error, isDeleted]);
 
 

@@ -52,6 +52,10 @@ const EditProduct = () => {
 
     useEffect(() => {
         setUserData(user);
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [user]);
 
     const handleChange = (e) => {

@@ -91,6 +91,10 @@ const Create = () => {
             navigate("/admin/products");
             dispatch({type: ADMIN_NEW_PRODUCT_RESET})
         }
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [error, success]);
 
     return (

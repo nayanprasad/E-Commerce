@@ -1,5 +1,5 @@
 .productDetails {
-    background-color: rgb(214, 214, 214);
+    background-color: rgb(255, 255, 255);
     width: 100vw;
     max-width: 100%;
     padding: 6vmax;
@@ -15,7 +15,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    border: 1px solid white;
+    border: 1px solid #d8d2d2;
 }
 
 .productDetails > div:last-child {

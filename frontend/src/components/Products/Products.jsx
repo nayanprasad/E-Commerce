@@ -68,6 +68,11 @@ const Products = () => {
             dispatch(clearErrors());
         }
 
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
+
     }, [dispatch, keyword, currentPage, price, category, ratings]);
 
 

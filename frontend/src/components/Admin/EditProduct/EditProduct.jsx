@@ -118,6 +118,10 @@ const EditProduct = () => {
             setDeletedImages([])
             setImages([])
         }
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [error, productDetailsError, isUpdated, id, dispatch]);
 
     return (

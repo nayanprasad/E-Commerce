@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import "./ConfirmOrder.css";
 import Stepper from "../Stepper/Stepper";
@@ -13,7 +13,14 @@ const ConfirmOrder = () => {
     const totalPrice = cartItems.reduce((price, item) => price + item.price * item.quantity, 0);
     const shippingPrice = totalPrice > 100 ? 0 : 100
     const taxPrice = (totalPrice * 0.18).toFixed(2)
-    const finalPrice = (totalPrice + shippingPrice + Number(taxPrice)).toFixed(2)
+    const finalPrice = (totalPrice + shippingPrice + Number(taxPrice)).toFixed(2);
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, []);
 
     return (
         <Fragment>

@@ -18,6 +18,10 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(getAdminDashboard());
+        window.scrollTo ({
+            top: 0,
+            behavior: "smooth"
+        });
     }, [dispatch]);
 
     const lineState = {

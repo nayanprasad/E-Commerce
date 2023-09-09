@@ -80,6 +80,10 @@ const MyOrders = () => {
       toast.error(error)
     }
     dispatch(getMyOrders());
+    window.scrollTo ({
+      top: 0,
+      behavior: "smooth"
+    });
   }, [dispatch, alert, error]);
 
 

@@ -19,6 +19,10 @@ const OrderDetails = () => {
       toast.error(error);
     }
     dispatch(getOrderDetails(id));
+    window.scrollTo ({
+      top: 0,
+      behavior: "smooth"
+    });
   }, [dispatch, error, id]);
 
   return (
