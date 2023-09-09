@@ -1,4 +1,6 @@
 const User = require("../models/userModel");
+const Product = require("../models/productModel");
+const Order = require("../models/orderModel");
 const ErrorHandler = require("../utils/errorhandler");
 const CatchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
@@ -317,5 +319,26 @@ exports.isEmailUnique = CatchAsyncErrors(async (req, res, next) => {
         email,
         message: "email is unique"
     })
+});
+
+exports.getDashboardDetails = CatchAsyncErrors(async (req, res, next) => {
+    const users = await User.find();
+    const products = await Product.find();
+    const orders = await Order.find();
+    const totalAmount = orders.reduce((acc, order) => acc + order.totalPrice, 0);
+
+    const outOfStock = await Product.countDocuments({stock: 0});
+    const inStock = await Product.countDocuments({stock: {$gt: 0}});
+
+    res.status(200).json({
+        success: true,
+        users: users.length,
+        products: products.length,
+        orders: orders.length,
+        outOfStock,
+        inStock,
+        totalAmount
+    })
+
 });
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 const {registerUser, loginUser, logout, forgotPassword, resetPassword, getUser, updatePassword, updateProfile,
-    getAllUsers, getSingleUser, deleteAUser, updateRole, isEmailUnique, getUserDetailsFromToken
+    getAllUsers, getSingleUser, deleteAUser, updateRole, isEmailUnique, getDashboardDetails
 } = require("../controllers/userController");
 const {isAuthenticatedUser, isAuthorizedRoles} = require("../middleware/auth");
 const multer = require('multer');
@@ -27,6 +27,7 @@ Router.route("/admin/user/:id")
     .delete(isAuthenticatedUser, isAuthorizedRoles("admin"), deleteAUser)
     .put(isAuthenticatedUser, isAuthorizedRoles("admin"), updateRole);
 Router.route("/user/checkEmail").post(isEmailUnique);
+Router.route("/admin/dashboard").get(isAuthenticatedUser, isAuthorizedRoles("admin"), getDashboardDetails);
 
 
 module.exports = Router;

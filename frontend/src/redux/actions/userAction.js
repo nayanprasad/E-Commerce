@@ -30,6 +30,9 @@ import {
     ADMIN_USER_UPDATE_SUCCESS,
     ADMIN_USER_UPDATE_FAILS,
     ADMIN_USER_UPDATE_RESET,
+    ADMIN_DASHBOARD_REQUEST,
+    ADMIN_DASHBOARD_SUCCESS,
+    ADMIN_DASHBOARD_FAILS,
 } from "../constants/userConstant";
 import {CLEAR_ERRORS} from "../constants/productConstant";
 import {BASE_URL} from "../constants";
@@ -314,6 +317,33 @@ export const adminUpdateUser = (id, userData) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: ADMIN_USER_UPDATE_FAILS,
+            payload: e.response.data.message
+        })
+    }
+}
+
+export const getAdminDashboard = () => async (dispatch) => {
+    try {
+
+        dispatch({type: ADMIN_DASHBOARD_REQUEST});
+
+        const {data} = await axios({
+            method: "GET",
+            url: `${BASE_URL}/api/v1/admin/dashboard`,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        dispatch({
+            type: ADMIN_DASHBOARD_SUCCESS,
+            payload: data
+        })
+
+    } catch (e) {
+        dispatch({
+            type: ADMIN_DASHBOARD_FAILS,
             payload: e.response.data.message
         })
     }

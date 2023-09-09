@@ -49,12 +49,12 @@ const Sidebar = () => {
                     <PeopleIcon /> Users
                 </p>
             </Link>
-            <Link to="/admin/reviews">
-                <p>
-                    <RateReviewIcon />
-                    Reviews
-                </p>
-            </Link>
+            {/*<Link to="/admin/reviews">*/}
+            {/*    <p>*/}
+            {/*        <RateReviewIcon />*/}
+            {/*        Reviews*/}
+            {/*    </p>*/}
+            {/*</Link>*/}
         </div>
     );
 };

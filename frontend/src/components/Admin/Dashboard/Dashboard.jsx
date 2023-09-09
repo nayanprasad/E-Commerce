@@ -6,21 +6,17 @@ import { Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
-// import { getAdminProduct } from "../../actions/productAction";
-// import { getAllOrders } from "../../actions/orderAction.js";
-// import { getAllUsers } from "../../actions/userAction.js";
+import { getAdminDashboard } from "../../../redux/actions/userAction";
 import { CategoryScale, Chart } from "chart.js/auto";
 Chart.register(CategoryScale);
 
 const Dashboard = () => {
 
 
-    // const dispatch = useDispatch();
-    //
-    // const { products } = useSelector((state) => state.products);
-    // const { orders } = useSelector((state) => state.allOrders);
-    // const { users } = useSelector((state) => state.allUsers);
-    //
+    const dispatch = useDispatch();
+
+    const { dashboard } = useSelector((state) => state.dashboard);
+
     // let outOfStock = 0;
     // //
     // // products &&
@@ -30,11 +26,10 @@ const Dashboard = () => {
     // //     }
     // // });
     //
-    // useEffect(() => {
-    //     dispatch(getAdminProduct());
-    //     dispatch(getAllOrders());
-    //     dispatch(getAllUsers());
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(getAdminDashboard());
+        // console.log(dashboard)
+    }, [dispatch]);
     //
     // let totalAmount = 0;
     // orders &&
@@ -72,18 +67,18 @@ const Dashboard = () => {
                 label: "TOTAL AMOUNT",
                 backgroundColor: ["tomato"],
                 hoverBackgroundColor: ["rgb(197, 72, 49)"],
-                data: [0, 80],
+                data: [0, dashboard?.totalAmount],
             },
         ],
     };
 
     const doughnutState = {
-        labels: ["Out of Stock", "InStock"],
+        labels: ["InStock", "Out of Stock"],
         datasets: [
             {
                 backgroundColor: ["#00A6B4", "#6800B4"],
                 hoverBackgroundColor: ["#4B5000", "#35014F"],
-                data: [50, 100],
+                data: [dashboard?.inStock, dashboard?.outOfStock],
             },
         ],
     };
@@ -103,25 +98,21 @@ const Dashboard = () => {
                 <div className="dashboardSummary">
                     <div>
                         <p>
-                            {/*Total Amount <br /> ₹{totalAmount}*/}
-                            Total Amount <br /> ₹{"totalAmount"}
+                            Total Amount <br /> ₹{dashboard?.totalAmount.toFixed(2)}
                         </p>
                     </div>
                     <div className="dashboardSummaryBox2">
                         <Link to="/admin/products">
                             <p>Product</p>
-                            {/*<p>{products && products.length}</p>*/}
-                            <p>100</p>
+                            <p>{dashboard?.products}</p>
                         </Link>
                         <Link to="/admin/orders">
                             <p>Orders</p>
-                            {/*<p>{orders && orders.length}</p>*/}
-                            <p>100</p>
+                            <p>{dashboard?.orders}</p>
                         </Link>
                         <Link to="/admin/users">
                             <p>Users</p>
-                            {/*<p>{users && users.length}</p>*/}
-                            <p>50</p>
+                            <p>{dashboard?.users}</p>
                         </Link>
                     </div>
                 </div>

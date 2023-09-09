@@ -14,7 +14,8 @@ import {userReducer,
     adminUsersReducer,
     adminUserDeleteReducer,
     adminUserDetailsReducer,
-    adminUserUpdateReducer
+    adminUserUpdateReducer,
+    adminDashboardReducer
 } from "./reducers/userReducer"
 import {cartReducer} from "./reducers/cartReducer";
 import {orderReducer,
@@ -49,6 +50,7 @@ const reducer = combineReducers({
     adminUserDelete: adminUserDeleteReducer,
     adminUserDetails: adminUserDetailsReducer,
     adminUserUpdate: adminUserUpdateReducer,
+    dashboard: adminDashboardReducer
 });
 
 const initialState = {
