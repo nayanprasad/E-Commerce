@@ -15,7 +15,12 @@ app.use(core());
 app.use(express.json()); // This is a middleware that allows us to accept json data in the body
 app.use(cookieParse());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(fileUpload());
+app.use(fileUpload({
+    useTempFiles: true,
+    limits: {
+        fileSize: 1024 * 1024 * 10 // 10MB
+    }
+}));
 app.use(requestLogger());
 
 

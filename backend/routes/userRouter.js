@@ -4,6 +4,13 @@ const {registerUser, loginUser, logout, forgotPassword, resetPassword, getUser, 
     getAllUsers, getSingleUser, deleteAUser, updateRole, isEmailUnique, getUserDetailsFromToken
 } = require("../controllers/userController");
 const {isAuthenticatedUser, isAuthorizedRoles} = require("../middleware/auth");
+const multer = require('multer');
+const upload = multer({
+    limits: {
+        fileSize: 10 * 1024 * 1024, // 10MB in bytes
+    },
+})
+
 
 
 Router.route("/register").post(registerUser);
