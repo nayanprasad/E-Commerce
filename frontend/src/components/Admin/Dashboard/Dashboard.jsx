@@ -12,53 +12,13 @@ Chart.register(CategoryScale);
 
 const Dashboard = () => {
 
-
     const dispatch = useDispatch();
 
     const { dashboard } = useSelector((state) => state.dashboard);
 
-    // let outOfStock = 0;
-    // //
-    // // products &&
-    // // products.forEach((item) => {
-    // //     if (item.Stock === 0) {
-    // //         outOfStock += 1;
-    // //     }
-    // // });
-    //
     useEffect(() => {
         dispatch(getAdminDashboard());
-        // console.log(dashboard)
     }, [dispatch]);
-    //
-    // let totalAmount = 0;
-    // orders &&
-    // orders.forEach((item) => {
-    //     totalAmount += item.totalPrice;
-    // });
-
-    // const lineState = {
-    //     labels: ["Initial Amount", "Amount Earned"],
-    //     datasets: [
-    //         {
-    //             label: "TOTAL AMOUNT",
-    //             backgroundColor: ["tomato"],
-    //             hoverBackgroundColor: ["rgb(197, 72, 49)"],
-    //             data: [0, totalAmount],
-    //         },
-    //     ],
-    // };
-    //
-    // const doughnutState = {
-    //     labels: ["Out of Stock", "InStock"],
-    //     datasets: [
-    //         {
-    //             backgroundColor: ["#00A6B4", "#6800B4"],
-    //             hoverBackgroundColor: ["#4B5000", "#35014F"],
-    //             data: [outOfStock, products.length - outOfStock],
-    //         },
-    //     ],
-    // };
 
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],

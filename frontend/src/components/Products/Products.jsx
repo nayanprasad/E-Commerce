@@ -61,7 +61,7 @@ const Products = () => {
         if(category === "All") {
             setCategory("");
         }
-        dispatch(listProducts(keyword, currentPage, price, category, ratings));
+        dispatch(listProducts(keyword, currentPage, price, category, ratings, 6));
 
         if (error) {
             toast.error(error);

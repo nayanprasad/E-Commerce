@@ -26,9 +26,8 @@ import {
     ADMIN_NEW_PRODUCT_EDIT_FAIL
 } from "../constants/productConstant";
 import {BASE_URL} from"../constants"
-import {ADMIN_USER_DELETE_FAILS, ADMIN_USER_DELETE_REQUEST, ADMIN_USER_DELETE_SUCCESS} from "../constants/userConstant";
 
-export const listProducts = (keyword = "", page = 1, price = [0, 25000], category, ratings = 0) => async (dispatch) => {
+export const listProducts = (keyword = "", page = 1, price = [0, 25000], category, ratings = 0, resultPerPage = 8 ) => async (dispatch) => {
     try{
         dispatch({type: PRODUCT_LIST_REQUEST});
 
@@ -39,9 +38,13 @@ export const listProducts = (keyword = "", page = 1, price = [0, 25000], categor
             link += `&category=${category}`
         }
 
+        if(resultPerPage !== 8) {
+            link += `&resultPerPage=${resultPerPage}`
+        }
+
         const response = await axios({
             method: "GET",
-            url: link
+            url: link,
         });
 
         dispatch({
